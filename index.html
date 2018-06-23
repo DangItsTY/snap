@@ -1,79 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>Snap!</title>
-<link rel="stylesheet" href="styles/styles.css">
-<link rel="manifest" href="manifest.json">
-</head>
-<body class="mobil">
-<main>
-<div id="container">
-	<div id="debug"></div>
-	<div id="main">
-		<div id="content"></div>
-		<div id="overlays">
-		</div>
-	</div>
-</div>
-</main>
-<footer>
-</footer>
-<script src="scripts/config.js"></script>
-<script src="scripts/controls.js"></script>
-<script src="scripts/makes.js"></script>
-<script src="scripts/abilities.js"></script>
-<script src="runs/runPlayer.js"></script>
-<script src="runs/runGravity.js"></script>
-<script src="runs/runFriction.js"></script>
-<script src="runs/runVerticalWind.js"></script>
-<script src="runs/runFall.js"></script>
-<script src="runs/runCollidePlatform.js"></script>
-<script src="runs/runClean.js"></script>
-<script src="scripts/render.js"></script>
-<script src="scripts/game.js"></script>
-<script>	
-	function initialize() {
-	}
-	initialize();
-	
-	function preload() {
-	}
-	preload();
-	
-	function prerender() {
-	}
-	prerender();
-	
-	function log(label, value) {
-		var element = document.getElementById(label);
-		if (!element) {
-			element = document.createElement('div');
-			element.id = label;
-			debug.appendChild(element);
-		}
-		element.innerHTML = label + ": " + value;
-	}
-	
-	var lastTimestamp = null;
-	var currentTimestamp = null;
-	var deltaTime = null;
-	var mod = 0;
-	function gameloop(timestamp) {
-		currentTimestamp = timestamp;
-		deltaTime = currentTimestamp - lastTimestamp;
-		mod = deltaTime / 1000;
-		log("mod", mod);
-		lastTimestamp = currentTimestamp;
-		game();
-		render(theObjects);
-		renderHud();
-		
-		window.requestAnimationFrame(gameloop);
-	}
-	window.requestAnimationFrame(gameloop);
-</script>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<title>Snap!</title>
+		<link rel="stylesheet" href="styles/styles.css">
+		<link rel="manifest" href="manifest.json">
+	</head>
+	<body class="mobil">
+		<main id="container">
+			<section id="background">
+			</section>
+			<section id="content">
+			</section>
+			<section id="foreground">
+			</section>
+			<section id="overlay">
+			</section>
+			<section id="info">
+			</section>
+			<!--
+			<div id="container">
+				<div id="debug"></div>
+				<div id="main">
+					<div id="content"></div>
+					<div id="overlays">
+					</div>
+				</div>
+			</div>
+			-->
+		</main>
+		<footer>
+		</footer>
+		<script src="scripts/core/config.js"></script>
+		<script src="scripts/core/maker.js"></script>
+		<!--<script src="scripts/controls.js"></script>-->
+		<script src="scripts/abilities.js"></script>
+		<script src="scripts/runs/runPlayer.js"></script>
+		<script src="scripts/runs/runGravity.js"></script>
+		<script src="scripts/runs/runFall.js"></script>
+		<script src="scripts/runs/runCollidePlatform.js"></script>
+		<script src="scripts/runs/runClean.js"></script>
+		<script src="scripts/render.js"></script>
+		<script src="scripts/core/game.js"></script>
+		<script>	
+			function initialize() {
+				for (var i = 0; i < 100; i++) {
+					OBJECTS.push(make({
+						type: "basic",
+						randomizePosition: true,
+						randomizeColor: true
+					}));
+				}
+			}
+			initialize();
+			
+			function preload() {
+			}
+			preload();
+			
+			function prerender() {
+				renderAttach(OBJECTS);
+			}
+			prerender();
+			
+			function log(label, value) {
+				var element = document.getElementById(label);
+				if (!element) {
+					element = document.createElement('div');
+					element.id = label;
+					debug.appendChild(element);
+				}
+				element.innerHTML = label + ": " + value;
+			}
+			
+			var lastTimestamp = null;
+			var currentTimestamp = null;
+			var deltaTime = null;
+			var mod = 0;
+			function gameloop(timestamp) {
+				currentTimestamp = timestamp;
+				deltaTime = currentTimestamp - lastTimestamp;
+				mod = deltaTime / 1000;
+				//log("mod", mod);
+				lastTimestamp = currentTimestamp;
+				game();
+				render(OBJECTS);
+				//renderHud();
+				
+				window.requestAnimationFrame(gameloop);
+			}
+			window.requestAnimationFrame(gameloop);
+		</script>
+	</body>
+</html>

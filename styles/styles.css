@@ -13,7 +13,7 @@ body {
 	width: 800px;
 	height: 450px;
 	position: relative;
-	background-image: url('../images/background.png');
+	/*background-image: url('../images/background.png');*/
 	overflow: hidden;
 	tabindex: -1;
 }

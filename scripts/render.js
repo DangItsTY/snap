@@ -14,6 +14,6 @@ function renderHud() {
 
 function renderAttach(list) {
 	for (var i = 0; i < list.length; i++) {
-		mainElement.appendChild(list[i].element);
+		CONTENT_LAYER.appendChild(list[i].element);
 	}
 }
