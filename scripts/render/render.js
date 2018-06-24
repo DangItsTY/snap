@@ -17,3 +17,5 @@ function renderAttach(list) {
 		CONTENT_LAYER.appendChild(list[i].element);
 	}
 }
+
+//	need to break up the concept of render so that i have a DOM specific renderer. dom and element stuff shouldn't be core.

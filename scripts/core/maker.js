@@ -1,8 +1,10 @@
 function make(options) {	//	creates any object in the game
+	//	VARIABLES
 	var object = {};
 	var element;
 	
 	
+	//	INITIALIZE OBJECT
 	object.element = element;
 	object.speed = 0;
 	object.x = GAME_WIDTH / 2;
@@ -17,17 +19,22 @@ function make(options) {	//	creates any object in the game
 	object.runCollide = function(target) {}
 	
 	
+	//	OPTIONS
 	if (options.type == "basic") {
 		object.element = makeBasic();
 	}
 	if (options.randomizePosition) {
 		randomizePosition(object);
 	}
+	if (options.randomizeVelocity) {
+		randomizeVelocity(object);
+	}
 	if (options.randomizeColor) {
 		randomizeColor(object.element);
 	}
 	
 	
+	//	HELPER FUNCTIONS
 	function makeBasic() {
 		//	returns a basic DOM element
 		var element = document.createElement("div");
@@ -48,6 +55,14 @@ function make(options) {	//	creates any object in the game
 		object.x = num1;
 		object.y = num2;
 	}
+	
+	function randomizeVelocity(object) {
+		//	sets random velocity of object
+		var num1 = (Math.random() * 10) - 5;
+		var num2 = (Math.random() * 10) - 5;
+		object.vx = num1;
+		object.vy = num2;
+	}
 
 	function randomizeColor(element) {
 		//	transforms object's element to a random color
@@ -65,6 +80,10 @@ function make(options) {	//	creates any object in the game
 var imageMap = {
 	//'door': IMAGEPATH + 'door.png',
 }
+
+
+
+//	TRASH - delete all below when i have my own object classes all figured out, and colliding. and when all objects are inherited.
 
 
 function makePlayer() {

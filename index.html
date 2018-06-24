@@ -40,10 +40,11 @@
 		<script src="scripts/abilities.js"></script>
 		<script src="scripts/runs/runPlayer.js"></script>
 		<script src="scripts/runs/runGravity.js"></script>
+		<!--<script src="scripts/runs/runFriction.js"></script>-->
 		<script src="scripts/runs/runFall.js"></script>
 		<script src="scripts/runs/runCollidePlatform.js"></script>
 		<script src="scripts/runs/runClean.js"></script>
-		<script src="scripts/render.js"></script>
+		<script src="scripts/render/render.js"></script>
 		<script src="scripts/core/game.js"></script>
 		<script>	
 			function initialize() {
@@ -51,6 +52,7 @@
 					OBJECTS.push(make({
 						type: "basic",
 						randomizePosition: true,
+						randomizeVelocity: true,
 						randomizeColor: true
 					}));
 				}
