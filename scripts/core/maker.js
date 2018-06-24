@@ -18,8 +18,7 @@ function make(type, options) {	//	creates any object in the game
 	object.vy = options.vy ? options.vy : 0;
 	object.width = options.width ? options.width : 5;
 	object.height = options.height ? options.height : 5;
-	object.gravity = null;
-	object.fall = object.fall_init = 100;
+	object.weight = 0;
 	object.isAlive = true;
 	object.runCollide = function(target) {}
 	
@@ -32,6 +31,10 @@ function make(type, options) {	//	creates any object in the game
 		object.y = options.y ? options.y : GAME_HEIGHT - 50;
 		object.width = options.width ? options.width : GAME_WIDTH;
 		object.height = options.height ? options.height : 50;
+	}
+	if (type == "player") {
+		object.speed = 100;
+		object.weight = 10;
 	}
 	
 	

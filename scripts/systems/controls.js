@@ -1,6 +1,6 @@
 document.addEventListener("keydown", registerKeyDown);
 document.addEventListener("keyup", registerKeyUp);
-var el = document.getElementById("main");
+var el = document.getElementById("container"); // body?
 el.addEventListener("touchstart", registerTouch);
 el.addEventListener("touchend", deregisterTouch);
 el.addEventListener("touchmove", moveTouch);
@@ -24,7 +24,7 @@ var touchMoveRight = null;
 var keyMap = {
 	'jump': 32,
 	'left': 65,
-	'right': 68
+	'right': 68,
 }
 function registerKeyDown(e) {
 	var keyCode = e.keyCode;

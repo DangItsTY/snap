@@ -1,8 +1,8 @@
 function game() {
 	move(OBJECTS);
-	
-	
-	//runGravity(theObjects);
+	//runCollision(OBJECTS);
+	runPlayer(PLAYER);
+	runGravity(OBJECTS);
 	//runFriction([thePlayer]);
 	//runFall(theObjects);
 	//runPlayer(thePlayer);

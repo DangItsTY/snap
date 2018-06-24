@@ -1,3 +1,19 @@
+function runCollision(objects) {
+	for (var i = 0; i < objects.length; i++) {
+		for (var j = i+1; j < objects.length; j++) {
+			if (isCollidingAnywhere(objects[i], objects[j])) {
+				objects[i].isColliding = true;
+			}
+		}
+	}
+}
+
+
+
+
+//	clean all of this stuff at some point...
+
+
 var PLATFORMHEIGHT = 10;
 var isColliding = false;
 function runCollidePlatform(object, list) {
