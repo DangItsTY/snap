@@ -14,6 +14,18 @@ function renderHud() {
 
 function renderAttach(list) {
 	for (var i = 0; i < list.length; i++) {
+		var object = list[i];
+		var element = document.createElement("div");
+		element.style.width = object.width + "px";
+		element.style.height = object.height + "px";
+		element.style.position = "absolute";
+		element.style.left = "0px";
+		element.style.top = "0px";
+		element.style.backgroundColor = "rgba("+object.red+", "+object.green+", "+object.blue+", 1.0)";
+		//element.style.borderRadius = "5px";
+		
+		list[i].element = element;
+		
 		CONTENT_LAYER.appendChild(list[i].element);
 	}
 }

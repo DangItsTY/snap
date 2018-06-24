@@ -49,13 +49,14 @@
 		<script>	
 			function initialize() {
 				for (var i = 0; i < 100; i++) {
-					OBJECTS.push(make({
-						type: "basic",
+					OBJECTS.push(make("basic", {
 						randomizePosition: true,
 						randomizeVelocity: true,
 						randomizeColor: true
 					}));
 				}
+				
+				OBJECTS.push(make("platform"));
 			}
 			initialize();
 			

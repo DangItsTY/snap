@@ -1,27 +1,43 @@
-function make(options) {	//	creates any object in the game
+function make(type, options) {	//	creates any object in the game
 	//	VARIABLES
 	var object = {};
 	var element;
+	type = type ? type : "basic";
+	options = options ? options : {};
 	
 	
 	//	INITIALIZE OBJECT
 	object.element = element;
-	object.speed = 0;
-	object.x = GAME_WIDTH / 2;
-	object.y = GAME_HEIGHT / 2;
-	object.vx = 0;
-	object.vy = 0;
-	object.width = 5;
-	object.height = 5;
+	object.red = 0;
+	object.green = 0;
+	object.blue = 255;
+	object.speed = options.speed ? options.speed : 0;
+	object.x = options.x ? options.x : GAME_WIDTH / 2;
+	object.y = options.y ? options.y : GAME_HEIGHT / 2;
+	object.vx = options.vx ? options.vy : 0;
+	object.vy = options.vy ? options.vy : 0;
+	object.width = options.width ? options.width : 5;
+	object.height = options.height ? options.height : 5;
 	object.gravity = null;
 	object.fall = object.fall_init = 100;
 	object.isAlive = true;
 	object.runCollide = function(target) {}
 	
 	
+	//	TYPES
+	if (type == "basic") {
+	}
+	if (type == "platform") {
+		object.x = options.x ? options.x : 0;
+		object.y = options.y ? options.y : GAME_HEIGHT - 50;
+		object.width = options.width ? options.width : GAME_WIDTH;
+		object.height = options.height ? options.height : 50;
+	}
+	
+	
 	//	OPTIONS
-	if (options.type == "basic") {
-		object.element = makeBasic();
+	if (options.randomizeColor) {
+		randomizeColor(object.element);
 	}
 	if (options.randomizePosition) {
 		randomizePosition(object);
@@ -35,20 +51,7 @@ function make(options) {	//	creates any object in the game
 	
 	
 	//	HELPER FUNCTIONS
-	function makeBasic() {
-		//	returns a basic DOM element
-		var element = document.createElement("div");
-		element.style.width = "10px";
-		element.style.height = "10px";
-		element.style.position = "absolute";
-		element.style.left = "0px";
-		element.style.top = "0px";
-		element.style.backgroundColor = "rgba(0, 0, 255, 1.0)";
-		//element.style.borderRadius = "5px";
-		return element;
-	}
-
-	function randomizePosition(object) {
+	function randomizePosition() {
 		//	sets random position of object
 		var num1 = Math.random() * GAME_WIDTH;
 		var num2 = Math.random() * GAME_HEIGHT;
@@ -56,7 +59,7 @@ function make(options) {	//	creates any object in the game
 		object.y = num2;
 	}
 	
-	function randomizeVelocity(object) {
+	function randomizeVelocity() {
 		//	sets random velocity of object
 		var num1 = (Math.random() * 10) - 5;
 		var num2 = (Math.random() * 10) - 5;
@@ -70,7 +73,9 @@ function make(options) {	//	creates any object in the game
 		var num2 = Math.random() * 255;
 		var num3 = Math.random() * 255;
 		
-		element.style.backgroundColor = "rgba("+num1+", "+num2+", "+num3+", 1.0";
+		object.red = num1;
+		object.green = num2;
+		object.blue = num3;
 	}
 	
 
