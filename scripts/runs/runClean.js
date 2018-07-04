@@ -1,5 +1,15 @@
 function runClean(list) {
 	for (var i = list.length - 1; i >= 0; i--) {
+		if (!list[i].isAlive) {
+			list[i].element.remove();
+			list.splice(i, 1);
+		}
+	}
+}
+
+//	delete this at some point
+function runClean_old(list) {
+	for (var i = list.length - 1; i >= 0; i--) {
 		
 		if (
 		//	no longer alive

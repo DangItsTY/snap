@@ -7,6 +7,8 @@ function make(type, options) {	//	creates any object in the game
 	
 	
 	//	INITIALIZE OBJECT
+	object.type = type;
+	object.isAlive = true;
 	object.element = element;
 	object.red = 0;
 	object.green = 0;
@@ -19,8 +21,10 @@ function make(type, options) {	//	creates any object in the game
 	object.width = options.width ? options.width : 5;
 	object.height = options.height ? options.height : 5;
 	object.weight = 0;
-	object.isAlive = true;
-	object.runCollide = function(target) {}
+	object.collisions = [];
+	object.collisionFloor = null;
+	object.runCollide = function() {}
+	object.runAct = function() {}
 	
 	
 	//	TYPES
@@ -33,8 +37,33 @@ function make(type, options) {	//	creates any object in the game
 		object.height = options.height ? options.height : 50;
 	}
 	if (type == "player") {
+		object.speed = 200;
+		object.weight = 10;
+		
+		//	controls
+		object.jump = 200;
+		object.jumpReady = true;
+	}
+	if (type == "point") {
+		object.runCollide = function() {
+			for (var i = 0; i < object.collisions.length; i++) {
+				var target = object.collisions[i];
+				if (target.type == "player") {
+					object.isAlive = false;
+					console.log("you've got a point!");
+				}
+			}
+		}
+	}
+	if (type == "enemy") {
 		object.speed = 100;
 		object.weight = 10;
+		object.red = 255;
+		object.green = 50;
+		object.blue = 50;
+		object.runAct = function() {
+			
+		}
 	}
 	
 	

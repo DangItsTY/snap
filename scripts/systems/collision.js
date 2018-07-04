@@ -1,10 +1,23 @@
 function runCollision(objects) {
+	//	reset collision info
+	for (var i = 0; i < objects.length; i++) {
+		objects[i].collisions = [];
+	}
+	
+	//	set collision info
 	for (var i = 0; i < objects.length; i++) {
 		for (var j = i+1; j < objects.length; j++) {
 			if (isCollidingAnywhere(objects[i], objects[j])) {
-				objects[i].isColliding = true;
+				objects[i].collisions.push(objects[j]);
+				objects[j].collisions.push(objects[i]);
 			}
 		}
+	}
+	
+	//	do all objects' collisions
+	for (var i = 0; i < objects.length; i++) {
+		var target = objects[i];
+		target.runCollide();
 	}
 }
 

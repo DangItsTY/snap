@@ -21,33 +21,21 @@
 			</section>
 			<section id="info">
 			</section>
-			<!--
-			<div id="container">
-				<div id="debug"></div>
-				<div id="main">
-					<div id="content"></div>
-					<div id="overlays">
-					</div>
-				</div>
-			</div>
-			-->
 		</main>
 		<footer>
 		</footer>
 		<script src="scripts/core/config.js"></script>
-		<script src="scripts/core/maker.js"></script>
-		<script src="scripts/systems/controls.js"></script>
+		<script src="scripts/systems/maker.js"></script>
+		<script src="scripts/systems/controls/controls_config.js"></script>
+		<script src="scripts/systems/controls/controls.js"></script>
+		<script src="scripts/systems/controls/abilities.js"></script>
 		<script src="scripts/systems/physics.js"></script>
-		<script src="scripts/abilities.js"></script>
-		<script src="scripts/runs/runPlayer.js"></script>
-		<!--<script src="scripts/runs/runFriction.js"></script>-->
-		<script src="scripts/runs/runFall.js"></script>
-		<script src="scripts/runs/runCollidePlatform.js"></script>
+		<script src="scripts/systems/collision.js"></script>
 		<script src="scripts/runs/runClean.js"></script>
 		<script src="scripts/render/render.js"></script>
 		<script src="scripts/core/game.js"></script>
 		<script>	
-			function initialize() {
+			function initialize() {				
 				for (var i = 0; i < 100; i++) {
 					OBJECTS.push(make("basic", {
 						randomizePosition: true,
@@ -56,14 +44,21 @@
 					}));
 				}
 				
-				OBJECTS.push(make("platform"));
-				
+				OBJECTS.push(make("point", {
+					width: 25,
+					height: 25,
+					x: 100,
+					y: 350
+				}));
+								
 				var newPlayer = make("player", {
 					width: 50,
 					height: 50
 				});
 				PLAYER = newPlayer;
 				OBJECTS.push(newPlayer);
+				
+				OBJECTS.push(make("platform"));
 			}
 			initialize();
 			
@@ -94,7 +89,7 @@
 				currentTimestamp = timestamp;
 				deltaTime = currentTimestamp - lastTimestamp;
 				mod = deltaTime / 1000;
-				//log("mod", mod);
+				log("mod", mod);
 				lastTimestamp = currentTimestamp;
 				game();
 				render(OBJECTS);
