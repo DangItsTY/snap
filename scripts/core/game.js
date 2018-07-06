@@ -1,5 +1,6 @@
 function game() {
 	runControls(PLAYER);
+	runActs(OBJECTS);
 	runCollision(OBJECTS);
 	runPhysics(OBJECTS);
 	runClean(OBJECTS);

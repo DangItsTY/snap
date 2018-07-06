@@ -38,7 +38,7 @@ function make(type, options) {	//	creates any object in the game
 	}
 	if (type == "player") {
 		object.speed = 200;
-		object.weight = 10;
+		object.weight = 800;
 		
 		//	controls
 		object.jump = 200;
@@ -57,12 +57,16 @@ function make(type, options) {	//	creates any object in the game
 	}
 	if (type == "enemy") {
 		object.speed = 100;
-		object.weight = 10;
+		object.weight = 800;
 		object.red = 255;
 		object.green = 50;
 		object.blue = 50;
 		object.runAct = function() {
-			
+			if (object.x < PLAYER.x) {
+				object.vx = object.speed;
+			} else {
+				object.vx = object.speed * -1;
+			}
 		}
 	}
 	
