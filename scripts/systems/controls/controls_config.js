@@ -8,12 +8,14 @@ el.addEventListener("touchmove", moveTouch);
 var keysDown = {
 	'32': false,
 	'65': false,
-	'68': false
+	'68': false,
+	'74': false
 };
 var keysUp = {
 	'32': true,
 	'65': true,
-	'68': true
+	'68': true,
+	'74': true
 };
 var touchLeft = null;
 var touchLeftOriginX = 0;
@@ -25,6 +27,7 @@ var keyMap = {
 	'jump': 32,
 	'left': 65,
 	'right': 68,
+	'use': 74
 }
 function registerKeyDown(e) {
 	var keyCode = e.keyCode;

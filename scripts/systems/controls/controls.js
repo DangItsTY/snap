@@ -9,6 +9,15 @@ function runControls(player) {
 		player.collisionFloor = null;
 	}
 	
+	if (keysDown[keyMap.use] && player.useReady) {
+		shoot(player);
+		player.useReady = false;
+	}
+	
+	if (keysUp[keyMap.use]) {
+		player.useReady = true;
+	}
+	
 	/*
 	if ((keysDown[keyMap.jump] || touchRight)) {
 		player.jumpReady = false;

@@ -43,6 +43,7 @@ function make(type, options) {	//	creates any object in the game
 		//	controls
 		object.jump = 200;
 		object.jumpReady = true;
+		object.useReady = true;
 	}
 	if (type == "point") {
 		object.runCollide = function() {
@@ -67,6 +68,27 @@ function make(type, options) {	//	creates any object in the game
 			} else {
 				object.vx = object.speed * -1;
 			}
+		}
+	}
+	if (type == "projectile") {
+		object.speed = 400;
+		object.red = 50;
+		object.green = 255;
+		object.blue = 50;
+		object.timer = 2000;
+		object.runAct = function() {
+			if (options.direction == "left") {
+				object.vx = object.speed;
+			} else if (options.direction == "right") {
+				object.vx = object.speed * -1;
+			}
+			
+			if (object.timer < 0) {
+				object.isAlive = false;
+			} else {
+				object.timer = object.timer - (1000 * mod);
+			}
+
 		}
 	}
 	
