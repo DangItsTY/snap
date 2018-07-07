@@ -9,13 +9,17 @@ var keysDown = {
 	'32': false,
 	'65': false,
 	'68': false,
-	'74': false
+	'74': false,
+	'75': false,
+	'78': false
 };
 var keysUp = {
 	'32': true,
 	'65': true,
 	'68': true,
-	'74': true
+	'74': true,
+	'75': true,
+	'78': true
 };
 var touchLeft = null;
 var touchLeftOriginX = 0;
@@ -27,7 +31,9 @@ var keyMap = {
 	'jump': 32,
 	'left': 65,
 	'right': 68,
-	'use': 74
+	'use': 74,
+	'pickup': 75,
+	'drop': 78
 }
 function registerKeyDown(e) {
 	var keyCode = e.keyCode;

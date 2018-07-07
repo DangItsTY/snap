@@ -2,6 +2,7 @@ function runPhysics(list) {
 	gravity(list);
 	stick(list);
 	move(list);
+	direction(list);
 
 	function gravity(list) {
 		for (var i = 0; i < list.length; i++) {
@@ -31,6 +32,16 @@ function runPhysics(list) {
 		for (var i = 0; i < list.length; i++) {
 			list[i].x = list[i].x + (list[i].vx * mod);
 			list[i].y = list[i].y + (list[i].vy * mod);
+		}
+	}
+	
+	function direction(list) {
+		for (var i = 0; i < list.length; i++) {
+			if (list[i].vx > 0) {
+				list[i].direction = 1;
+			} else if (list[i].vx < 0) {
+				list[i].direction = -1;
+			}
 		}
 	}
 }

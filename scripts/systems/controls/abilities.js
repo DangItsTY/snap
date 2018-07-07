@@ -12,11 +12,24 @@ function jump(object) {
 
 function shoot(object) {
 	OBJECTS.push(make("projectile", {
-		x: object.x + (object.width / 2),
+		x: object.direction == 1 ? object.x + (object.width / 2) : object.x - (object.width / 2),
 		y: object.y + (object.height / 2),
 		width: 20,
 		height: 20,
-		direction: object.vx < 0 ? "right" : "left"
+		direction: object.direction
+	}));
+	renderAttach([OBJECTS[OBJECTS.length-1]]);
+}
+
+function slash(object) {
+	OBJECTS.push(make("projectile", {
+		x: object.direction == 1 ? object.x + (object.width / 2) : object.x - (object.width / 2),
+		y: object.y,
+		width: 20,
+		height: 50,
+		speed: 0,
+		direction: object.direction,
+		target: object
 	}));
 	renderAttach([OBJECTS[OBJECTS.length-1]]);
 }

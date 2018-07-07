@@ -13,13 +13,14 @@ function make(type, options) {	//	creates any object in the game
 	object.red = 0;
 	object.green = 0;
 	object.blue = 255;
-	object.speed = options.speed ? options.speed : 0;
-	object.x = options.x ? options.x : GAME_WIDTH / 2;
-	object.y = options.y ? options.y : GAME_HEIGHT / 2;
-	object.vx = options.vx ? options.vy : 0;
-	object.vy = options.vy ? options.vy : 0;
-	object.width = options.width ? options.width : 5;
-	object.height = options.height ? options.height : 5;
+	object.speed = options.speed != undefined ? options.speed : 0;
+	object.x = options.x != undefined ? options.x : GAME_WIDTH / 2;
+	object.y = options.y != undefined ? options.y : GAME_HEIGHT / 2;
+	object.vx = options.vx != undefined ? options.vy : 0;
+	object.vy = options.vy != undefined ? options.vy : 0;
+	object.direction = options.direction != undefined ? options.direction : 1;
+	object.width = options.width != undefined ? options.width : 5;
+	object.height = options.height != undefined ? options.height : 5;
 	object.weight = 0;
 	object.collisions = [];
 	object.collisionFloor = null;
@@ -31,10 +32,10 @@ function make(type, options) {	//	creates any object in the game
 	if (type == "basic") {
 	}
 	if (type == "platform") {
-		object.x = options.x ? options.x : 0;
-		object.y = options.y ? options.y : GAME_HEIGHT - 50;
-		object.width = options.width ? options.width : GAME_WIDTH;
-		object.height = options.height ? options.height : 50;
+		object.x = options.x != undefined ? options.x : 0;
+		object.y = options.y != undefined ? options.y : GAME_HEIGHT - 50;
+		object.width = options.width != undefined ? options.width : GAME_WIDTH;
+		object.height = options.height != undefined ? options.height : 50;
 	}
 	if (type == "player") {
 		object.speed = 200;
@@ -71,24 +72,24 @@ function make(type, options) {	//	creates any object in the game
 		}
 	}
 	if (type == "projectile") {
-		object.speed = 400;
+		object.speed = options.speed != undefined ? options.speed : 400;
 		object.red = 50;
 		object.green = 255;
 		object.blue = 50;
 		object.timer = 2000;
 		object.runAct = function() {
-			if (options.direction == "left") {
-				object.vx = object.speed;
-			} else if (options.direction == "right") {
-				object.vx = object.speed * -1;
-			}
-			
+			object.vx = object.speed * object.direction;
 			if (object.timer < 0) {
 				object.isAlive = false;
 			} else {
 				object.timer = object.timer - (1000 * mod);
 			}
-
+			
+			if (options.target) {
+				var target = options.target;
+				object.x = target.direction == 1 ? target.x + (target.width / 2) : target.x - (target.width / 2),
+				object.y = target.y;
+			}
 		}
 	}
 	
