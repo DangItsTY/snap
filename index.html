@@ -66,7 +66,10 @@
 				PLAYER = newPlayer;
 				OBJECTS.push(newPlayer);
 				
-				OBJECTS.push(make("platform"));
+				OBJECTS.push(make("platform", {
+					x: GAME_WIDTH / 2,
+					y: GAME_HEIGHT - 25
+				}));
 			}
 			initialize();
 			

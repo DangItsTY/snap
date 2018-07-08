@@ -2,8 +2,10 @@ function render(list) {
 	for (var i = 0; i < list.length; i++) {
 		var object = list[i];
 		var element = object.element;
-		element.style.left = object.x + "px";
-		element.style.top = object.y + "px";
+		//element.style.left = object.x + "px";
+		//element.style.top = object.y + "px";
+		element.style.left = object.x - (object.width / 2) + "px";
+		element.style.top = object.y - (object.height / 2) + "px";
 	}
 }
 

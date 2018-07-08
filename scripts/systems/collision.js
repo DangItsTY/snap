@@ -62,16 +62,16 @@ function isCollidingWithFloor(object, target) {
 
 function isCollidingAnywhere(object, target) {
 	var sourceVertices = [
-		{'x': object.x, 'y': object.y},
-		{'x': object.x + object.width, 'y': object.y},
-		{'x': object.x + object.width, 'y': object.y + object.height},
-		{'x': object.x, 'y': object.y + object.height}
+		{'x': object.x - (object.width / 2), 'y': object.y - (object.height / 2)},
+		{'x': object.x - (object.width / 2) + object.width, 'y': object.y - (object.height / 2)},
+		{'x': object.x - (object.width / 2) + object.width, 'y': object.y - (object.height / 2) + object.height},
+		{'x': object.x - (object.width / 2), 'y': object.y - (object.height / 2) + object.height}
 	];
 	var targetVertices = [
-		{'x': target.x, 'y': target.y},
-		{'x': target.x + target.width, 'y': target.y},
-		{'x': target.x + target.width, 'y': target.y + target.height},
-		{'x': target.x, 'y': target.y + target.height}
+		{'x': target.x - (target.width / 2), 'y': target.y - (target.height / 2)},
+		{'x': target.x - (target.width / 2) + target.width, 'y': target.y - (target.height / 2)},
+		{'x': target.x - (target.width / 2) + target.width, 'y': target.y - (target.height / 2) + target.height},
+		{'x': target.x - (target.width / 2), 'y': target.y - (target.height / 2) + target.height}
 	];
 	return object != target &&
 		(pointInSquareCollision(sourceVertices.slice(0, 1), targetVertices) || pointInSquareCollision(sourceVertices.slice(1, 2), targetVertices) ||
