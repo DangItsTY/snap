@@ -13,7 +13,7 @@ function jump(object) {
 function shoot(object) {
 	OBJECTS.push(make("projectile", {
 		x: object.direction == 1 ? object.x + (object.width / 2) : object.x - (object.width / 2),
-		y: object.y + (object.height / 2),
+		y: object.y,
 		width: 20,
 		height: 20,
 		direction: object.direction

@@ -10,8 +10,8 @@ function runControls(player) {
 	}
 	
 	if (keysDown[keyMap.use] && player.useReady) {
-		//shoot(player);
-		slash(player);
+		shoot(player);
+		//slash(player);
 		player.useReady = false;
 	}
 	

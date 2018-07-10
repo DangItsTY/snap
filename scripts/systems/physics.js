@@ -21,7 +21,7 @@ function runPhysics(list) {
 					if (target.type == "platform") {
 						object.collisionFloor = target;
 						object.vy = 0;
-						object.y = target.y - (target.height / 2) - (object.height / 2)
+						object.y = target.y - (target.height / 2) - (object.height / 2);
 					}
 				}
 			}

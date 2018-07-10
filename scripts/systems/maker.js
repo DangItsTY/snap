@@ -39,7 +39,7 @@ function make(type, options) {	//	creates any object in the game
 	}
 	if (type == "player") {
 		object.speed = 200;
-		object.weight = 800;
+		object.weight = 700;
 		
 		//	controls
 		object.jump = 200;
