@@ -4,7 +4,8 @@ function render(list) {
 		var element = object.element;
 		//element.style.left = object.x + "px";
 		//element.style.top = object.y + "px";
-		element.style.left = object.x - (object.width / 2) + "px";
+		element.style.left = object.x - (object.width / 2) - CAMERA.offsetX + "px";
+		//element.style.top = object.y - (object.height / 2) - CAMERA.offsetY + "px";
 		element.style.top = object.y - (object.height / 2) + "px";
 	}
 }

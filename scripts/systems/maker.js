@@ -130,6 +130,21 @@ function make(type, options) {	//	creates any object in the game
 			}
 		}
 	}
+	if (type == "camera") {
+		object.width = 0;
+		object.height = 0;
+		
+		object.runAct = function() {
+			object.x = PLAYER.x;
+			object.y = PLAYER.y;
+			object.viewWidth = 800;
+			object.viewHeight = 450;
+			object.originX = 400;
+			object.originY = 375;
+			object.offsetX = object.x - object.originX;
+			object.offsetY = object.y - object.originY;
+		}
+	}
 	
 	
 	//	OPTIONS

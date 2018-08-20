@@ -50,5 +50,4 @@ function runControls(player) {
 	log("keyright", keysDown[keyMap.right]);
 	log("vx", player.vx);
 	log("vy", player.vy);
-	log("lift", player.lift);
 }

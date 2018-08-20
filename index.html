@@ -61,7 +61,9 @@
 								
 				var newPlayer = make("player", {
 					width: 50,
-					height: 50
+					height: 50,
+					x: 350,
+					y: 375
 				});
 				PLAYER = newPlayer;
 				OBJECTS.push(newPlayer);
@@ -107,6 +109,10 @@
 					x: 200,
 					y: 300
 				}));
+				
+				var newCamera = make("camera", {});
+				OBJECTS.push(newCamera);
+				CAMERA = newCamera;
 			}
 			initialize();
 			
