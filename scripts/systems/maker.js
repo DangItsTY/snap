@@ -44,7 +44,10 @@ function make(type, options) {	//	creates any object in the game
 		//	controls
 		object.jump = 270;
 		object.jumpReady = true;
-		object.useReady = true;
+		object.useReady = false;
+		object.pickupReady = true;
+		
+		object.item = null;
 	}
 	if (type == "point") {
 		object.runCollide = function() {
@@ -63,11 +66,27 @@ function make(type, options) {	//	creates any object in the game
 		object.red = 255;
 		object.green = 50;
 		object.blue = 50;
+		object.timer = 0;
+		object.timerMax = 1000;
 		object.runAct = function() {
-			if (object.x < PLAYER.x) {
-				object.vx = object.speed;
+			if (object.timer <= 0) {
+				if (object.x < PLAYER.x) {
+					object.vx = object.speed;
+				} else {
+					object.vx = object.speed * -1;
+				}
 			} else {
-				object.vx = object.speed * -1;
+				object.timer = object.timer - (1000 * mod);
+			}	
+		}
+		
+		object.runCollide = function() {
+			for (var i = 0; i < object.collisions.length; i++) {
+				var target = object.collisions[i];
+				if (target.type == "player") {
+					object.timer = object.timerMax;
+					object.vx = 0;
+				}
 			}
 		}
 	}
@@ -89,6 +108,25 @@ function make(type, options) {	//	creates any object in the game
 				var target = options.target;
 				object.x = target.direction == 1 ? target.x + (target.width / 2) : target.x - (target.width / 2),
 				object.y = target.y;
+			}
+		}
+	}
+	if (type == "item") {
+		object.width = 25;
+		object.height = 25;
+		object.timer = object.timerMax = 500;
+		
+		object.runAct = function() {
+			if (object.timer < 0) {
+			} else {
+				object.timer = object.timer - (1000 * mod);
+			}
+		}		
+		object.owner = null;
+		object.use = function() {
+			if (object.timer <= 0) {
+				shoot(object.owner);
+				object.timer = object.timerMax;
 			}
 		}
 	}

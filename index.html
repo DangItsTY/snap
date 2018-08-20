@@ -53,8 +53,8 @@
 				}));
 				
 				OBJECTS.push(make("enemy", {
-					width: 25,
-					height: 25,
+					width: 50,
+					height: 50,
 					x: 200,
 					y: 350
 				}));
@@ -78,7 +78,6 @@
 					height: 50
 				}));
 				
-				/*
 				OBJECTS.push(make("platform", {
 					x: 500,
 					y: GAME_HEIGHT - 25 - 50,
@@ -103,9 +102,16 @@
 					width: 200,
 					height: 5
 				}));
-				*/
+				
+				OBJECTS.push(make("item", {
+					x: 200,
+					y: 300
+				}));
 			}
 			initialize();
+			
+			function blankField() {
+			}
 			
 			function preload() {
 			}

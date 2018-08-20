@@ -34,5 +34,18 @@ function slash(object) {
 	renderAttach([OBJECTS[OBJECTS.length-1]]);
 }
 
+function pickup(object) {
+	for (var i = 0; i < object.collisions.length; i++) {
+		var target = object.collisions[i];
+		if (target.type == "item") {
+			target.x = 0;
+			target.y = 0;
+			object.item = target;
+			target.owner = object;
+			console.log("picked up!");
+		}
+	}
+}
+
 //	not sure what to do with this file.. it's like a middle system between the controls system
 //	and the physics system...

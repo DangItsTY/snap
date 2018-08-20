@@ -10,13 +10,21 @@ function runControls(player) {
 	}
 	
 	if (keysDown[keyMap.use] && player.useReady) {
-		shoot(player);
-		//slash(player);
+		player.item.use();
 		player.useReady = false;
 	}
 	
-	if (keysUp[keyMap.use]) {
+	if (keysUp[keyMap.use] && player.item != null) {
 		player.useReady = true;
+	}
+	
+	if (keysDown[keyMap.pickup] && player.pickupReady) {
+		pickup(player);
+		player.pickupReady = false;
+	}
+	
+	if (keysUp[keyMap.pickup]) {
+		player.pickupReady = true;
 	}
 	
 	/*
