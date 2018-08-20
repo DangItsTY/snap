@@ -6,7 +6,7 @@ function runCollision(objects) {
 	
 	//	set collision info
 	for (var i = 0; i < objects.length; i++) {
-		for (var j = i+1; j < objects.length; j++) {
+		for (var j = 0; j < objects.length; j++) {
 			if (isCollidingAnywhere(objects[i], objects[j])) {
 				objects[i].collisions.push(objects[j]);
 				objects[j].collisions.push(objects[i]);
@@ -117,9 +117,7 @@ function isCollidingAnywhere(object, target) {
 		{'x': target.x - (target.width / 2) + target.width, 'y': target.y - (target.height / 2) + target.height},
 		{'x': target.x - (target.width / 2), 'y': target.y - (target.height / 2) + target.height}
 	];
-	return object != target &&
-		(pointInSquareCollision(sourceVertices.slice(0, 1), targetVertices) || pointInSquareCollision(sourceVertices.slice(1, 2), targetVertices) ||
-		pointInSquareCollision(sourceVertices.slice(2, 3), targetVertices) || pointInSquareCollision(sourceVertices.slice(3, 4), targetVertices));
+	return object != target && pointInSquareCollision(sourceVertices, targetVertices);
 }
 
 function onFloor(object, target) {

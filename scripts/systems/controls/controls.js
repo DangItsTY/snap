@@ -10,11 +10,13 @@ function runControls(player) {
 	}
 	
 	if (keysDown[keyMap.use] && player.useReady) {
-		player.item.use();
+		if (player.item != null) {
+			player.item.use();
+		}
 		player.useReady = false;
 	}
 	
-	if (keysUp[keyMap.use] && player.item != null) {
+	if (keysUp[keyMap.use]) {
 		player.useReady = true;
 	}
 	
@@ -25,6 +27,15 @@ function runControls(player) {
 	
 	if (keysUp[keyMap.pickup]) {
 		player.pickupReady = true;
+	}
+	
+	if (keysDown[keyMap.drop] && player.dropReady) {
+		drop(player);
+		player.dropReady = false;
+	}
+	
+	if (keysUp[keyMap.drop]) {
+		player.dropReady = true;
 	}
 	
 	/*

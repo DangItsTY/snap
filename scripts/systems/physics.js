@@ -55,7 +55,7 @@ function runPhysicsCollision(list) {
 					//	do not apply gravity if object is colliding with a platform
 					for (var j = 0; j < object.collisions.length; j++) {
 						target = object.collisions[j];
-						if (target.type == "platform" && isCollidingWithFloor(object, target)) {
+						if ((target.type == "platform" || target.type == "wall") && isCollidingWithFloor(object, target)) {
 							object.collisionFloor = target;
 							object.vy = 0;
 							object.y = target.y - (target.height / 2) - (object.height / 2);
@@ -75,10 +75,10 @@ function runPhysicsCollision(list) {
 			
 			for (var j = 0; j < object.collisions.length; j++) {
 				target = object.collisions[j];
-				if (target.type == "platform" && isCollidingWithWallRight(object, target)) {
+				if (target.type == "wall" && isCollidingWithWallRight(object, target)) {
 					object.vx = 0;
 					object.x = target.x - (target.width / 2) - (object.width / 2);
-				} else if (target.type == "platform" && isCollidingWithWallLeft(object, target)) {
+				} else if (target.type == "wall" && isCollidingWithWallLeft(object, target)) {
 					object.vx = 0;
 					object.x = target.x + (target.width / 2) + (object.width / 2);
 				}

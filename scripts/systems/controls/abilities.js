@@ -47,5 +47,15 @@ function pickup(object) {
 	}
 }
 
+function drop(object) {
+	if (object.item != null) {
+		var target = object.item;
+		target.x = target.owner.x;
+		target.y = target.owner.y;
+		target.owner = null;
+		object.item = null;
+	}
+}
+
 //	not sure what to do with this file.. it's like a middle system between the controls system
 //	and the physics system...

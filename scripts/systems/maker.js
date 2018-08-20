@@ -37,6 +37,12 @@ function make(type, options) {	//	creates any object in the game
 		object.width = options.width != undefined ? options.width : GAME_WIDTH;
 		object.height = options.height != undefined ? options.height : 50;
 	}
+	if (type == "wall") {
+		object.x = options.x != undefined ? options.x : 0;
+		object.y = options.y != undefined ? options.y : GAME_HEIGHT - 50;
+		object.width = options.width != undefined ? options.width : GAME_WIDTH;
+		object.height = options.height != undefined ? options.height : 50;
+	}
 	if (type == "player") {
 		object.speed = 200;
 		object.weight = 700;
@@ -44,8 +50,9 @@ function make(type, options) {	//	creates any object in the game
 		//	controls
 		object.jump = 270;
 		object.jumpReady = true;
-		object.useReady = false;
+		object.useReady = true;
 		object.pickupReady = true;
+		object.dropReady = true;
 		
 		object.item = null;
 	}

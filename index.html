@@ -36,7 +36,7 @@
 		<script src="scripts/render/render.js"></script>
 		<script src="scripts/core/game.js"></script>
 		<script>	
-			function initialize() {				
+			function initialize() {
 				for (var i = 0; i < 100; i++) {
 					OBJECTS.push(make("basic", {
 						randomizePosition: true,
@@ -68,12 +68,12 @@
 				PLAYER = newPlayer;
 				OBJECTS.push(newPlayer);
 				
-				OBJECTS.push(make("platform", {
+				OBJECTS.push(make("wall", {
 					x: GAME_WIDTH / 2,
 					y: GAME_HEIGHT - 25
 				}));
 				
-				OBJECTS.push(make("platform", {
+				OBJECTS.push(make("wall", {
 					x: 500,
 					y: GAME_HEIGHT - 25 - 50,
 					width: 200,
