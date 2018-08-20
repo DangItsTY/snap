@@ -42,7 +42,7 @@ function make(type, options) {	//	creates any object in the game
 		object.weight = 700;
 		
 		//	controls
-		object.jump = 200;
+		object.jump = 270;
 		object.jumpReady = true;
 		object.useReady = true;
 	}

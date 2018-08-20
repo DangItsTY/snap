@@ -37,7 +37,7 @@ function runControls(player) {
 	}
 		
 	log("y", player.y);
-	log("x", player.element.style.left);
+	log("x", player.x);
 	log("keyleft", keysDown[keyMap.left]);
 	log("keyright", keysDown[keyMap.right]);
 	log("vx", player.vx);

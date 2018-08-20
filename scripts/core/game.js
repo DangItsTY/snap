@@ -1,8 +1,14 @@
 function game() {
+	//	pre-collision
 	runControls(PLAYER);
 	runActs(OBJECTS);
-	runCollision(OBJECTS);
 	runPhysics(OBJECTS);
+	
+	//	collision
+	runCollision(OBJECTS);
+	
+	//	post-collision
+	runPhysicsCollision(OBJECTS);
 	runClean(OBJECTS);
 	//runFriction([thePlayer]);
 	//runFall(theObjects);

@@ -45,19 +45,63 @@ function runCollidePlatform(object, list) {
 }
 
 function isCollidingWithFloor(object, target) {
+	var bufferWidth = 0.1;
+	var bufferHeight = 0.4;
 	var sourceVertices = [
-		{'x': object.x, 'y': object.y + object.height},
-		{'x': object.x + object.width, 'y': object.y + object.height}
+		{'x': object.x - (object.width * bufferWidth), 'y': object.y + (object.height * bufferHeight)},
+		{'x': object.x + (object.width * bufferWidth), 'y': object.y + (object.height * bufferHeight)},
+		{'x': object.x + (object.width * bufferWidth), 'y': object.y - (object.height / 2) + object.height},
+		{'x': object.x - (object.width * bufferWidth), 'y': object.y - (object.height / 2) + object.height}
 	];
 	var targetVertices = [
-		{'x': target.x, 'y': target.y},
-		{'x': target.x + target.width, 'y': target.y},
-		{'x': target.x + target.width, 'y': target.y + target.height},
-		{'x': target.x, 'y': target.y + target.height}
+		{'x': target.x - (target.width / 2), 'y': target.y - (target.height / 2)},
+		{'x': target.x - (target.width / 2) + target.width, 'y': target.y - (target.height / 2)},
+		{'x': target.x - (target.width / 2) + target.width, 'y': target.y - (target.height / 2) + target.height},
+		{'x': target.x - (target.width / 2), 'y': target.y - (target.height / 2) + target.height}
 	];
 	return object != target &&
-		object.vy >= 0 &&
-		(pointInSquareCollision(sourceVertices.slice(0, 1), targetVertices) || pointInSquareCollision(sourceVertices.slice(1, 2), targetVertices));
+		(pointInSquareCollision(sourceVertices.slice(0, 1), targetVertices) || pointInSquareCollision(sourceVertices.slice(1, 2), targetVertices) ||
+		pointInSquareCollision(sourceVertices.slice(2, 3), targetVertices) || pointInSquareCollision(sourceVertices.slice(3, 4), targetVertices));
+}
+
+function isCollidingWithWallRight(object, target) {
+	var buffer = 0.5;
+	var bufferHeight = 0.1
+	var sourceVertices = [
+		{'x': object.x + (object.width * buffer), 'y': object.y - (object.height * bufferHeight)},
+		{'x': object.x - (object.width / 2) + object.width, 'y': object.y - (object.height * bufferHeight)},
+		{'x': object.x - (object.width / 2) + object.width, 'y': object.y + (object.height * bufferHeight)},
+		{'x': object.x + (object.width * buffer), 'y': object.y + (object.height * bufferHeight)}
+	];
+	var targetVertices = [
+		{'x': target.x - (target.width / 2), 'y': target.y - (target.height / 2)},
+		{'x': target.x - (target.width / 2) + target.width, 'y': target.y - (target.height / 2)},
+		{'x': target.x - (target.width / 2) + target.width, 'y': target.y - (target.height / 2) + target.height},
+		{'x': target.x - (target.width / 2), 'y': target.y - (target.height / 2) + target.height}
+	];
+	return object != target &&
+		(pointInSquareCollision(sourceVertices.slice(0, 1), targetVertices) || pointInSquareCollision(sourceVertices.slice(1, 2), targetVertices) ||
+		pointInSquareCollision(sourceVertices.slice(2, 3), targetVertices) || pointInSquareCollision(sourceVertices.slice(3, 4), targetVertices));
+}
+
+function isCollidingWithWallLeft(object, target) {
+	var buffer = 0.4;
+	var bufferHeight = 0.1
+	var sourceVertices = [
+		{'x': object.x - (object.width / 2), 'y': object.y - (object.height * bufferHeight)},
+		{'x': object.x - (object.width * buffer), 'y': object.y - (object.height * bufferHeight)},
+		{'x': object.x - (object.width * buffer), 'y': object.y + (object.height * bufferHeight)},
+		{'x': object.x - (object.width / 2), 'y': object.y + (object.height * bufferHeight)}
+	];
+	var targetVertices = [
+		{'x': target.x - (target.width / 2), 'y': target.y - (target.height / 2)},
+		{'x': target.x - (target.width / 2) + target.width, 'y': target.y - (target.height / 2)},
+		{'x': target.x - (target.width / 2) + target.width, 'y': target.y - (target.height / 2) + target.height},
+		{'x': target.x - (target.width / 2), 'y': target.y - (target.height / 2) + target.height}
+	];
+	return object != target &&
+		(pointInSquareCollision(sourceVertices.slice(0, 1), targetVertices) || pointInSquareCollision(sourceVertices.slice(1, 2), targetVertices) ||
+		pointInSquareCollision(sourceVertices.slice(2, 3), targetVertices) || pointInSquareCollision(sourceVertices.slice(3, 4), targetVertices));
 }
 
 function isCollidingAnywhere(object, target) {
@@ -97,7 +141,7 @@ function specialStart(object) {
 	}
 }
 
-function pointInSquareCollision(sourceVertices, targetVertices) {
+function pointInSquareCollision_old(sourceVertices, targetVertices) {
 	//  Implementing a "Point in Polygon" using a ray casting to the right algorithm.
 	//  If any source points pass the test, then collision is true
 	//  Winding order is top left, clockwise
@@ -119,4 +163,27 @@ function pointInSquareCollision(sourceVertices, targetVertices) {
 	  }
 	}
 	return false;
+}
+
+function pointInSquareCollision(sourceVertices, targetVertices) {
+	//	targetVertices expects four points, starting top left going clockwise
+	var top = targetVertices[0].y;
+	var bottom = targetVertices[2].y;
+	var left = targetVertices[0].x;
+	var right = targetVertices[2].x;
+	for (var i = 0; i < sourceVertices.length; i++) {
+		var p = sourceVertices[i];
+		if (p.x > left && p.x < right && p.y > top && p.y < bottom) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function pointInLineCollision(source, targetMin, targetMax) {
+	if (source > targetMin && source < targetMax) {
+		return true;
+	} else {
+		return false;
+	}
 }
