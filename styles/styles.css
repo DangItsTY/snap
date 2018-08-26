@@ -13,8 +13,9 @@ main {
 	height: 450px;
 	position: relative;
 }
-bg-color {
-	background-color: aquablue;
+.bg-color {
+	background-color: antiquewhite;
+	overflow: hidden;
 }
 
 

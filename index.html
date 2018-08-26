@@ -49,20 +49,20 @@
 					width: 25,
 					height: 25,
 					x: 100,
-					y: 350
+					y: 300
 				}));
 				
 				OBJECTS.push(make("enemy", {
 					width: 50,
 					height: 50,
 					x: 200,
-					y: 350
+					y: 300
 				}));
 								
 				var newPlayer = make("player", {
 					width: 50,
 					height: 50,
-					x: 350,
+					x: 351,
 					y: 375
 				});
 				PLAYER = newPlayer;
@@ -84,21 +84,15 @@
 				}));
 				*/
 				
-				for (var i = 0; i < 39; i++) {
+				for (var i = 0; i < 41; i++) {
 					OBJECTS.push(make("wall", {
 						x: i * 50,
-						y: GAME_HEIGHT,
+						y: GAME_HEIGHT - 50,
 						width: 50,
 						height: 50
 					}));
 				}
 				
-				OBJECTS.push(make("platform", {
-					x: 500,
-					y: GAME_HEIGHT - 25 - 50,
-					width: 200,
-					height: 5
-				}));
 				OBJECTS.push(make("platform", {
 					x: 500,
 					y: GAME_HEIGHT - 25 - 100,
@@ -117,10 +111,16 @@
 					width: 200,
 					height: 5
 				}));
+				OBJECTS.push(make("platform", {
+					x: 500,
+					y: GAME_HEIGHT - 25 - 250,
+					width: 200,
+					height: 5
+				}));
 				
 				OBJECTS.push(make("item", {
 					x: 200,
-					y: 350
+					y: 300
 				}));
 				
 				var newCamera = make("camera", {});
