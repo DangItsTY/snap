@@ -2,6 +2,7 @@ function runPhysics(list) {
 	gravity(list);
 	move(list);
 	direction(list);
+	wrap(list);
 
 	function gravity(list) {
 		for (var i = 0; i < list.length; i++) {
@@ -23,6 +24,16 @@ function runPhysics(list) {
 				list[i].direction = 1;
 			} else if (list[i].vx < 0) {
 				list[i].direction = -1;
+			}
+		}
+	}
+	
+	function wrap(list) {
+		for (var i = 0; i < list.length; i++) {
+			if (list[i].x > GAME_BOUNDARY) {
+				list[i].x = list[i].x - GAME_BOUNDARY;
+			} else if (list[i].x < 0) {
+				list[i].x = list[i].x + GAME_BOUNDARY;
 			}
 		}
 	}

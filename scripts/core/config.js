@@ -4,6 +4,7 @@ var GAME_WIDTH = 800;
 var GAME_HEIGHT = 450;
 var PLAYER;	//	reference to player object, is just one player for now
 var CAMERA; //	reference to camera object
+var GAME_BOUNDARY = 2000;
 
 //	ELEMENT REFERENCES
 var CONTENT_LAYER = document.getElementById("content");

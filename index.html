@@ -10,7 +10,7 @@
 		<link rel="manifest" href="manifest.json">
 	</head>
 	<body class="mobil">
-		<main id="container">
+		<main id="container" class="bg-color">
 			<section id="background">
 			</section>
 			<section id="content">
@@ -68,17 +68,30 @@
 				PLAYER = newPlayer;
 				OBJECTS.push(newPlayer);
 				
+				/*
 				OBJECTS.push(make("wall", {
 					x: GAME_WIDTH / 2,
 					y: GAME_HEIGHT - 25
 				}));
+				*/
 				
+				/*
 				OBJECTS.push(make("wall", {
 					x: 500,
 					y: GAME_HEIGHT - 25 - 50,
 					width: 200,
 					height: 50
 				}));
+				*/
+				
+				for (var i = 0; i < 39; i++) {
+					OBJECTS.push(make("wall", {
+						x: i * 50,
+						y: GAME_HEIGHT,
+						width: 50,
+						height: 50
+					}));
+				}
 				
 				OBJECTS.push(make("platform", {
 					x: 500,
@@ -107,7 +120,7 @@
 				
 				OBJECTS.push(make("item", {
 					x: 200,
-					y: 300
+					y: 350
 				}));
 				
 				var newCamera = make("camera", {});
