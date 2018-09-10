@@ -8,8 +8,10 @@ function make(type, options) {	//	creates any object in the game
 	
 	//	INITIALIZE OBJECT
 	object.type = type;
+	object.name = options.name != undefined ? options.name : "";
 	object.isAlive = true;
 	object.element = element;
+	object.image = "";
 	object.red = 0;
 	object.green = 0;
 	object.blue = 255;
@@ -151,6 +153,11 @@ function make(type, options) {	//	creates any object in the game
 			object.offsetX = object.x - object.originX;
 			object.offsetY = object.y - object.originY;
 		}
+	}
+	
+	//	NAMES
+	if (options.name == "floor") {
+		object.image = "hardwoodfloor.png";
 	}
 	
 	

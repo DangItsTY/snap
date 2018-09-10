@@ -11,5 +11,5 @@ var CONTENT_LAYER = document.getElementById("content");
 var INFO_LAYER = document.getElementById("info");
 
 //	PATHS
-var IMAGEPATH = 'images/';
+var IMAGEPATH = 'assets/images/';
 var RUNPATH = 'runs/';

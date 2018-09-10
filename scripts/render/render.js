@@ -39,7 +39,13 @@ function renderAttach(list) {
 		element.style.position = "absolute";
 		element.style.left = "0px";
 		element.style.top = "0px";
-		element.style.backgroundColor = "rgba("+object.red+", "+object.green+", "+object.blue+", 1.0)";
+		if (object.image.length > 0) {
+			console.log(object.image);
+			element.style.backgroundImage = "url('" + IMAGEPATH + object.image + "')";
+			element.style.backgroundSize = "cover";
+		} else {
+			element.style.backgroundColor = "rgba("+object.red+", "+object.green+", "+object.blue+", 1.0)";
+		}
 		//element.style.borderRadius = "5px";
 		
 		list[i].element = element;
