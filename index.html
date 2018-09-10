@@ -88,11 +88,19 @@
 					OBJECTS.push(make("wall", {
 						name: "floor",
 						x: i * 50,
-						y: GAME_HEIGHT - 50,
+						y: GAME_HEIGHT - 25,
 						width: 50,
 						height: 50
 					}));
 				}
+				
+				OBJECTS.push(make("platform", {
+					name: "chandalier",
+					x: 500,
+					y: 50,
+					width: 100,
+					height: 100
+				}));
 				
 				OBJECTS.push(make("platform", {
 					x: 500,
