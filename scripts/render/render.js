@@ -44,7 +44,7 @@ function renderAttach(list) {
 			element.style.backgroundImage = "url('" + IMAGEPATH + object.image + "')";
 			element.style.backgroundSize = "cover";
 		} else {
-			element.style.backgroundColor = "rgba("+object.red+", "+object.green+", "+object.blue+", 1.0)";
+			element.style.backgroundColor = "rgba("+object.red+", "+object.green+", "+object.blue+", "+object.alpha+")";
 		}
 		//element.style.borderRadius = "5px";
 		

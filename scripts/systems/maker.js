@@ -15,6 +15,7 @@ function make(type, options) {	//	creates any object in the game
 	object.red = 0;
 	object.green = 0;
 	object.blue = 255;
+	object.alpha = options.alpha != undefined ? options.alpha : 1.0;
 	object.speed = options.speed != undefined ? options.speed : 0;
 	object.x = options.x != undefined ? options.x : GAME_WIDTH / 2;
 	object.y = options.y != undefined ? options.y : GAME_HEIGHT / 2;
@@ -37,7 +38,8 @@ function make(type, options) {	//	creates any object in the game
 		object.x = options.x != undefined ? options.x : 0;
 		object.y = options.y != undefined ? options.y : GAME_HEIGHT - 50;
 		object.width = options.width != undefined ? options.width : GAME_WIDTH;
-		object.height = options.height != undefined ? options.height : 50;
+		object.height = options.height != undefined ? options.height : 5;
+		object.alpha = options.alpha != undefined ? options.alpha : 0.0;
 	}
 	if (type == "wall") {
 		object.x = options.x != undefined ? options.x : 0;
@@ -163,7 +165,27 @@ function make(type, options) {	//	creates any object in the game
 	if (options.name == "chandalier") {
 		object.image = "chandalier.png";
 	}
-	
+	if (options.name == "zombie") {
+		object.image = "zombie.png";
+	}
+	if (options.name == "foyer") {
+		object.image = "foyer.png";
+	}
+	if (options.name == "redstep") {
+		object.image = "redstep.png";
+	}
+	if (options.name == "stairrailpost") {
+		object.image = "stairrailpost.png";
+	}
+	if (options.name == "stairrail") {
+		object.image = "stairrail.png";
+	}
+	if (options.name == "foyerupperfloor") {
+		object.image = "foyerupperfloor.png";
+	}
+	if (options.name == "paperwall") {
+		object.image = "paperwall.png";
+	}
 	
 	//	OPTIONS
 	if (options.randomizeColor) {
