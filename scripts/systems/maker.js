@@ -170,6 +170,16 @@ function make(type, options) {	//	creates any object in the game
 			}
 		}
 	}
+	if (type == "selector") {
+		object.image = "player.png";
+		
+		object.runAct = function() {
+			if (mousePosition != null) {
+				object.x = Math.floor((mousePosition.x)/BLOCK_SIZE) * BLOCK_SIZE / CAMERA_SIZE;
+				object.y = Math.floor((mousePosition.y)/BLOCK_SIZE) * BLOCK_SIZE / CAMERA_SIZE;
+			}
+		}
+	}
 	
 	//	NAMES
 	if (options.name == "floor") {

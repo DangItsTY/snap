@@ -5,6 +5,8 @@ el.addEventListener("touchstart", registerTouch);
 el.addEventListener("touchend", deregisterTouch);
 el.addEventListener("touchmove", moveTouch);
 //el.addEventListener("touchcancel", cancelTouch);
+var mousePosition = {x: 0, y: 0};
+el.addEventListener('mousemove', getMousePosition);
 var keysDown = {
 	'32': false,
 	'65': false,
@@ -95,4 +97,12 @@ function moveTouch(e) {
 			touchMoveLeft = null;
 		}
 	}
+}
+
+function getMousePosition(e) {
+    var rect = el.getBoundingClientRect();
+    mousePosition = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
 }

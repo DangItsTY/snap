@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<title>Level Editor</title>
+		<link rel="stylesheet" href="styles/styles.css">
+		<link rel="manifest" href="manifest.json">
+	</head>
+	<body class="mobil">
+		<main id="container" class="bg-color">
+			<section id="background">
+			</section>
+			<section id="content">
+			</section>
+			<section id="foreground">
+			</section>
+			<section id="overlay">
+			</section>
+			<section id="info">
+			</section>
+		</main>
+		<footer>
+		</footer>
+		<script src="scripts/core/config.js"></script>
+		<script src="scripts/systems/maker.js"></script>
+		<script src="scripts/systems/controls/controls_config.js"></script>
+		<script src="scripts/systems/controls/controls.js"></script>
+		<script src="scripts/systems/controls/abilities.js"></script>
+		<script src="scripts/systems/physics.js"></script>
+		<script src="scripts/systems/collision.js"></script>
+		<script src="scripts/runs/runClean.js"></script>
+		<script src="scripts/runs/runActs.js"></script>
+		<script src="scripts/render/render.js"></script>
+		<script src="scripts/core/game.js"></script>
+		<script>
+			// things for an editor
+			
+			
+			
+			
+			
+			function initrender() {
+				renderInit();
+			}
+			initrender();
+			
+			function initialize() {
+				// load
+				var loadlist = [];
+				loadlist.length = BLOCKH;
+				for (var i = 0; i < loadlist.length; i++) {
+					var newlist = [];
+					newlist.length = BLOCKW;
+					newlist.fill(0);
+					loadlist[i] = newlist;
+				}
+				
+				// object list
+				var objectlist = [
+					"paperwall"
+				];
+				
+				for (var i = 0; i < loadlist.length; i++) {
+					for (var j = 0; j < loadlist[i].length; j++) {
+						OBJECTS.push(make("basic", {
+							name: objectlist[loadlist[i][j]],
+							x: j * BLOCK_SIZE,
+							y: i * BLOCK_SIZE,
+							width: BLOCK_SIZE,
+							height: BLOCK_SIZE
+						}));
+					}
+				}
+				
+				var newPlayer = make("selector", {
+					width: BLOCK_SIZE,
+					height: BLOCK_SIZE,
+					x: GAME_WIDTH / 2 + 1,
+					y: GAME_HEIGHT / 2
+				});
+				PLAYER = newPlayer;
+				OBJECTS.push(newPlayer);
+				
+				var newCamera = make("camera", {
+					mode: "static",
+					x: 0,
+					y: 0
+				});
+				OBJECTS.push(newCamera);
+				CAMERA = newCamera;
+			}
+			initialize();
+			
+			function blankField() {
+			}
+			
+			function preload() {
+			}
+			preload();
+			
+			function prerender() {
+				renderAttach(OBJECTS);
+			}
+			prerender();
+			
+			function log(label, value) {
+				var element = document.getElementById(label);
+				if (!element) {
+					element = document.createElement('div');
+					element.id = label;
+					INFO_LAYER.appendChild(element);
+				}
+				element.innerHTML = label + ": " + value;
+			}
+			
+			var lastTimestamp = null;
+			var currentTimestamp = null;
+			var deltaTime = null;
+			var mod = 0;
+			function gameloop(timestamp) {
+				currentTimestamp = timestamp;
+				deltaTime = currentTimestamp - lastTimestamp;
+				
+				// if user tabs out, don't change anything
+				// this will need to be removed once logic goes to the server
+				if (deltaTime > 100) {
+					deltaTime = 0; 
+				}
+				
+				mod = deltaTime / 1000;
+				log("mod", mod);
+				lastTimestamp = currentTimestamp;
+				game();
+				render(OBJECTS);
+				
+				window.requestAnimationFrame(gameloop);
+			}
+			window.requestAnimationFrame(gameloop);
+		</script>
+	</body>
+</html>
