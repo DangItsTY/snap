@@ -35,9 +35,120 @@
 		<script src="scripts/runs/runActs.js"></script>
 		<script src="scripts/render/render.js"></script>
 		<script src="scripts/core/game.js"></script>
-		<script>	
-			function initialize() {
-				// need to create a background layer of objects, they don't collide, may have z parallax property
+		<script>
+			function initrender() {
+				renderInit();
+			}
+			initrender();
+			
+			function initialize() {				
+				for (var i = 0; i < BLOCKH + 1; i++) {
+					for (var j = 0; j < BLOCKW + 1; j++) {
+						OBJECTS_BACKGROUND.push(make("basic", {
+							name: "paperwall",
+							x: j * BLOCK_SIZE,
+							y: i * BLOCK_SIZE,
+							width: BLOCK_SIZE,
+							height: BLOCK_SIZE
+						}));
+					}
+				}
+				
+				for (var i = 0; i < BLOCKW + 1; i++) {
+					OBJECTS.push(make("wall", {
+						name: "floor",
+						x: i * BLOCK_SIZE,
+						y: GAME_HEIGHT - (BLOCK_SIZE / 2),
+						width: BLOCK_SIZE,
+						height: BLOCK_SIZE
+					}));
+				}
+				
+				OBJECTS.push(make("enemy", {
+					name: "zombie",
+					width: BLOCK_SIZE,
+					height: BLOCK_SIZE,
+					x: GAME_WIDTH / 2 + 1,
+					y: GAME_HEIGHT / 2
+				}));
+								
+				var newPlayer = make("player", {
+					width: BLOCK_SIZE,
+					height: BLOCK_SIZE,
+					x: GAME_WIDTH / 2 + 1,
+					y: GAME_HEIGHT / 2
+				});
+				PLAYER = newPlayer;
+				OBJECTS.push(newPlayer);
+				
+				var newCamera = make("camera", {
+					mode: "static",
+					x: 0,
+					y: 0
+				});
+				OBJECTS.push(newCamera);
+				CAMERA = newCamera;
+			}
+			initialize();
+			
+			function blankField() {
+			}
+			
+			function preload() {
+			}
+			preload();
+			
+			function prerender() {
+				renderAttach(OBJECTS_BACKGROUND);			
+				renderAttach(OBJECTS);
+			}
+			prerender();
+			
+			function log(label, value) {
+				var element = document.getElementById(label);
+				if (!element) {
+					element = document.createElement('div');
+					element.id = label;
+					INFO_LAYER.appendChild(element);
+				}
+				element.innerHTML = label + ": " + value;
+			}
+			
+			var lastTimestamp = null;
+			var currentTimestamp = null;
+			var deltaTime = null;
+			var mod = 0;
+			function gameloop(timestamp) {
+				currentTimestamp = timestamp;
+				deltaTime = currentTimestamp - lastTimestamp;
+				
+				// if user tabs out, don't change anything
+				// this will need to be removed once logic goes to the server
+				if (deltaTime > 100) {
+					deltaTime = 0; 
+				}
+				
+				mod = deltaTime / 1000;
+				log("mod", mod);
+				lastTimestamp = currentTimestamp;
+				game();
+				render(OBJECTS_BACKGROUND);
+				render(OBJECTS);
+				//renderHud();
+				
+				window.requestAnimationFrame(gameloop);
+			}
+			window.requestAnimationFrame(gameloop);
+			
+			
+			
+			
+			
+			
+			
+			//	initialization scripts
+			function initmansion() {
+			// need to create a background layer of objects, they don't collide, may have z parallax property
 				/*
 				OBJECTS.push(make("basic", {
 					name: "foyer",
@@ -299,56 +410,6 @@
 				OBJECTS.push(newCamera);
 				CAMERA = newCamera;
 			}
-			initialize();
-			
-			function blankField() {
-			}
-			
-			function preload() {
-			}
-			preload();
-			
-			function prerender() {
-				renderAttach(OBJECTS_BACKGROUND);			
-				renderAttach(OBJECTS);
-			}
-			prerender();
-			
-			function log(label, value) {
-				var element = document.getElementById(label);
-				if (!element) {
-					element = document.createElement('div');
-					element.id = label;
-					INFO_LAYER.appendChild(element);
-				}
-				element.innerHTML = label + ": " + value;
-			}
-			
-			var lastTimestamp = null;
-			var currentTimestamp = null;
-			var deltaTime = null;
-			var mod = 0;
-			function gameloop(timestamp) {
-				currentTimestamp = timestamp;
-				deltaTime = currentTimestamp - lastTimestamp;
-				
-				// if user tabs out, don't change anything
-				// this will need to be removed once logic goes to the server
-				if (deltaTime > 100) {
-					deltaTime = 0; 
-				}
-				
-				mod = deltaTime / 1000;
-				log("mod", mod);
-				lastTimestamp = currentTimestamp;
-				game();
-				render(OBJECTS_BACKGROUND);
-				render(OBJECTS);
-				//renderHud();
-				
-				window.requestAnimationFrame(gameloop);
-			}
-			window.requestAnimationFrame(gameloop);
 		</script>
 	</body>
 </html>

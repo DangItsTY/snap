@@ -6,11 +6,11 @@ function render(list) {
 		//element.style.top = object.y - (object.height / 2) + "px";
 		
 		//element.style.top = object.y - (object.height / 2) - CAMERA.offsetY + "px";
-		element.style.top = object.y - (object.height / 2) + "px";
+		element.style.top = (object.y * CAMERA_SIZE) - ((object.height * CAMERA_SIZE) / 2) + "px";
 		if (CAMERA.mode == "follow" && object == PLAYER) {
 			element.style.left = "375px";
 		} else {
-			element.style.left = object.x - (object.width / 2) - CAMERA.offsetX + "px";
+			element.style.left = (object.x * CAMERA_SIZE) - ((object.width * CAMERA_SIZE) / 2) - CAMERA.offsetX + "px";
 			
 			//	show the wrapping area
 			var wrapLength = (CAMERA.x + (CAMERA.viewWidth / 2)) - GAME_BOUNDARY;
@@ -34,8 +34,8 @@ function renderAttach(list) {
 	for (var i = 0; i < list.length; i++) {
 		var object = list[i];
 		var element = document.createElement("div");
-		element.style.width = object.width + "px";
-		element.style.height = object.height + "px";
+		element.style.width = object.width * CAMERA_SIZE + "px";
+		element.style.height = object.height * CAMERA_SIZE+ "px";
 		element.style.position = "absolute";
 		element.style.left = "0px";
 		element.style.top = "0px";
@@ -53,5 +53,12 @@ function renderAttach(list) {
 		CONTENT_LAYER.appendChild(list[i].element);
 	}
 }
+
+function renderInit() {
+	var main = document.getElementById("container");
+	main.style.width = GAME_WIDTH * CAMERA_SIZE + "px";
+	main.style.height = GAME_HEIGHT * CAMERA_SIZE + "px";
+}
+
 
 //	need to break up the concept of render so that i have a DOM specific renderer. dom and element stuff shouldn't be core.
