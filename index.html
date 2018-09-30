@@ -331,6 +331,13 @@
 			function gameloop(timestamp) {
 				currentTimestamp = timestamp;
 				deltaTime = currentTimestamp - lastTimestamp;
+				
+				// if user tabs out, don't change anything
+				// this will need to be removed once logic goes to the server
+				if (deltaTime > 100) {
+					deltaTime = 0; 
+				}
+				
 				mod = deltaTime / 1000;
 				log("mod", mod);
 				lastTimestamp = currentTimestamp;

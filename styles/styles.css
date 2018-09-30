@@ -13,10 +13,6 @@ main {
 	height: 450px;
 	position: relative;
 }
-.bg-color {
-	background-color: antiquewhite;
-	overflow: hidden;
-}
 div { 
 	image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
 	image-rendering: -moz-crisp-edges;          /* Firefox                        */
@@ -25,6 +21,15 @@ div {
 	image-rendering: pixelated; /* Chrome */
 	image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
 	-ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+}
+#info {
+	position: absolute;
+	color: white;
+	font-weight: bold;
+}
+.bg-color {
+	background-color: antiquewhite;
+	overflow: hidden;
 }
 
 
