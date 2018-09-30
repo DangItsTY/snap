@@ -48,6 +48,18 @@
 				}));
 				*/
 				
+				for (var i = 0; i < 9; i++) {
+					for (var j = 0; j < 17; j++) {
+						OBJECTS_BACKGROUND.push(make("basic", {
+							name: "paperwall",
+							x: j * 50,
+							y: i * 50,
+							width: 50,
+							height: 50
+						}));
+					}
+				}
+				
 				//	red staircase
 				for (var i = 0; i < 6; i++) {
 					for (var j = 0; j < 4; j++) {
@@ -67,8 +79,8 @@
 				
 				
 				
-				
-				
+				// for performance testing
+				/*
 				for (var i = 0; i < 100; i++) {
 					OBJECTS.push(make("basic", {
 						randomizePosition: true,
@@ -76,13 +88,16 @@
 						randomizeColor: true
 					}));
 				}
+				*/
 				
+				/*
 				OBJECTS.push(make("point", {
 					width: 25,
 					height: 25,
 					x: 100,
 					y: 300
 				}));
+				*/
 				
 				OBJECTS.push(make("enemy", {
 					name: "zombie",
@@ -130,7 +145,7 @@
 				//	 left wall
 				for (var i = 0; i < 6; i++) {
 					OBJECTS.push(make("wall", {
-						name: "paperwall",
+						name: "woodwall",
 						x: GAME_WIDTH - 800,
 						y: GAME_HEIGHT - 425 + (50 * i),
 						width: 50,
@@ -141,7 +156,7 @@
 				//	 right wall
 				for (var i = 0; i < 6; i++) {
 					OBJECTS.push(make("wall", {
-						name: "paperwall",
+						name: "woodwall",
 						x: GAME_WIDTH,
 						y: GAME_HEIGHT - 425 + (50 * i),
 						width: 50,
@@ -185,10 +200,12 @@
 					width: GAME_WIDTH - 50,
 				}));
 				
+				/*
 				OBJECTS.push(make("item", {
 					x: 200,
 					y: 300
 				}));
+				*/
 				
 				//	foreground
 				OBJECTS.push(make("basic", {
@@ -274,7 +291,11 @@
 				
 				
 				
-				var newCamera = make("camera", {});
+				var newCamera = make("camera", {
+					mode: "static",
+					x: 0,
+					y: 0
+				});
 				OBJECTS.push(newCamera);
 				CAMERA = newCamera;
 			}
@@ -288,6 +309,7 @@
 			preload();
 			
 			function prerender() {
+				renderAttach(OBJECTS_BACKGROUND);			
 				renderAttach(OBJECTS);
 			}
 			prerender();
@@ -313,6 +335,7 @@
 				log("mod", mod);
 				lastTimestamp = currentTimestamp;
 				game();
+				render(OBJECTS_BACKGROUND);
 				render(OBJECTS);
 				//renderHud();
 				

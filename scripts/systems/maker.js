@@ -145,16 +145,29 @@ function make(type, options) {	//	creates any object in the game
 	if (type == "camera") {
 		object.width = 0;
 		object.height = 0;
+		object.x = 0;
+		object.y = 0;
+		object.viewWidth = 800;
+		object.viewHeight = 450;
+		object.originX = 0;
+		object.originY = 0;
+		object.offsetX = 0;
+		object.offsetY = 0;
 		
-		object.runAct = function() {
-			object.x = PLAYER.x;
-			object.y = PLAYER.y;
-			object.viewWidth = 800;
-			object.viewHeight = 450;
-			object.originX = 400;
-			object.originY = 375;
-			object.offsetX = object.x - object.originX;
-			object.offsetY = object.y - object.originY;
+		if (options.mode == "static") {
+			object.offsetX = options.x;
+			object.offsetY = options.y;
+		} else if (options.mode == "follow") {
+			object.runAct = function() {
+				object.x = PLAYER.x;
+				object.y = PLAYER.y;
+				object.viewWidth = 800;
+				object.viewHeight = 450;
+				object.originX = 400;
+				object.originY = 375;
+				object.offsetX = object.x - object.originX;
+				object.offsetY = object.y - object.originY;
+			}
 		}
 	}
 	
@@ -185,6 +198,9 @@ function make(type, options) {	//	creates any object in the game
 	}
 	if (options.name == "paperwall") {
 		object.image = "paperwall.png";
+	}
+	if (options.name == "woodwall") {
+		object.image = "woodwall.png";
 	}
 	
 	//	OPTIONS

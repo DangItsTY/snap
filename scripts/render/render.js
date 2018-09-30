@@ -7,7 +7,7 @@ function render(list) {
 		
 		//element.style.top = object.y - (object.height / 2) - CAMERA.offsetY + "px";
 		element.style.top = object.y - (object.height / 2) + "px";
-		if (object == PLAYER) {
+		if (CAMERA.mode == "follow" && object == PLAYER) {
 			element.style.left = "375px";
 		} else {
 			element.style.left = object.x - (object.width / 2) - CAMERA.offsetX + "px";
@@ -40,9 +40,9 @@ function renderAttach(list) {
 		element.style.left = "0px";
 		element.style.top = "0px";
 		if (object.image.length > 0) {
-			console.log(object.image);
 			element.style.backgroundImage = "url('" + IMAGEPATH + object.image + "')";
 			element.style.backgroundSize = "cover";
+			//element.style.filter = "brightness(50%)";
 		} else {
 			element.style.backgroundColor = "rgba("+object.red+", "+object.green+", "+object.blue+", "+object.alpha+")";
 		}
