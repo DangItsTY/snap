@@ -214,6 +214,9 @@ function make(type, options) {	//	creates any object in the game
 	if (options.name == "woodwall") {
 		object.image = "woodwall.png";
 	}
+	if (options.name == "chandalierchain") {
+		object.image = "chandalierchain.png";
+	}
 	
 	//	OPTIONS
 	if (options.randomizeColor) {
