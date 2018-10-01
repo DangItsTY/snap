@@ -21,3 +21,17 @@ var INFO_LAYER = document.getElementById("info");
 //	PATHS
 var IMAGEPATH = 'assets/images/';
 var RUNPATH = 'runs/';
+
+//	EDITOR
+var EDITORGRID = [];
+EDITORGRID.length = BLOCKH;
+for (var i = 0; i < EDITORGRID.length; i++) {
+	var newlist = [];
+	newlist.length = BLOCKW;
+	newlist.fill(0);
+	EDITORGRID[i] = newlist;
+}
+var OBJECTMAP = [
+	"paperwall",
+	"zombie"
+];

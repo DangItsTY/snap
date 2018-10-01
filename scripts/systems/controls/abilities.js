@@ -57,5 +57,28 @@ function drop(object) {
 	}
 }
 
+function selectorEdit(object) {
+	var gridx = Math.floor(object.x / BLOCK_SIZE);
+	var gridy = Math.floor(object.y / BLOCK_SIZE);
+	
+	EDITORGRID[gridy][gridx] = object.selection;
+	
+	//	i'm not cleaning up objects, just adding them on top so watch out for this memory leak
+
+	OBJECTS.push(make("basic", {
+		name: OBJECTMAP[object.selection],
+		x: gridx * BLOCK_SIZE,
+		y: gridy * BLOCK_SIZE,
+		width: BLOCK_SIZE,
+		height: BLOCK_SIZE
+	}));
+	renderAttach([OBJECTS[OBJECTS.length-1]]);
+}
+
+function editorSelection(e) {
+	PLAYER.selection = e.target.getAttribute("value");
+}
+
+
 //	not sure what to do with this file.. it's like a middle system between the controls system
 //	and the physics system...

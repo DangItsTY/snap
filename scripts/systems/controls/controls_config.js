@@ -6,14 +6,17 @@ el.addEventListener("touchend", deregisterTouch);
 el.addEventListener("touchmove", moveTouch);
 //el.addEventListener("touchcancel", cancelTouch);
 var mousePosition = {x: 0, y: 0};
-el.addEventListener('mousemove', getMousePosition);
+el.addEventListener('mousemove', getMousePosition, false);
+el.addEventListener("mousedown", mouseDown, false);
+el.addEventListener("mouseup", mouseUp, false);
 var keysDown = {
 	'32': false,
 	'65': false,
 	'68': false,
 	'74': false,
 	'75': false,
-	'78': false
+	'78': false,
+	'leftclick': false
 };
 var keysUp = {
 	'32': true,
@@ -21,7 +24,8 @@ var keysUp = {
 	'68': true,
 	'74': true,
 	'75': true,
-	'78': true
+	'78': true,
+	'leftclick': true
 };
 var touchLeft = null;
 var touchLeftOriginX = 0;
@@ -105,4 +109,13 @@ function getMousePosition(e) {
       x: e.clientX - rect.left,
       y: e.clientY - rect.top
     };
+}
+
+function mouseDown() {
+	keysDown["leftclick"] = true;
+	keysUp["leftclick"] = false;
+}
+function mouseUp() {
+	keysUp["leftclick"] = true;
+	keysDown["leftclick"] = false;
 }

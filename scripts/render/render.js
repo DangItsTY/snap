@@ -60,5 +60,21 @@ function renderInit() {
 	main.style.height = GAME_HEIGHT * CAMERA_SIZE + "px";
 }
 
+function renderEditor() {
+	var selections = document.getElementById("selections");
+	for (var i = 0; i < OBJECTMAP.length; i++) {
+		var index = "" + i;
+		var element = document.createElement("button");
+		element.style.backgroundImage = "url('" + IMAGEPATH + OBJECTMAP[i] + ".png" + "')";
+		element.style.width = BLOCK_SIZE + "px";
+		element.style.height = BLOCK_SIZE + "px";
+		element.setAttribute("value", index);
+		selections.appendChild(element);
+	}
+	selections = selections.getElementsByTagName("button");
+	for (var i = 0; i < selections.length; i++) {
+		selections[i].onclick = editorSelection;
+	}
+}
 
 //	need to break up the concept of render so that i have a DOM specific renderer. dom and element stuff shouldn't be core.

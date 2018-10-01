@@ -22,6 +22,8 @@
 			<section id="info">
 			</section>
 		</main>
+		<section id="selections">
+		</section>
 		<footer>
 		</footer>
 		<script src="scripts/core/config.js"></script>
@@ -36,37 +38,16 @@
 		<script src="scripts/render/render.js"></script>
 		<script src="scripts/core/game.js"></script>
 		<script>
-			// things for an editor
-			
-			
-			
-			
-			
 			function initrender() {
 				renderInit();
 			}
 			initrender();
 			
-			function initialize() {
-				// load
-				var loadlist = [];
-				loadlist.length = BLOCKH;
-				for (var i = 0; i < loadlist.length; i++) {
-					var newlist = [];
-					newlist.length = BLOCKW;
-					newlist.fill(0);
-					loadlist[i] = newlist;
-				}
-				
-				// object list
-				var objectlist = [
-					"paperwall"
-				];
-				
-				for (var i = 0; i < loadlist.length; i++) {
-					for (var j = 0; j < loadlist[i].length; j++) {
+			function initialize() {				
+				for (var i = 0; i < EDITORGRID.length; i++) {
+					for (var j = 0; j < EDITORGRID[i].length; j++) {
 						OBJECTS.push(make("basic", {
-							name: objectlist[loadlist[i][j]],
+							name: OBJECTMAP[EDITORGRID[i][j]],
 							x: j * BLOCK_SIZE,
 							y: i * BLOCK_SIZE,
 							width: BLOCK_SIZE,
@@ -103,6 +84,7 @@
 			
 			function prerender() {
 				renderAttach(OBJECTS);
+				renderEditor();
 			}
 			prerender();
 			

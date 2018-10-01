@@ -61,4 +61,12 @@ function runControls(player) {
 	log("keyright", keysDown[keyMap.right]);
 	log("vx", player.vx);
 	log("vy", player.vy);
+	
+	// for the selector in editor
+	if (PLAYER.type == "selector") {
+		if (keysDown["leftclick"] && !keysUp["leftclick"]) {
+			selectorEdit(player);
+			keysUp["leftclick"] = true;
+		}
+	}
 }

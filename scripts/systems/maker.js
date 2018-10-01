@@ -175,10 +175,12 @@ function make(type, options) {	//	creates any object in the game
 		
 		object.runAct = function() {
 			if (mousePosition != null) {
-				object.x = Math.floor((mousePosition.x)/BLOCK_SIZE) * BLOCK_SIZE / CAMERA_SIZE;
-				object.y = Math.floor((mousePosition.y)/BLOCK_SIZE) * BLOCK_SIZE / CAMERA_SIZE;
+				object.x = Math.floor((mousePosition.x) / (BLOCK_SIZE * CAMERA_SIZE)) * BLOCK_SIZE;
+				object.y = Math.floor((mousePosition.y) / (BLOCK_SIZE * CAMERA_SIZE)) * BLOCK_SIZE;
 			}
 		}
+		
+		object.selection = 0;
 	}
 	
 	//	NAMES
