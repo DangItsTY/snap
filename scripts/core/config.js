@@ -33,5 +33,11 @@ for (var i = 0; i < EDITORGRID.length; i++) {
 }
 var OBJECTMAP = [
 	"paperwall",
-	"zombie"
+	"hardwoodfloor",
+	"chandalier",
+	"zombie",
+	"redstep",
+	"stairrailpost",
+	"stairrail",
+	"woodwall"
 ];

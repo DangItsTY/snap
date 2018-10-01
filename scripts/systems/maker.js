@@ -184,7 +184,7 @@ function make(type, options) {	//	creates any object in the game
 	}
 	
 	//	NAMES
-	if (options.name == "floor") {
+	if (options.name == "hardwoodfloor") {
 		object.image = "hardwoodfloor.png";
 	}
 	if (options.name == "chandalier") {
