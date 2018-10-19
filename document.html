@@ -7,22 +7,250 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Snap!</title>
 <link rel="manifest" href="manifest.json">
+<style>
+	main {
+		width: 1024px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	header {
+		text-decoration: underline;
+	}
+	section {
+		background-color: aliceblue;
+		padding: 0px 21px;
+	}
+	h1 {
+		font-size: 21pt;
+	}
+	h2 {
+		font-size: 13pt;
+	}
+</style>
 </head>
 <body>
 <nav>
 	<ol>
 		<li>Poison</li>
 		<li>Controls</li>
-		<li>Crafting (Break, Combine, Make)</li>
-		<li>Inventory (Main, Pocket)</li>
-		<li>Zombie AI (Stacking, Aggro, Blockade, Blocking)</li>
+		<li>Crafting</li>
+		<ol>
+			<li>Break</li>
+			<li>Combine</li>
+			<li>Make</li>
+		</ol>
+		<li>Inventory</li>
+		<ol>
+			<li>Main</li>
+			<li>Pocket</li>
+		</ol>
+		<li>Zombie AI</li>
+		<ol>
+			<li>Stacking</li>
+			<li>Aggro</li>
+			<li>Blockade</li>
+			<li>Blocking</li>
+		</ol>
 		<li>Camera</li>
-		<li>Grid</li>
-		<li>Sound (Background Music, Sound Effects, Ambience)</li>
-		<li>Visual (Palette, Art Style, Perspective, Animation)</li>
+		<li>Layout</li>
+		<li>Sound</li>
+		<ol>
+			<li>Background Music</li>
+			<li>Sound Effects</li>
+			<li>Ambience</li>
+		</ol>
+		<li>Visual</li>
+		<ol>
+			<li>Palette</li>
+			<li>Art Style</li>
+			<li>Perspective</li>
+			<li>Animation</li>
+		</ol>
 		<li>Mounds</li>
+		<ol>
+			<li>Humongous Zombie</li>
+			<li>Ressurection Tomb</li>
+		</ol>
+		<li>Health</li>
+		<li>Items</li>
+		<ol>
+			<li>Tool</li>
+			<ol>
+				<li>Match</li>
+				<li>Mop</li>
+				<li>Jar</li>
+			</ol>
+			<li>Wood</li>
+			<li>Bone</li>
+			<li>Cloth</li>
+			<li>Stone</li>
+			<li>Metal</li>
+			<li>Blood</li>
+			<li>Flesh</li>
+		</ol>
+		<li>Single Player</li>
+		<li>Physics</li>
+		<li>HUD</li>
 	</ol>
 </nav>
+<main>
+	<section>
+		<header><h1>Poison</h1></header>
+		<p>
+			Once attacked, you're poisoned. Start the clock. You're dead soon buddy! There is no cure. No antidote.		
+		</p>
+		<p>
+			Any attack will add a stack of poison. One stack of poison inflicts one tenth of a health point per tick. One tick is one tenth of a second. Visibly, players will only see one health point go down at a time since partial health points are not displayed.
+		</p>
+	</section>
+	<section>
+		<header><h1>Controls</h1></header>
+		<ul>
+			<li>W - Up</li>
+			<li>A - Move left</li>
+			<li>S - Down</li>
+			<li>D - Move right</li>
+			<li>Spacebar - Jump</li>
+			<li>J - Use item / Equip item</li>
+			<li>K - Swap item / Pocket item</li>
+			<li>N - Pickup / Drop</li>
+			<li>U - Cycle left</li>
+			<li>I - Cycle right</li>
+		</ul>
+		<p>
+			Moving left and right with no delay gives an instant and tight control to players. There is no friction.
+		</p>
+		<p>
+			Pressing the jump button will always make the player hop. Holding the jump button for longer elongates the vertical jumping distance and instantly stops once the jump button is released. At this point, the effects of gravity takes place and should give the player a small freeze feeling at this peak in height before accelerating back to ground floor.
+		</p>
+		<p>
+			Use an equipped item by pressing the use button. In addition, some items can be used by holding the use button. However, during selection mode, holding the use button equips the selected item instead. Wait for selection mode to end, a short one second of no selection action, in order to use the hold function again.
+		</p>
+		<p>
+			Swap your equipped item for the pocketed item by pressing the swap button. In addition, some items can be used by holding the use button. However, during selection mode, holding the use button equips the selected item instead. Wait for selection mode to end, a short one second of no selection action, in order to use the hold function again.
+		</p>
+		<p>
+			Equip items by holding the use button, or pocket an item by holding the swap button during selection mode.
+		</p>
+		<p>
+			Activate selection mode by pressing either cycle buttons, left or right. The selection cursor will move accordingly. The item selected will be affected by other actions (i.e. equip, pocket, drop)
+		</p>
+		<p>
+			Items laying on the floor can be picked up by pressing the pickup button. Some objects can also be picked up by holding the pickup button.
+		</p>
+		<p>
+			Drop selected items by pressing the pickup button in selection mode. To drop full item stacks, hold the pickup button. Otherwise pressing the pickup button drops one item count.
+		</p>
+		<p>
+			Quick drop items by pressing down, then hold the use button to drop the equipped item, or hold the swap button to drop the pocketed item. The hold functions for these items will not activate. You must hold down first.
+		</p>
+		<p>
+			Drop down from a ledge by pressing down and then the jump button. You will only phase through one ledge.
+		</p>
+		<p>
+			Dodge and hop any attack by pressing any direction and hopping (only press the jump button briefly). You will become temporarily invulnerable. Left or right dodge will short hop with an added boost and can change direction while keeping momentum. Up dodge does a back flip, which has a long dodge time. You can almost hold left or right and up to do a front flip with an extra boost and are free to move left or right. Down dodge does a duck in place.
+		</p>
+		<p>
+			Throw drop item? up? down? side?	
+		</p>
+	</section>
+	<section>
+		<header><h1>Crafting</h1></header>
+		<p>All resources are zero sum. The quantity of items is potentially consistent throughout the game. Depending on how resources are consumed and reused affects the output of items created.
+		</p>
+		<h2>Break</h2>
+		<p>Naturally, as items are used and things break, pieces of that resource is dropped. Theoretically, everything broken can be reassembled again, if the proper tools are accessible.
+		</p>
+		<h2>Combine</h2>
+		<p>
+			Some items can be combined when the right combination of equipped items and pocketed items are made.
+		</p>
+		<h2>Make</h2>
+		<p>
+			To make items requires special tools accessible to the player. Some tools are machines that are able to create full forms of resources. Others create special items not normally found in game by receiving ingredients.
+		</p>
+	</section>
+	<section>
+		<header><h1>Inventory</h1></header>
+		<h2>Main</h2>
+		<p>
+			The player's main item is displayed on the HUD. Using the use button will use this item. Items may only be used when equipped as the main item.
+		</p>
+		<h2>Pocket</h2>
+		<p>
+			The player's pocket provides quick access to one item. You can swap out your main item with your pocket item by using the swap button. The pocket item is displayed on the HUD. Items that may need to be used as a response should be pocketed to provide the player quick access to a secondary item.
+		</p>
+	</section>
+		<li>Zombie AI</li>
+		<ol>
+			<li>Stacking</li>
+			<li>Aggro</li>
+			<li>Blockade</li>
+			<li>Blocking</li>
+		</ol>
+		<li>Camera</li>
+		<li>Layout</li>
+		<li>Sound</li>
+		<ol>
+			<li>Background Music</li>
+			<li>Sound Effects</li>
+			<li>Ambience</li>
+		</ol>
+		<li>Visual</li>
+		<ol>
+			<li>Palette</li>
+			<li>Art Style</li>
+			<li>Perspective</li>
+			<li>Animation</li>
+		</ol>
+		<li>Mounds</li>
+		<ol>
+			<li>Humongous Zombie</li>
+			<li>Ressurection Tomb</li>
+		</ol>
+		<li>Health</li>
+		<li>Items</li>
+		<ol>
+			<li>Tool</li>
+			<ol>
+				<li>Match</li>
+				<li>Mop</li>
+				<li>Jar</li>
+			</ol>
+			<li>Wood</li>
+			<li>Bone</li>
+			<li>Cloth</li>
+			<li>Stone</li>
+			<li>Metal</li>
+			<li>Blood</li>
+			<li>Flesh</li>
+		</ol>
+		<li>Single Player</li>
+		<li>Physics</li>
+		<li>HUD</li>
+</main>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <footer>
 </footer>
 </body>
