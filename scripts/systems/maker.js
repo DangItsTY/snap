@@ -54,12 +54,12 @@ function make(type, options) {	//	creates any object in the game
 		object.height = options.height != undefined ? options.height : 50;
 	}
 	if (type == "player") {
-		object.speed = 200;
-		object.weight = 700;
+		object.speed = 128;
+		object.weight = 1024;
 		object.image = "player.png";
 		
 		//	controls
-		object.jump = 270;
+		object.jump = 256;
 		object.jumpReady = true;
 		object.useReady = true;
 		object.pickupReady = true;
