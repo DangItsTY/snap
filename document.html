@@ -8,10 +8,18 @@
 <title>Snap!</title>
 <link rel="manifest" href="manifest.json">
 <style>
+	nav {
+		position: fixed;
+		background-color: whitesmoke;
+		height: 100%;
+		left: 0px;
+		top: 0px;
+	}
 	main {
 		width: 1024px;
 		margin-left: auto;
 		margin-right: auto;
+		margin-bottom: 100vh;
 	}
 	header {
 		text-decoration: underline;
@@ -24,55 +32,59 @@
 		font-size: 21pt;
 	}
 	h2 {
-		font-size: 13pt;
+		font-size: 18pt;
+	}
+	h3 {
+		font-size: 15pt;
+		font-weight: normal;
 	}
 </style>
 </head>
 <body>
 <nav>
 	<ol>
-		<li>Poison</li>
-		<li>Controls</li>
-		<li>Crafting</li>
+		<li><a href="#poison">Poison</a></li>
+		<li><a href="#controls">Controls</a></li>
+		<li><a href="#crafting">Crafting</a></li>
 		<ol>
 			<li>Break</li>
 			<li>Combine</li>
 			<li>Make</li>
 		</ol>
-		<li>Inventory</li>
+		<li><a href="#inventory">Inventory</a></li>
 		<ol>
 			<li>Main</li>
 			<li>Pocket</li>
 		</ol>
-		<li>Zombie AI</li>
+		<li><a href="#zombieai">Zombie AI</a></li>
 		<ol>
 			<li>Stacking</li>
 			<li>Aggro</li>
 			<li>Blockade</li>
 			<li>Blocking</li>
 		</ol>
-		<li>Camera</li>
-		<li>Layout</li>
-		<li>Sound</li>
+		<li><a href="#camera">Camera</a></li>
+		<li><a href="#layout">Layout</a></li>
+		<li><a href="#sound">Sound</a></li>
 		<ol>
 			<li>Background Music</li>
 			<li>Sound Effects</li>
 			<li>Ambience</li>
 		</ol>
-		<li>Visual</li>
+		<li><a href="#visual">Visual</a></li>
 		<ol>
 			<li>Palette</li>
 			<li>Art Style</li>
 			<li>Perspective</li>
 			<li>Animation</li>
 		</ol>
-		<li>Mounds</li>
+		<li><a href="#mounds">Mounds</a></li>
 		<ol>
 			<li>Humongous Zombie</li>
 			<li>Ressurection Tomb</li>
 		</ol>
-		<li>Health</li>
-		<li>Items</li>
+		<li><a href="#health">Health</a></li>
+		<li><a href="#items">Items</a></li>
 		<ol>
 			<li>Tool</li>
 			<ol>
@@ -88,13 +100,13 @@
 			<li>Blood</li>
 			<li>Flesh</li>
 		</ol>
-		<li>Single Player</li>
-		<li>Physics</li>
-		<li>HUD</li>
+		<li><a href="#singleplayer">Single Player</a></li>
+		<li><a href="#physics">Physics</a></li>
+		<li><a href="#hud">HUD</a></li>
 	</ol>
 </nav>
 <main>
-	<section>
+	<section id="poison">
 		<header><h1>Poison</h1></header>
 		<p>
 			Once attacked, you're poisoned. Start the clock. You're dead soon buddy! There is no cure. No antidote.		
@@ -103,7 +115,7 @@
 			Any attack will add a stack of poison. One stack of poison inflicts one tenth of a health point per tick. One tick is one tenth of a second. Visibly, players will only see one health point go down at a time since partial health points are not displayed.
 		</p>
 	</section>
-	<section>
+	<section id="controls">
 		<header><h1>Controls</h1></header>
 		<ul>
 			<li>W - Up</li>
@@ -154,7 +166,7 @@
 			Throw drop item? up? down? side?	
 		</p>
 	</section>
-	<section>
+	<section id="crafting">
 		<header><h1>Crafting</h1></header>
 		<p>All resources are zero sum. The quantity of items is potentially consistent throughout the game. Depending on how resources are consumed and reused affects the output of items created.
 		</p>
@@ -170,7 +182,7 @@
 			To make items requires special tools accessible to the player. Some tools are machines that are able to create full forms of resources. Others create special items not normally found in game by receiving ingredients.
 		</p>
 	</section>
-	<section>
+	<section id="inventory">
 		<header><h1>Inventory</h1></header>
 		<h2>Main</h2>
 		<p>
@@ -181,76 +193,194 @@
 			The player's pocket provides quick access to one item. You can swap out your main item with your pocket item by using the swap button. The pocket item is displayed on the HUD. Items that may need to be used as a response should be pocketed to provide the player quick access to a secondary item.
 		</p>
 	</section>
-		<li>Zombie AI</li>
-		<ol>
-			<li>Stacking</li>
-			<li>Aggro</li>
-			<li>Blockade</li>
-			<li>Blocking</li>
+	<section id="zombieai">
+		<header><h1>Zombie AI</h1></header>
+		<p>
+			The base behavior for all zombies are slowly moving, aimless, limping bodies with uneven movements.
+		</p>
+		<h2>Aggro</h2>
+		<p>
+			Zombie behavior becomes aggressive and move faster if the player is within range and line of sight on the same level.
+		</p>
+		<h2>Attack</h2>
+		<p>
+			A zombie will always have a windup before an attack. If the player unsuccessfully dodges the attack, they must button mash their
+			way out with movement or jump buttons. Each tick that passes by adds a stack of poison as well as instant flat damage.
+		</p>
+		<h2>Bounce</h2>
+		<p>
+			Zombies bounce off walls, obstacles, blockades, and off each other, when they are wandering. If aggrod, zombies instead will lock
+			onto the object obstructing their way to the player and attack the object even if the player goes out of aggro range.
+		</p>
+		<h2>Stack</h2>
+		<p>
+			However, zombies begin to climb on each other and stack vertically if there is no immediate space to go left or right. Zombies
+			can walk on top of these zombies like a floor.
+		</p>
+		<h2>Blocking</h2>
+		<p>
+			Zombies block movement from one another and bounce. Players are not affected by zombie collision and can simply run through. They
+			cannot walk on top of zombies either.
+		</p>
+	</section>
+	<section id="camera">
+		<header><h1>Camera</h1></header>
+		<p>
+			The camera system is basic. Visuals are projected in 2D, are flat, and static. The camera does not move. You can see everything on
+			one screen.
+		</p>
+	</section>
+	<section id="layout">
+		<header><h1>Layout</h1></header>
+		<p>
+			The layout of the screen is 16 by 9 to match the modern screen resolution of 16:9. The smallest resolution is a 32x32 block, so
+			512x288, but it is recommended to play at 2X so 1024x576.
+		</p>
+	</section>
+	<section id="sound">
+		<header><h1>Sound</h1></header>
+		<p>
+			Sounds expressed in this game bring an eerie atmosphere to the player. Real, familiar sounds are distorted for an uncanny, creepy effect.
+		</p>
+		<h2>Background Music</h2>
+		<p>
+			The background music is slow moving 2/2, creepy, out of tune, minor, and with some high screeches. It's like an insidious march that
+			slowly closes in on you, suffocating you, drudgingly until your doom.
+		</p>
+		<h2>Sound Effects</h2>
+		<p>
+			Sound effects are full of human snarls and uncomfortable feelings. Some have rage, the kind your parents could give you a scare.
+		</p>
+		<p>
+			Items are natural sounding and make conspicuous noises like snaps, pops, shatters, and screeches. There are eerie long rolls or turns.
+			Squeaky doors which need some oil.
+		</p>
+	</section>
+	<section id="visual">
+		<header><h1>Visual</h1></header>
+		<p>
+			The visuals are pixelated to provide quick and novice representation of entities in the game.
+		</p>
+		<h2>Palette</h2>
+		<p>
+			Red for aggression and blood. Brown for rustic, old. Gold for riches. Blue to contrast. Gray and dulled out, unsaturated colors for death, or whithering.
+		</p>
+		<h2>Art Style</h2>
+		<p>
+			The main entities of the game are the player and zombies, which is just a dulled out version of a player. They are of two head heights to give a stubby,
+			chibi, cute look to contrast everything else gruesome the game will present itself. Items are hidden, and some things look out of perspective. This
+			gives a sense of mystery and secrecy as players discover little secrets that make their next survival a bit manageable. The real world objects will
+			be chipped-like with pixelart, showing that nothing is perfect and to make the art not seem so one-shaded. Actions and items are sharp and brighter
+			to give more attention and visual pleasure. Zombie attacks and other obstacles will look intense and painful, which will give players feedback to not
+			do the thing they just did again.
+		</p>
+		<h2>Perspective</h2>
+		<p>
+			This game is in 2D platformer style.
+		</p>
+		<h2>Animation</h2>
+		<p>
+			This game will have basic 2 framed animation per action/behavior, just enough to give the illusion of movement. This also makes it quick to animate.
+		</p>
 		</ol>
-		<li>Camera</li>
-		<li>Layout</li>
-		<li>Sound</li>
-		<ol>
-			<li>Background Music</li>
-			<li>Sound Effects</li>
-			<li>Ambience</li>
-		</ol>
-		<li>Visual</li>
-		<ol>
-			<li>Palette</li>
-			<li>Art Style</li>
-			<li>Perspective</li>
-			<li>Animation</li>
-		</ol>
-		<li>Mounds</li>
-		<ol>
-			<li>Humongous Zombie</li>
-			<li>Ressurection Tomb</li>
-		</ol>
-		<li>Health</li>
-		<li>Items</li>
-		<ol>
-			<li>Tool</li>
-			<ol>
-				<li>Match</li>
-				<li>Mop</li>
-				<li>Jar</li>
-			</ol>
-			<li>Wood</li>
-			<li>Bone</li>
-			<li>Cloth</li>
-			<li>Stone</li>
-			<li>Metal</li>
-			<li>Blood</li>
-			<li>Flesh</li>
-		</ol>
-		<li>Single Player</li>
-		<li>Physics</li>
-		<li>HUD</li>
+	</section>
+	<section>
+		<header><h1>Mounds</h1></header>
+		<p>
+			Mounds are mostly comprised of dead zombies. They act as one of the game's primary cleaning and maintenance mechanics. Toss bodies of dead zombies
+			and soon a special buff or debuff will appear, consuming the mound.
+		</p>
+		<h2>Humongous Zombie</h2>
+		<p>
+			If too many zombies are piled up together in a mound, which is the easiest way to create mounds, then the player is punished by being summoned a
+			very powerful zombie.
+		</p>
+		<h2>Ressurection Tomb</h2>
+		<p>
+			When placing a balanced amount of resources into the mound, the mound will turn into a ressurection tomb in which the player will revive at with
+			full health and full condition (no poison). Definitely one of the best mounds to create.
+		</p>
+	</section>
+	<section>
+		<header><h1>Health</h1></header>
+		<p>
+			Player health is simply out of 100. This resembles percentages. Health will always display in full integers, so it is possible to see your health
+			drop to zero before actually dying, since in the background your HP is probably in the tenths of a percentage left.
+		</p>
+	</section>
+	<section>
+		<header><h1>Items</h1></header>
+		<p>
+			All items in the game can be crafted, except for tools. Everything can be assembled and disassembled, and all pieces of the crafting tree are
+			of use in some way.
+		</p>
+		<h2>Tool</h2>
+		<p>
+			Tools are special items in the game that do not disappear. Players can drop them, but will reappear at the tools station where they can pick
+			them up again, but only one of each can be held in inventory! All tools are in the player's inventory at the start.
+		</p>
+			<h3>Match</h3>
+			<p>
+				Matches can light things on fire. It's an easy way to dispose of zombie bodies that are not needed. They can change wood too, and other
+				resources.
+			</p>
+			<h3>Mop</h3>
+			<p>
+				The mop is the primary cleaning tool. Mop blood away and reuse it for later, like for vials. Being clean in this game promotes tidiness
+				and if not clean, the player will be punished with more zombies.
+			</p>
+			<h3>Jar</h3>
+			<p>
+				The jar is used to store other resources and can be used to combine to other useful items.
+			</p>
+		<h2>Wood</h2>
+		<p>
+			Basic resource in the game. This allows the player to build the essential items needed in order to survive.
+		</p>
+		<h2>Bone</h2>
+		<p>
+			Dismemberment of zombies results in bones. Stronger than wood.
+		</p>
+		<h2>Cloth</h2>
+		<p>
+			Found on zombies, cloth is used as a binding resource to allow for other crafts to form. It is also flammable.
+		</p>
+		<h2>Stone</h2>
+		<p>
+			Stone is hard material that comes out of the result of mansion rubble. They are sturdy and used as structures.
+		</p>
+		<h2>Metal</h2>
+		<p>
+			Metal is rare and is the strongest material in the game. They create the deadliest, the strongest, and the best items in the game.
+		</p>
+		<h2>Blood</h2>
+		<p>
+			Zombie blood is plentifully found and is primarily used to make vials.
+		</p>
+		<h2>Flesh</h2>
+		<p>
+			Zombie flesh can be found by dismembering zombies and can be used as bases for structures.
+		</p>
+	</section>
+	<section>
+		<header><h1>Single Player</h1></header>
+		<p>
+			This game is single player only. A multiplayer version will surely come, but later.
+		</p>
+	</section>
+	<section>
+		<header><h1>Physics</h1></header>
+		<p>
+			This game will have gravity. There is no friction. Stacking logic will be separate, not utilizing Newton's 3rd law.
+		</p>
+	</section>
+	<section>
+		<header><h1>HUD</h1></header>
+		<p>
+			The top left shows the player's health, equipped item, and pocketed item. The inventory will temporarily show on top and center as the player is selecting.
+		</p>
+	</section>		
 </main>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 <footer>
 </footer>
 </body>
