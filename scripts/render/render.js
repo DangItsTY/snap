@@ -26,8 +26,8 @@ function render(list) {
 }
 
 function renderHud() {
-	var element = document.getElementById("points");
-	element.innerHTML = points;
+	var element = document.getElementById("health");
+	element.innerHTML = Math.floor(PLAYER.health);
 }
 
 function renderAttach(list) {

@@ -26,6 +26,12 @@ div {
 	position: absolute;
 	color: white;
 	font-weight: bold;
+	margin-top: 50px;
+}
+#hud {
+	position: absolute;
+	color: white;
+	font-weight: bold;
 }
 .bg-color {
 	background-color: antiquewhite;

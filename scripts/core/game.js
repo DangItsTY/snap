@@ -3,6 +3,7 @@ function game() {
 	runControls(PLAYER);
 	runActs(OBJECTS);
 	runPhysics(OBJECTS);
+	runPoison(OBJECTS);
 	
 	//	collision
 	runCollision(OBJECTS);

@@ -19,6 +19,12 @@
 			</section>
 			<section id="overlay">
 			</section>
+			<section id="hud">
+				<div id="health_container">
+					<span>Health: </span>
+					<span id="health"></span>
+				</div>
+			</section>
 			<section id="info">
 			</section>
 		</main>
@@ -33,6 +39,7 @@
 		<script src="scripts/systems/collision.js"></script>
 		<script src="scripts/runs/runClean.js"></script>
 		<script src="scripts/runs/runActs.js"></script>
+		<script src="scripts/runs/runPoison.js"></script>
 		<script src="scripts/render/render.js"></script>
 		<script src="scripts/core/game.js"></script>
 		<script>
@@ -91,7 +98,7 @@
 				render(OBJECTS_BACKGROUND);
 				render(OBJECTS);
 				render(OBJECTS_FOREGROUND);
-				//renderHud();
+				renderHud();
 				
 				window.requestAnimationFrame(gameloop);
 			}
@@ -207,7 +214,7 @@
 					name: "zombie",
 					width: BLOCK_SIZE,
 					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2,
+					x: GAME_WIDTH / 2 - 4*BLOCK_SIZE,
 					y: GAME_HEIGHT - BLOCK_SIZE
 				}));
 								

@@ -25,10 +25,16 @@ function make(type, options) {	//	creates any object in the game
 	object.width = options.width != undefined ? options.width : 5;
 	object.height = options.height != undefined ? options.height : 5;
 	object.weight = 0;
+	object.health = options.health != undefined ? options.health : 100;
+	object.poisonTimer = 0;
+	object.poisonStack = 0;
+	object.invulnerableTimer = 0;
+	object.invulnerableTimerMax = 2000;
 	object.collisions = [];
 	object.collisionFloor = null;
 	object.runCollide = function() {}
 	object.runAct = function() {}
+	object.damage = function(attack) {}
 	
 	
 	//	TYPES
@@ -60,6 +66,22 @@ function make(type, options) {	//	creates any object in the game
 		object.dropReady = true;
 		
 		object.item = null;
+		
+		object.runAct = function() {
+			if (object.health < 0) {
+				object.health = -100;	//	this indicates that the player has died
+			}
+			
+			object.invulnerableTimer -= 1000 * mod;
+		}
+		
+		object.damage = function(attack) {
+			if (object.invulnerableTimer <= 0) {
+				attack();
+				object.invulnerableTimer = object.invulnerableTimerMax;
+			}
+		}
+		
 	}
 	if (type == "point") {
 		object.runCollide = function() {
@@ -96,8 +118,16 @@ function make(type, options) {	//	creates any object in the game
 			for (var i = 0; i < object.collisions.length; i++) {
 				var target = object.collisions[i];
 				if (target.type == "player") {
-					object.timer = object.timerMax;
 					object.vx = 0;
+					if (object.timer <= 0) {
+						object.timer = object.timerMax;
+					}
+					if (object.timer <= 500) {
+						target.damage(function() {
+							target.poisonStack += 1;
+							console.log("poisoned!");
+						});
+					}
 				}
 			}
 		}
