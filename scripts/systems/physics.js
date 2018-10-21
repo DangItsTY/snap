@@ -2,7 +2,7 @@ function runPhysics(list) {
 	gravity(list);
 	move(list);
 	direction(list);
-	wrap(list);
+	//wrap(list);
 
 	function gravity(list) {
 		for (var i = 0; i < list.length; i++) {
