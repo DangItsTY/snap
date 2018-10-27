@@ -24,6 +24,10 @@
 					<span>Health: </span>
 					<span id="health"></span>
 				</div>
+				<div id="inventory_container">
+					<span>Inventory: </span>
+					<span id="inventory"></span>
+				</div>
 			</section>
 			<section id="info">
 			</section>
@@ -209,6 +213,30 @@
 					y: 300
 				}));
 				*/
+				
+				OBJECTS.push(make("item", {
+					name: "crossbow",
+					x: GAME_WIDTH / 2 - 2*BLOCK_SIZE,
+					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
+				}));
+				
+				OBJECTS.push(make("item", {
+					name: "spear",
+					x: GAME_WIDTH / 2 + 2*BLOCK_SIZE,
+					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
+				}));
+				
+				OBJECTS.push(make("item", {
+					name: "spear",
+					x: GAME_WIDTH / 2 + 2*BLOCK_SIZE,
+					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
+				}));
+				
+				OBJECTS.push(make("item", {
+					name: "spear",
+					x: GAME_WIDTH / 2 + 2*BLOCK_SIZE,
+					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
+				}));
 				
 				/*
 				OBJECTS.push(make("enemy", {

@@ -64,8 +64,12 @@ function make(type, options) {	//	creates any object in the game
 		object.useReady = true;
 		object.pickupReady = true;
 		object.dropReady = true;
+		object.cycleleftReady = true;
+		object.cyclerightReady = true;
 		
 		object.item = null;
+		object.inventory = [];
+		object.selection = 0;
 		
 		object.runAct = function() {
 			if (object.health < 0) {
@@ -154,8 +158,8 @@ function make(type, options) {	//	creates any object in the game
 		}
 	}
 	if (type == "item") {
-		object.width = 25;
-		object.height = 25;
+		object.width = BLOCK_SIZE / 2;
+		object.height = BLOCK_SIZE / 2;
 		object.timer = object.timerMax = 500;
 		
 		object.runAct = function() {
@@ -165,11 +169,31 @@ function make(type, options) {	//	creates any object in the game
 			}
 		}		
 		object.owner = null;
-		object.use = function() {
-			if (object.timer <= 0) {
-				shoot(object.owner);
-				object.timer = object.timerMax;
-			}
+		
+		switch (options.name) {
+			case "crossbow":
+				object.use = function() {
+					if (object.timer <= 0) {
+						shoot(object.owner);
+						object.timer = object.timerMax;
+					}
+				}
+				break;
+			case "spear":
+				object.use = function() {
+					if (object.timer <= 0) {
+						slash(object.owner);
+						object.timer = object.timerMax;
+					}
+				}
+				break;
+			default:
+				object.use = function() {
+					if (object.timer <= 0) {
+						shoot(object.owner);
+						object.timer = object.timerMax;
+					}
+				}
 		}
 	}
 	if (type == "camera") {

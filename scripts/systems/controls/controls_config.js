@@ -38,8 +38,10 @@ var keyMap = {
 	'left': 65,
 	'right': 68,
 	'use': 74,
-	'pickup': 75,
-	'drop': 78
+	'pickup': 78,
+	'pocket': 75,
+	'cycleleft': 85,
+	'cycleright': 73
 }
 function registerKeyDown(e) {
 	var keyCode = e.keyCode;

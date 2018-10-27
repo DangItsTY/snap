@@ -38,6 +38,24 @@ function runControls(player) {
 		player.dropReady = true;
 	}
 	
+	if (keysDown[keyMap.cycleleft] && player.cycleleftReady) {
+		inventoryCycle(player, -1);
+		player.cycleleftReady = false;
+	}
+	
+	if (keysUp[keyMap.cycleleft]) {
+		player.cycleleftReady = true;
+	}
+	
+	if (keysDown[keyMap.cycleright] && player.cyclerightReady) {
+		inventoryCycle(player, 1);
+		player.cyclerightReady = false;
+	}
+	
+	if (keysUp[keyMap.cycleright]) {
+		player.cyclerightReady = true;
+	}
+	
 	/*
 	if ((keysDown[keyMap.jump] || touchRight)) {
 		player.jumpReady = false;

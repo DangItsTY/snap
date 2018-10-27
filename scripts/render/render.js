@@ -26,8 +26,22 @@ function render(list) {
 }
 
 function renderHud() {
+	//	health
 	var element = document.getElementById("health");
 	element.innerHTML = Math.floor(PLAYER.health);
+	
+	//	inventory
+	var element = document.getElementById("inventory");
+	var result = "";
+	var inventory = PLAYER.inventory;
+	for (var i = 0; i < inventory.length; i++) {
+		if (i == PLAYER.selection) {
+			result = result + "*" + inventory[i].name + "*, ";
+		} else {
+			result = result + inventory[i].name + ", ";
+		}
+	}
+	element.innerHTML = result;
 }
 
 function renderAttach(list) {

@@ -40,9 +40,9 @@ function pickup(object) {
 		if (target.type == "item") {
 			target.x = 0;
 			target.y = 0;
-			object.item = target;
+			//object.item = target; // this would automatically equip item
+			object.inventory.push(target);
 			target.owner = object;
-			console.log("picked up!");
 		}
 	}
 }
@@ -54,6 +54,15 @@ function drop(object) {
 		target.y = target.owner.y;
 		target.owner = null;
 		object.item = null;
+	}
+}
+
+function inventoryCycle(object, count) {
+	object.selection += count;
+	if (object.selection < 0) {
+		object.selection = object.inventory.length - 1;
+	} else if (object.selection >= object.inventory.length) {
+		object.selection = 0;
 	}
 }
 
