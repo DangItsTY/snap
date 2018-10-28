@@ -35,7 +35,7 @@ function renderHud() {
 	var result = "";
 	var inventory = PLAYER.inventory;
 	for (var i = 0; i < inventory.length; i++) {
-		if (i == PLAYER.selection) {
+		if (i == PLAYER.selection && PLAYER.inventoryMode) {
 			result = result + "*" + inventory[i].name + "*, ";
 		} else {
 			result = result + inventory[i].name + ", ";

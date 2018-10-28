@@ -9,15 +9,30 @@ function runControls(player) {
 		player.collisionFloor = null;
 	}
 	
-	if (keysDown[keyMap.use] && player.useReady) {
+	if (keysDown[keyMap.use] && player.useReady && !player.inventoryMode) {
 		if (player.item != null) {
 			player.item.use();
 		}
+		log("use", "active");
 		player.useReady = false;
 	}
 	
-	if (keysUp[keyMap.use]) {
+	if (keysUp[keyMap.use] && !player.inventoryMode) {
+		log("use", "ready");
 		player.useReady = true;
+	}
+	
+	if (keysDown[keyMap.use] && player.equipReady && player.inventoryMode) {
+		player.equipTimer = 0;
+		player.equipReady = false;
+		
+		player.inventoryMode = true;
+		player.inventoryModeTimer = player.inventoryModeTimerMax;
+	}
+	
+	if (keysUp[keyMap.use] && player.inventoryMode) {
+		player.equipTimer = -1;
+		player.equipReady = true;
 	}
 	
 	if (keysDown[keyMap.pickup] && player.pickupReady) {
@@ -79,6 +94,8 @@ function runControls(player) {
 	log("keyright", keysDown[keyMap.right]);
 	log("vx", player.vx);
 	log("vy", player.vy);
+	log("inventoryModeTimer", player.inventoryModeTimer);
+	log("equipTimer", player.equipTimer);
 	
 	// for the selector in editor
 	if (PLAYER.type == "selector") {

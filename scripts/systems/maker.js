@@ -61,22 +61,47 @@ function make(type, options) {	//	creates any object in the game
 		//	controls
 		object.jump = 256;
 		object.jumpReady = true;
-		object.useReady = true;
+		object.useReady = false;
+		object.equipReady = true;
 		object.pickupReady = true;
 		object.dropReady = true;
 		object.cycleleftReady = true;
 		object.cyclerightReady = true;
+		object.inventoryMode = false;
 		
 		object.item = null;
 		object.inventory = [];
 		object.selection = 0;
+		
+		//	timers
+		object.inventoryModeTimer = 0;
+		object.inventoryModeTimerMax = 800;
+		object.equipTimer = -1;
+		object.equipTimerMax = 400;
 		
 		object.runAct = function() {
 			if (object.health < 0) {
 				object.health = -100;	//	this indicates that the player has died
 			}
 			
-			object.invulnerableTimer -= 1000 * mod;
+			//	tick the timers
+			if (object.invulnerableTimer > 0) {
+				object.invulnerableTimer -= 1000 * mod;
+			}
+			if (object.inventoryModeTimer > 0) {
+				object.inventoryModeTimer -= 1000 * mod;
+			} else if (object.inventoryMode) {
+				object.inventoryMode = false;
+			}
+			if (object.equipTimer >= object.equipTimerMax) {
+				object.item = object.inventory[object.selection];
+				object.equipTimer = -1;
+				object.inventoryMode = false;
+				object.inventoryModeTimer = 0;
+				object.useReady = false;
+			} else if (object.equipTimer >= 0) {
+				object.equipTimer += 1000 * mod;
+			}
 		}
 		
 		object.damage = function(attack) {
@@ -85,7 +110,6 @@ function make(type, options) {	//	creates any object in the game
 				object.invulnerableTimer = object.invulnerableTimerMax;
 			}
 		}
-		
 	}
 	if (type == "point") {
 		object.runCollide = function() {

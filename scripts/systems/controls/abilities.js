@@ -59,6 +59,8 @@ function drop(object) {
 }
 
 function inventoryCycle(object, count) {
+	object.inventoryMode = true;
+	object.inventoryModeTimer = object.inventoryModeTimerMax;
 	object.selection += count;
 	if (object.selection < 0) {
 		object.selection = object.inventory.length - 1;
