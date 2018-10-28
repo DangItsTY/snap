@@ -43,6 +43,7 @@ function pickup(object) {
 			//object.item = target; // this would automatically equip item
 			object.inventory.push(target);
 			target.owner = object;
+			i = object.collisions.length;
 		}
 	}
 }
