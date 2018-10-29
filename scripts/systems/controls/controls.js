@@ -22,7 +22,7 @@ function runControls(player) {
 		player.useReady = true;
 	}
 	
-	if (keysDown[keyMap.use] && player.equipReady && player.inventoryMode) {
+	if (keysDown[keyMap.equip] && player.equipReady && player.inventoryMode) {
 		player.equipTimer = 0;
 		player.equipReady = false;
 		
@@ -30,7 +30,7 @@ function runControls(player) {
 		player.inventoryModeTimer = player.inventoryModeTimerMax;
 	}
 	
-	if (keysUp[keyMap.use] && player.inventoryMode) {
+	if (keysUp[keyMap.equip] && player.inventoryMode) {
 		player.equipTimer = -1;
 		player.equipReady = true;
 	}
