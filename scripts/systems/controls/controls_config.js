@@ -40,6 +40,7 @@ var keyMap = {
 	'use': 74,
 	'equip': 74,
 	'pickup': 78,
+	'drop': 78,
 	'switch': 75,
 	'pocket': 75,
 	'cycleleft': 85,

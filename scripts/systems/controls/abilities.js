@@ -49,13 +49,11 @@ function pickup(object) {
 }
 
 function drop(object) {
-	if (object.item != null) {
-		var target = object.item;
-		target.x = target.owner.x;
-		target.y = target.owner.y;
-		target.owner = null;
-		object.item = null;
-	}
+	var target = object.inventory[object.selection];
+	target.x = target.owner.x;
+	target.y = target.owner.y;
+	target.owner = null;
+	object.inventory.splice(object.selection, 1);
 }
 
 function inventoryCycle(object, count) {

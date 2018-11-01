@@ -65,7 +65,7 @@ function make(type, options) {	//	creates any object in the game
 		object.equipReady = true;
 		object.switchReady = false;
 		object.pocketReady = true;
-		object.pickupReady = true;
+		object.pickupReady = false;
 		object.dropReady = true;
 		object.cycleleftReady = true;
 		object.cyclerightReady = true;

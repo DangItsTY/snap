@@ -59,21 +59,22 @@ function runControls(player) {
 		player.switchReady = true;
 	}
 	
-	if (keysDown[keyMap.pickup] && player.pickupReady) {
+	if (keysDown[keyMap.pickup] && player.pickupReady && !player.inventoryMode) {
 		pickup(player);
 		player.pickupReady = false;
 	}
 	
-	if (keysUp[keyMap.pickup]) {
+	if (keysUp[keyMap.pickup] && !player.inventoryMode) {
 		player.pickupReady = true;
 	}
 	
-	if (keysDown[keyMap.drop] && player.dropReady) {
+	if (keysDown[keyMap.drop] && player.dropReady && player.inventoryMode) {
 		drop(player);
 		player.dropReady = false;
+		player.pickupReady = false;
 	}
 	
-	if (keysUp[keyMap.drop]) {
+	if (keysUp[keyMap.drop] && player.inventoryMode) {
 		player.dropReady = true;
 	}
 	
