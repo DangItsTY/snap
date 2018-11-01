@@ -42,6 +42,13 @@ function renderHud() {
 		}
 	}
 	element.innerHTML = result;
+	
+	element = document.getElementById("pocket");
+	result = "";
+	if (PLAYER.pocket) {
+		result = PLAYER.pocket.name;
+	}
+	element.innerHTML = result;
 }
 
 function renderAttach(list) {

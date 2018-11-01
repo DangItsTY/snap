@@ -63,6 +63,8 @@ function make(type, options) {	//	creates any object in the game
 		object.jumpReady = true;
 		object.useReady = false;
 		object.equipReady = true;
+		object.switchReady = false;
+		object.pocketReady = true;
 		object.pickupReady = true;
 		object.dropReady = true;
 		object.cycleleftReady = true;
@@ -70,6 +72,7 @@ function make(type, options) {	//	creates any object in the game
 		object.inventoryMode = false;
 		
 		object.item = null;
+		object.pocket = null;
 		object.inventory = [];
 		object.selection = 0;
 		
@@ -78,6 +81,8 @@ function make(type, options) {	//	creates any object in the game
 		object.inventoryModeTimerMax = 800;
 		object.equipTimer = -1;
 		object.equipTimerMax = 400;
+		object.pocketTimer = -1;
+		object.pocketTimerMax = 200;
 		
 		object.runAct = function() {
 			if (object.health < 0) {
@@ -101,6 +106,15 @@ function make(type, options) {	//	creates any object in the game
 				object.useReady = false;
 			} else if (object.equipTimer >= 0) {
 				object.equipTimer += 1000 * mod;
+			}
+			if (object.pocketTimer >= object.pocketTimerMax) {
+				object.pocket = object.inventory[object.selection];
+				object.pocketTimer = -1;
+				object.inventoryMode = false;
+				object.inventoryModeTimer = 0;
+				object.switchReady = false;
+			} else if (object.pocketTimer >= 0) {
+				object.pocketTimer += 1000 * mod;
 			}
 		}
 		

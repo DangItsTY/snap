@@ -35,6 +35,30 @@ function runControls(player) {
 		player.equipReady = true;
 	}
 	
+	if (keysDown[keyMap.pocket] && player.pocketReady && player.inventoryMode) {
+		player.pocketTimer = 0;
+		player.pocketReady = false;
+		
+		player.inventoryMode = true;
+		player.inventoryModeTimer = player.inventoryModeTimerMax;
+	}
+	
+	if (keysUp[keyMap.pocket] && player.inventoryMode) {
+		player.pocketTimer = -1;
+		player.pocketReady = true;
+	}
+	
+	if (keysDown[keyMap.switch] && player.switchReady && !player.inventoryMode) {
+		var temp = player.item;
+		player.item = player.pocket;
+		player.pocket = temp;
+		player.switchReady = false;
+	}
+	
+	if (keysUp[keyMap.switch] && !player.inventoryMode) {
+		player.switchReady = true;
+	}
+	
 	if (keysDown[keyMap.pickup] && player.pickupReady) {
 		pickup(player);
 		player.pickupReady = false;
