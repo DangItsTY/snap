@@ -171,7 +171,7 @@ function pointInSquareCollision(sourceVertices, targetVertices) {
 	var right = targetVertices[2].x;
 	for (var i = 0; i < sourceVertices.length; i++) {
 		var p = sourceVertices[i];
-		if (p.x > left && p.x < right && p.y > top && p.y < bottom) {
+		if (p.x >= left && p.x <= right && p.y >= top && p.y <= bottom) {
 			return true;
 		}
 	}

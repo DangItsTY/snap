@@ -137,23 +137,36 @@ function make(type, options) {	//	creates any object in the game
 		}
 	}
 	if (type == "enemy") {
-		object.speed = 100;
+		object.speed = 64;
 		object.weight = 800;
 		object.red = 255;
 		object.green = 50;
 		object.blue = 50;
 		object.timer = 0;
 		object.timerMax = 1000;
+		
+		if (object.x < PLAYER.x) {
+			object.direction = 1;
+		} else {
+			object.direction = -1;
+		}
+		object.vx = object.direction * object.speed * 0.2;
+		
 		object.runAct = function() {
+			// bounce off game edge
+			if (object.x < 0 * BLOCK_SIZE) {
+				object.direction *= -1;
+				object.x = 0;
+			} else if (object.x >= GAME_WIDTH) {
+				object.direction *= -1;
+				object.x = GAME_WIDTH;
+			}
+			
 			if (object.timer <= 0) {
-				if (object.x < PLAYER.x) {
-					object.vx = object.speed;
-				} else {
-					object.vx = object.speed * -1;
-				}
+				object.vx = object.direction * object.speed * 0.2;
 			} else {
 				object.timer = object.timer - (1000 * mod);
-			}	
+			}
 		}
 		
 		object.runCollide = function() {
@@ -169,6 +182,30 @@ function make(type, options) {	//	creates any object in the game
 							target.poisonStack += 1;
 							console.log("poisoned!");
 						});
+					}
+				}
+				
+				//	bounce off walls
+				if (target.type == "wall") {
+					if (isCollidingWithWallRight(object, target)) {
+						object.direction *= -1;
+						object.x = target.x - (target.width / 2) - (object.width / 2) - 1;
+					} else if (isCollidingWithWallLeft(object, target)) {
+						object.direction *= -1;
+						object.x = target.x + (target.width / 2) + (object.width / 2) + 1;
+					}
+				}
+				
+				// bounce off zombies
+				if (target.type == "enemy") {
+					if (isCollidingWithWallRight(object, target)) {
+						object.direction *= -1;
+						target.direction *= -1;
+						object.x = target.x - (target.width / 2) - (object.width / 2) - 1;
+					} else if (isCollidingWithWallLeft(object, target)) {
+						object.direction *= -1;
+						target.direction *= -1;
+						object.x = target.x + (target.width / 2) + (object.width / 2) + 1;
 					}
 				}
 			}
