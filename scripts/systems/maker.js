@@ -144,6 +144,11 @@ function make(type, options) {	//	creates any object in the game
 		object.blue = 50;
 		object.timer = 0;
 		object.timerMax = 1000;
+		object.timerStuck = 0;
+		object.timerStuckMax = 1000;
+		object.stuck = false;
+		object.stuckCounter = 0;
+		object.prevDirection = 1;
 		
 		if (object.x < PLAYER.x) {
 			object.direction = 1;
@@ -167,6 +172,22 @@ function make(type, options) {	//	creates any object in the game
 			} else {
 				object.timer = object.timer - (1000 * mod);
 			}
+			
+			//	stuck timer
+			if (object.timerStuck <= 0) {
+				if (object.stuckCounter > 0) {
+					object.stuck = true;
+				} else {
+					object.stuck = false;
+				}
+				object.timerStuck = object.timerStuckMax;
+				object.stuckCounter = 0;
+			}
+			if (object.prevDirection != object.direction) {
+				object.prevDirection = object.direction;
+				object.stuckCounter++;
+			}
+			object.timerStuck = object.timerStuck - (1000 * mod);
 		}
 		
 		object.runCollide = function() {
@@ -194,10 +215,12 @@ function make(type, options) {	//	creates any object in the game
 						object.direction *= -1;
 						object.x = target.x + (target.width / 2) + (object.width / 2) + 1;
 					}
-				}
+				}				
 				
-				// bounce off zombies
-				if (target.type == "enemy") {
+				// stack on stuck zombies
+				if (target.type == "enemy" && target.stuck && !object.stuck) {
+					object.y = target.y - target.height;
+				} else if (target.type == "enemy") { // bounce off zombies
 					if (isCollidingWithWallRight(object, target)) {
 						object.direction *= -1;
 						target.direction *= -1;

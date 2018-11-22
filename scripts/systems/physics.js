@@ -42,6 +42,7 @@ function runPhysics(list) {
 function runPhysicsCollision(list) {
 	stick(list);
 	wall(list);
+	stack(list);
 	
 	function stick(list) {
 		for (var i = 0; i < list.length; i++) {
@@ -76,6 +77,45 @@ function runPhysicsCollision(list) {
 			} else {
 				object.vy = 0;
 				object.y = target.y - (target.height / 2) - (object.height / 2);
+			}
+		}
+	}
+	
+	function stack(list) {
+		for (var i = 0; i < list.length; i++) {
+			var object = list[i];
+			var target = object.collisionFloor;
+			
+			if (object.type == "enemy") {
+				//	first check if object is on a floor
+				var isOnFloor = 0;
+				for (var j = 0; j < object.collisions.length; j++) {
+					target = object.collisions[j];
+					if (target.type == "enemy") {
+							isOnFloor += 1;
+					}
+				}
+				if (isOnFloor == 0) {
+					object.collisionFloor = null;
+				}
+				target = object.collisionFloor;
+				
+				if (target == null) {
+						if (object.vy > 0) {
+						//	do not apply gravity if object is colliding with a zombie
+						for (var j = 0; j < object.collisions.length; j++) {
+							target = object.collisions[j];
+							if (target.type == "enemy" && isCollidingWithFloor(object, target)) {
+								object.collisionFloor = target;
+								object.vy = 0;
+								object.y = target.y - (target.height / 2) - (object.height / 2);
+							}
+						}
+					}
+				} else {
+					object.vy = 0;
+					object.y = target.y - (target.height / 2) - (object.height / 2);
+				}
 			}
 		}
 	}
