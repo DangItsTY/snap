@@ -34,7 +34,7 @@ function make(type, options) {	//	creates any object in the game
 	object.collisionFloor = null;
 	object.runCollide = function() {}
 	object.runAct = function() {}
-	object.damage = function(attack) {}
+	object.damage = function(attack) { attack(); }
 	
 	
 	//	TYPES
@@ -236,10 +236,11 @@ function make(type, options) {	//	creates any object in the game
 	}
 	if (type == "projectile") {
 		object.speed = options.speed != undefined ? options.speed : 400;
-		object.red = 50;
-		object.green = 255;
-		object.blue = 50;
-		object.timer = 2000;
+		object.red = options.red != undefined ? options.red : 50;
+		object.green = options.green != undefined ? options.green : 255;
+		object.blue = options.blue != undefined ? options.blue : 50;
+		object.timer = options.timer != undefined ? options.timer : 2000;
+		object.item = options.item != undefined ? options.item : undefined; // reference to an item
 		object.runAct = function() {
 			object.vx = object.speed * object.direction;
 			if (object.timer < 0) {
@@ -254,16 +255,39 @@ function make(type, options) {	//	creates any object in the game
 				object.y = target.y;
 			}
 		}
+		
+		object.runCollide = function() {
+			for (var i = 0; i < object.collisions.length; i++) {
+				var target = object.collisions[i];
+				if (target.type == "enemy") {
+					target.damage(function() {
+						target.isAlive = false;
+						object.isAlive = false;
+						if (object.item) {
+							object.item.stack--;
+						}
+						i = object.collisions.length;
+					});
+				}
+			}
+		}
 	}
 	if (type == "item") {
 		object.width = BLOCK_SIZE / 2;
 		object.height = BLOCK_SIZE / 2;
 		object.timer = object.timerMax = 500;
+		object.stack = 1; // negative means no stacking, right? does this logically work?
+		object.stackMax = 99;
 		
 		object.runAct = function() {
 			if (object.timer < 0) {
 			} else {
 				object.timer = object.timer - (1000 * mod);
+			}
+			
+			if (object.stack == 0) {
+				object.isAlive = false;
+				object.owner.inventory.splice(object.selection, 1);
 			}
 		}		
 		object.owner = null;
@@ -281,6 +305,14 @@ function make(type, options) {	//	creates any object in the game
 				object.use = function() {
 					if (object.timer <= 0) {
 						slash(object.owner);
+						object.timer = object.timerMax;
+					}
+				}
+				break;
+			case "stake":
+				object.use = function() {
+					if (object.timer <= 0) {
+						stab(object);
 						object.timer = object.timerMax;
 					}
 				}

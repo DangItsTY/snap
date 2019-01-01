@@ -36,10 +36,17 @@ function renderHud() {
 	var inventory = PLAYER.inventory;
 	for (var i = 0; i < inventory.length; i++) {
 		if (i == PLAYER.selection && PLAYER.inventoryMode) {
-			result = result + "*" + inventory[i].name + "*, ";
+			result = result + "*" + inventory[i].name + inventory[i].stack + "*, ";
 		} else {
-			result = result + inventory[i].name + ", ";
+			result = result + inventory[i].name + +inventory[i].stack + ", ";
 		}
+	}
+	element.innerHTML = result;
+	
+	element = document.getElementById("equip");
+	result = "";
+	if (PLAYER.item) {
+		result = PLAYER.item.name;
 	}
 	element.innerHTML = result;
 	

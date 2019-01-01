@@ -34,15 +34,42 @@ function slash(object) {
 	renderAttach([OBJECTS[OBJECTS.length-1]]);
 }
 
+function stab(object) {
+	var owner = object.owner;
+	OBJECTS.push(make("projectile", {
+		x: owner.direction == 1 ? owner.x + (owner.width / 2) : owner.x - (owner.width / 2),
+		y: owner.y,
+		width: BLOCK_SIZE,
+		height: BLOCK_SIZE / 4,
+		speed: 0,
+		direction: owner.direction,
+		target: owner,
+		item: object,
+		red: 255,
+		green: 255,
+		blue: 255,
+		timer: 100
+	}));
+	renderAttach([OBJECTS[OBJECTS.length-1]]);
+}
+
 function pickup(object) {
 	for (var i = 0; i < object.collisions.length; i++) {
 		var target = object.collisions[i];
 		if (target.type == "item") {
-			target.x = 0;
-			target.y = 0;
-			//object.item = target; // this would automatically equip item
-			object.inventory.push(target);
-			target.owner = object;
+			var inventoryTop = object.inventory[object.inventory.length - 1];
+			if (inventoryTop != undefined &&
+					inventoryTop.name == target.name &&
+					inventoryTop.stack > 0) {
+				inventoryTop.stack++;
+				target.isAlive = false;
+			} else {
+				target.x = 0;
+				target.y = 0;
+				//object.item = target; // this would automatically equip item
+				object.inventory.push(target);
+				target.owner = object;
+			}
 			i = object.collisions.length;
 		}
 	}
