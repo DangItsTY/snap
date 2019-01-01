@@ -64,6 +64,7 @@ function make(type, options) {	//	creates any object in the game
 		object.useReady = false;
 		object.equipReady = true;
 		object.switchReady = false;
+		object.combineReady = false;
 		object.pocketReady = true;
 		object.pickupReady = false;
 		object.dropReady = true;
@@ -83,6 +84,8 @@ function make(type, options) {	//	creates any object in the game
 		object.equipTimerMax = 400;
 		object.pocketTimer = -1;
 		object.pocketTimerMax = 200;
+		object.combineTimer = -1;
+		object.combineTimerMax = 200;
 		
 		object.runAct = function() {
 			if (object.health < 0) {
@@ -115,6 +118,16 @@ function make(type, options) {	//	creates any object in the game
 				object.switchReady = false;
 			} else if (object.pocketTimer >= 0) {
 				object.pocketTimer += 1000 * mod;
+			}
+			if (object.combineTimer >= object.combineTimerMax) {
+				object.combineTimer = -1;
+				object.combineReady = false;
+				var temp = object.item;
+				object.item = object.pocket;
+				object.pocket = temp;
+				combine(object.item, object.pocket);
+			} else if (object.combineTimer >= 0) {
+				object.combineTimer += 1000 * mod;
 			}
 		}
 		
@@ -276,8 +289,9 @@ function make(type, options) {	//	creates any object in the game
 		object.width = BLOCK_SIZE / 2;
 		object.height = BLOCK_SIZE / 2;
 		object.timer = object.timerMax = 500;
-		object.stack = 1; // negative means no stacking, right? does this logically work?
+		object.stack = 1;
 		object.stackMax = 99;
+		object.isPermanent = false;
 		
 		object.runAct = function() {
 			if (object.timer < 0) {
@@ -285,19 +299,35 @@ function make(type, options) {	//	creates any object in the game
 				object.timer = object.timer - (1000 * mod);
 			}
 			
-			if (object.stack == 0) {
+			if (object.stack == 0 && !object.isPermanent) {
 				object.isAlive = false;
-				object.owner.inventory.splice(object.selection, 1);
+				
+				var index = object.owner.inventory.indexOf(object);
+				object.owner.inventory.splice(index, 1);
 			}
 		}		
 		object.owner = null;
 		
 		switch (options.name) {
 			case "crossbow":
+				object.stackMax = 3;
+				object.stack = 3;
+				object.isPermanent = true;
 				object.use = function() {
 					if (object.timer <= 0) {
-						shoot(object.owner);
-						object.timer = object.timerMax;
+						var pocket = PLAYER.pocket;
+						if (object.stack > 0) {
+							object.stack--
+							
+							shoot(object);
+							object.timer = object.timerMax;
+						}
+						else if (pocket && pocket.name == "stake" && pocket.stack > 0) {
+							pocket.stack--
+							
+							shoot(object);
+							object.timer = object.timerMax;
+						}
 					}
 				}
 				break;

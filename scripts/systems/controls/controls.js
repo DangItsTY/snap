@@ -59,6 +59,16 @@ function runControls(player) {
 		player.switchReady = true;
 	}
 	
+	if (keysDown[keyMap.combine] && player.combineReady && !player.inventoryMode) {
+		player.combineTimer = 0;
+		player.combineReady = false;
+	}
+	
+	if (keysUp[keyMap.combine] && !player.inventoryMode) {
+		player.combineTimer = -1;
+		player.combineReady = true;
+	}
+	
 	if (keysDown[keyMap.pickup] && player.pickupReady && !player.inventoryMode) {
 		pickup(player);
 		player.pickupReady = false;

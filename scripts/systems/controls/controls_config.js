@@ -43,6 +43,7 @@ var keyMap = {
 	'drop': 78,
 	'switch': 75,
 	'pocket': 75,
+	'combine': 75,
 	'cycleleft': 85,
 	'cycleright': 73
 }

@@ -11,12 +11,13 @@ function jump(object) {
 }
 
 function shoot(object) {
+	var owner = object.owner;
 	OBJECTS.push(make("projectile", {
-		x: object.direction == 1 ? object.x + (object.width / 2) : object.x - (object.width / 2),
-		y: object.y,
-		width: 20,
-		height: 20,
-		direction: object.direction
+		x: owner.direction == 1 ? owner.x + (owner.width / 2) : owner.x - (owner.width / 2),
+		y: owner.y,
+		width: BLOCK_SIZE,
+		height: BLOCK_SIZE / 4,
+		direction: owner.direction
 	}));
 	renderAttach([OBJECTS[OBJECTS.length-1]]);
 }
@@ -71,6 +72,21 @@ function pickup(object) {
 				target.owner = object;
 			}
 			i = object.collisions.length;
+		}
+	}
+}
+
+function combine(equip, pocket) {
+	if (equip.name == "crossbow" && pocket.name == "stake") {
+		var slots = equip.stackMax - equip.stack;
+		var remaining = pocket.stack / slots;
+		if (remaining >= 1) {
+			equip.stack = equip.stackMax;
+			pocket.stack -= slots;
+		} else {
+			remaining = pocket.stack % slots;
+			equip.stack += remaining;
+			pocket.stack = 0;
 		}
 	}
 }
