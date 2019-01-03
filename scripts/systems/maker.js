@@ -347,6 +347,15 @@ function make(type, options) {	//	creates any object in the game
 					}
 				}
 				break;
+			case "plank":
+				object.use = function() {
+					if (object.timer <= 0) {
+						build(object);
+						object.timer = object.timerMax;
+						object.stack--
+					}
+				}
+				break;
 			default:
 				object.use = function() {
 					if (object.timer <= 0) {

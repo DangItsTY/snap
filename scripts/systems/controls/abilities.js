@@ -54,6 +54,22 @@ function stab(object) {
 	renderAttach([OBJECTS[OBJECTS.length-1]]);
 }
 
+function build(object) {
+	var owner = object.owner;
+	OBJECTS.push(make("wall", {
+		name: object.name,
+		x: owner.direction == 1 ? owner.x + (owner.width / 2) : owner.x - (owner.width / 2),
+		y: owner.y,
+		width: BLOCK_SIZE,
+		height: BLOCK_SIZE,
+		direction: owner.direction,
+		red: 255,
+		green: 255,
+		blue: 255
+	}));
+	renderAttach([OBJECTS[OBJECTS.length-1]]);
+}
+
 function pickup(object) {
 	for (var i = 0; i < object.collisions.length; i++) {
 		var target = object.collisions[i];
