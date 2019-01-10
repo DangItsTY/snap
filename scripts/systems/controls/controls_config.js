@@ -41,6 +41,8 @@ var keyMap = {
 	'equip': 74,
 	'pickup': 78,
 	'drop': 78,
+	'lift': 78,
+	'toss': 78,
 	'switch': 75,
 	'pocket': 75,
 	'combine': 75,

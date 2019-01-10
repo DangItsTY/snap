@@ -35,6 +35,7 @@ function make(type, options) {	//	creates any object in the game
 	object.runCollide = function() {}
 	object.runAct = function() {}
 	object.damage = function(attack) { attack(); }
+	object.held = null;
 	
 	
 	//	TYPES
@@ -68,9 +69,12 @@ function make(type, options) {	//	creates any object in the game
 		object.pocketReady = true;
 		object.pickupReady = false;
 		object.dropReady = true;
+		object.liftReady = true;
+		object.tossReady = false;
 		object.cycleleftReady = true;
 		object.cyclerightReady = true;
 		object.inventoryMode = false;
+		object.isHolding = false;
 		
 		object.item = null;
 		object.pocket = null;
@@ -247,6 +251,17 @@ function make(type, options) {	//	creates any object in the game
 			}
 		}
 	}
+	if (type == "body") {
+		object.weight = 800;
+		
+		object.runAct = function() {
+			if (object.owner != null) {
+				object.x = object.owner.x,
+				object.y = object.owner.y - object.owner.height;
+				object.vy = 0;
+			}
+		}
+	}
 	if (type == "projectile") {
 		object.speed = options.speed != undefined ? options.speed : 400;
 		object.red = options.red != undefined ? options.red : 50;
@@ -414,6 +429,9 @@ function make(type, options) {	//	creates any object in the game
 		object.image = "chandalier.png";
 	}
 	if (options.name == "zombie") {
+		object.image = "zombie.png";
+	}
+	if (options.name == "body") {
 		object.image = "zombie.png";
 	}
 	if (options.name == "foyer") {

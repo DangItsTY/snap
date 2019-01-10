@@ -272,6 +272,7 @@
 					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
 				}));
 				
+				/*
 				OBJECTS.push(make("enemy", {
 					name: "zombie",
 					width: BLOCK_SIZE,
@@ -311,6 +312,15 @@
 					x: GAME_WIDTH / 2 - 5*BLOCK_SIZE,
 					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
 				}));
+				*/
+				
+				OBJECTS.push(make("body", {
+					name: "body",
+					width: BLOCK_SIZE,
+					height: BLOCK_SIZE,
+					x: GAME_WIDTH / 2 - 5*BLOCK_SIZE,
+					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
+				}));
 				
 				
 				/*
@@ -322,13 +332,14 @@
 				}));
 				*/
 				
-				
+				/*
 				OBJECTS.push(make("wall", {
 					width: BLOCK_SIZE,
 					height: BLOCK_SIZE,
 					x: GAME_WIDTH / 2 - 4*BLOCK_SIZE,
 					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
 				}));
+				*/
 				
 				for (var i = 0; i < 41; i++) {
 					OBJECTS.push(make("wall", {

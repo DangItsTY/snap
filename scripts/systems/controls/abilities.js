@@ -92,6 +92,22 @@ function pickup(object) {
 	}
 }
 
+function lift(object) {
+	for (var i = 0; i < object.collisions.length; i++) {
+		var target = object.collisions[i];
+		if (target.type == "body") {
+			object.held = target;
+			target.owner = object;
+			i = object.collisions.length;
+		}
+	}
+}
+
+function toss(object) {
+	object.held.owner = null;
+	object.held = null;
+}
+
 function combine(equip, pocket) {
 	if (equip.name == "crossbow" && pocket.name == "stake") {
 		var slots = equip.stackMax - equip.stack;
