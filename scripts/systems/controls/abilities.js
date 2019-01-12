@@ -98,6 +98,7 @@ function lift(object) {
 		if (target.type == "body") {
 			object.held = target;
 			target.owner = object;
+			object.isHolding = true;
 			i = object.collisions.length;
 		}
 	}
@@ -106,6 +107,7 @@ function lift(object) {
 function toss(object) {
 	object.held.owner = null;
 	object.held = null;
+	object.isHolding = false;
 }
 
 function combine(equip, pocket) {

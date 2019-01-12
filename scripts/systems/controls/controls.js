@@ -81,7 +81,6 @@ function runControls(player) {
 	if (keysDown[keyMap.lift] && player.liftReady && !player.isHolding && !player.inventoryMode) {
 		lift(player);
 		player.liftReady = false;
-		player.isHolding = true;
 	}
 	
 	if (keysUp[keyMap.lift] && !player.isHolding && !player.inventoryMode) {
@@ -91,7 +90,6 @@ function runControls(player) {
 	if (keysDown[keyMap.toss] && player.isHolding && player.tossReady && !player.inventoryMode) {
 		toss(player);
 		player.tossReady = false;
-		player.isHolding = false;
 	}
 	
 	if (keysUp[keyMap.toss] && player.isHolding && !player.inventoryMode) {
