@@ -371,6 +371,15 @@ function make(type, options) {	//	creates any object in the game
 					}
 				}
 				break;
+			case "match":
+				object.use = function() {
+					if (object.timer <= 0) {
+						match(object.owner);
+						object.timer = object.timerMax;
+						object.stack--
+					}
+				}
+				break;
 			default:
 				object.use = function() {
 					if (object.timer <= 0) {

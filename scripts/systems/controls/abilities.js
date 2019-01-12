@@ -110,6 +110,16 @@ function toss(object) {
 	object.isHolding = false;
 }
 
+function match(object) {
+	for (var i = 0; i < object.collisions.length; i++) {
+		var target = object.collisions[i];
+		if (target.type == "body") {
+			target.isAlive = false;
+			i = object.collisions.length;
+		}
+	}
+}
+
 function combine(equip, pocket) {
 	if (equip.name == "crossbow" && pocket.name == "stake") {
 		var slots = equip.stackMax - equip.stack;
