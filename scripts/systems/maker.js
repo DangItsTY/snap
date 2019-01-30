@@ -253,12 +253,29 @@ function make(type, options) {	//	creates any object in the game
 	}
 	if (type == "body") {
 		object.weight = 800;
+		object.timerBlood = 0;
+		object.timerBloodMax = 5000;
 		
 		object.runAct = function() {
 			if (object.owner != null) {
 				object.x = object.owner.x,
 				object.y = object.owner.y - object.owner.height;
 				object.vy = 0;
+			}
+			
+			if (object.timerBlood <= 0) {
+				OBJECTS.push(make("blood", {
+					name: "blood",
+					x: object.x,
+					y: object.y - BLOCK_SIZE / 2,
+					width: BLOCK_SIZE,
+					height: BLOCK_SIZE / 4
+				}));
+				renderAttach([OBJECTS[OBJECTS.length-1]]);
+				
+				object.timerBlood = object.timerBloodMax;
+			} else {
+				object.timerBlood = object.timerBlood - (1000 * mod);
 			}
 		}
 	}
