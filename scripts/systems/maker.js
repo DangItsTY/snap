@@ -262,6 +262,12 @@ function make(type, options) {	//	creates any object in the game
 			}
 		}
 	}
+	if (type == "blood") {
+		object.weight = 800;
+		object.red = 255;
+		object.green = 0;
+		object.blue = 0;
+	}
 	if (type == "projectile") {
 		object.speed = options.speed != undefined ? options.speed : 400;
 		object.red = options.red != undefined ? options.red : 50;
@@ -377,6 +383,20 @@ function make(type, options) {	//	creates any object in the game
 						match(object.owner);
 						object.timer = object.timerMax;
 						object.stack--
+					}
+				}
+				break;
+			case "mop":
+				object.isSoaked = false;
+				object.isPermanent = true;
+				object.stack = 1;
+				object.use = function() {
+					if (object.timer <= 0) {
+						var target = mop(object.owner);
+						if (target != null && target.type == "blood") {
+							object.isSoaked = true;
+						}
+						object.timer = object.timerMax;
 					}
 				}
 				break;

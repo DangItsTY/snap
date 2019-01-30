@@ -120,6 +120,18 @@ function match(object) {
 	}
 }
 
+function mop(object) {
+	for (var i = 0; i < object.collisions.length; i++) {
+		var target = object.collisions[i];
+		if (target.type == "blood") {
+			target.isAlive = false;
+			i = object.collisions.length;
+			return target;
+		}
+	}
+	return null;
+}
+
 function combine(equip, pocket) {
 	if (equip.name == "crossbow" && pocket.name == "stake") {
 		var slots = equip.stackMax - equip.stack;
