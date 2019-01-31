@@ -144,6 +144,9 @@ function combine(equip, pocket) {
 			equip.stack += remaining;
 			pocket.stack = 0;
 		}
+	} else if (equip.name == "mop" && pocket.name == "jar") {
+		equip.isSoaked = false;
+		pocket.isFilled = true;
 	}
 }
 

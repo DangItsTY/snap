@@ -415,6 +415,15 @@ function make(type, options) {	//	creates any object in the game
 						}
 						object.timer = object.timerMax;
 					}
+					log("Soaked", object.isSoaked);
+				}
+				break;
+			case "jar":
+				object.isFilled = false;
+				object.isPermanent = true;
+				object.stack = 1;
+				object.use = function() {
+					log("Filled", object.isFilled);
 				}
 				break;
 			default:
