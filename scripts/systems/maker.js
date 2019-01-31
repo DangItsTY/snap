@@ -278,12 +278,52 @@ function make(type, options) {	//	creates any object in the game
 				object.timerBlood = object.timerBlood - (1000 * mod);
 			}
 		}
+		
+		object.runCollide = function() {
+			for (var i = 0; i < object.collisions.length; i++) {
+				var target = object.collisions[i];
+				if (target.type == "body") {
+					OBJECTS.push(make("mound", {
+						name: "mound",
+						x: object.x,
+						y: object.y,
+						width: BLOCK_SIZE,
+						height: BLOCK_SIZE,
+						pile: 2
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+					
+					object.isAlive = false;
+					target.isAlive = false;
+					i = object.collisions.length;
+				}
+			}
+		}
 	}
 	if (type == "blood") {
 		object.weight = 800;
 		object.red = 255;
 		object.green = 0;
 		object.blue = 0;
+	}
+	if (type == "mound") {
+		object.weight = 800;
+		object.pile = options.pile ? options.pile : 1;
+		
+		object.runAct = function() {
+			log("Mound Size", object.pile);
+		}
+		
+		object.runCollide = function() {
+			for (var i = 0; i < object.collisions.length; i++) {
+				var target = object.collisions[i];
+				if (target.type == "body") {
+					object.pile++
+					target.isAlive = false;
+					i = object.collisions.length;
+				}
+			}
+		}
 	}
 	if (type == "projectile") {
 		object.speed = options.speed != undefined ? options.speed : 400;
@@ -487,6 +527,9 @@ function make(type, options) {	//	creates any object in the game
 		object.image = "zombie.png";
 	}
 	if (options.name == "body") {
+		object.image = "zombie.png";
+	}
+	if (options.name == "mound") {
 		object.image = "zombie.png";
 	}
 	if (options.name == "foyer") {
