@@ -135,10 +135,13 @@ function runControls(player) {
 	
 	if ((keysDown[keyMap.left] || touchMoveLeft)) {
 		moveLeft(player);
+		player.animation = "walking";
 	} else if ((keysDown[keyMap.right] || touchMoveRight)) {
 		moveRight(player);
+		player.animation = "walking";
 	} else {
 		player.vx = 0;
+		player.animation = "standing";
 	}
 		
 	log("y", player.y);

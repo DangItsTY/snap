@@ -12,6 +12,8 @@ function make(type, options) {	//	creates any object in the game
 	object.isAlive = true;
 	object.element = element;
 	object.image = "";
+	object.imageX = 0;
+	object.imageY = 0;
 	object.red = 0;
 	object.green = 0;
 	object.blue = 255;
@@ -81,6 +83,13 @@ function make(type, options) {	//	creates any object in the game
 		object.inventory = [];
 		object.selection = 0;
 		
+		object.animation = "standing";
+		object.animationFrame = 0;
+		object.animationMap = {
+			"standing": [{"x": 0, "y": 0}],
+			"walking": [{"x": 0, "y": 0}, {"x": 0, "y": 1}]
+		};
+		
 		//	timers
 		object.inventoryModeTimer = 0;
 		object.inventoryModeTimerMax = 800;
@@ -90,6 +99,8 @@ function make(type, options) {	//	creates any object in the game
 		object.pocketTimerMax = 200;
 		object.combineTimer = -1;
 		object.combineTimerMax = 200;
+		object.animationTimer = 0;
+		object.animationTimerMax = 200;
 		
 		object.runAct = function() {
 			if (object.health < 0) {
@@ -132,6 +143,19 @@ function make(type, options) {	//	creates any object in the game
 				combine(object.item, object.pocket);
 			} else if (object.combineTimer >= 0) {
 				object.combineTimer += 1000 * mod;
+			}
+			if (object.animationTimer >= object.animationTimerMax) {
+				object.animationFrame++;
+				var nextAnimationFrame = object.animationMap[object.animation];
+				if (object.animationFrame >= nextAnimationFrame.length) {
+					object.animationFrame = 0;
+				}
+				object.imageX = object.animationMap[object.animation][object.animationFrame].x;
+				object.imageY = object.animationMap[object.animation][object.animationFrame].y;
+				
+				object.animationTimer = 0;
+			} else {
+				object.animationTimer += 1000 * mod;
 			}
 		}
 		
