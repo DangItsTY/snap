@@ -190,6 +190,8 @@ function make(type, options) {	//	creates any object in the game
 		object.stuck = false;
 		object.stuckCounter = 0;
 		object.prevDirection = 1;
+		object.snarlTimer = 0;
+		object.snarlTimerMax = 5000;
 		
 		if (object.x < PLAYER.x) {
 			object.direction = 1;
@@ -229,6 +231,18 @@ function make(type, options) {	//	creates any object in the game
 				object.stuckCounter++;
 			}
 			object.timerStuck = object.timerStuck - (1000 * mod);
+			
+			//	snarl
+			if (object.snarlTimer >= object.snarlTimerMax) {
+				var snarlSE = document.getElementById("snarl");
+				snarlSE.currentTime = 0;
+				snarlSE.volume = 0.5;
+				snarlSE.play();
+				
+				object.snarlTimer = 0;
+			} else {
+				object.snarlTimer += 1000 * mod;
+			}
 		}
 		
 		object.runCollide = function() {

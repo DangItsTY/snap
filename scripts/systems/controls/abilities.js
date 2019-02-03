@@ -8,6 +8,10 @@ function moveRight(object) {
 
 function jump(object) {
 	object.vy = -1 * object.jump;
+	var jumpSE = document.getElementById("jump");
+	jumpSE.currentTime = 0;
+	jumpSE.volume = 0.5;
+	jumpSE.play();
 }
 
 function shoot(object) {

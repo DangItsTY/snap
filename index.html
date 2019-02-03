@@ -46,6 +46,12 @@
 		<audio id="backgroundMusic">
 			<source src="assets/sounds/mansionwalk.wav" type="audio/wav">
 		</audio>
+		<audio id="jump">
+			<source src="assets/sounds/jump.wav" type="audio/wav">
+		</audio>
+		<audio id="snarl">
+			<source src="assets/sounds/snarl.wav" type="audio/wav">
+		</audio>
 		<script src="scripts/core/config.js"></script>
 		<script src="scripts/systems/maker.js"></script>
 		<script src="scripts/systems/controls/controls_config.js"></script>
@@ -70,7 +76,7 @@
 							this.volume += 0.1;
 						}
 					}
-					if (this.currentTimer > buffer) {
+					if (this.currentTime > buffer) {
 						this.volume = 1.0;
 					}
 					if (this.currentTime > this.duration - buffer) {
@@ -348,15 +354,13 @@
 				}));
 				*/
 				
-				/*
-				OBJECTS.push(make("body", {
-					name: "body",
+				OBJECTS.push(make("enemy", {
+					name: "zombie",
 					width: BLOCK_SIZE,
 					height: BLOCK_SIZE,
 					x: GAME_WIDTH / 2 - 5*BLOCK_SIZE,
 					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
 				}));
-				*/
 				
 				OBJECTS.push(make("body", {
 					name: "body",
