@@ -10,6 +10,7 @@
 		<link rel="manifest" href="manifest.json">
 	</head>
 	<body class="mobil">
+		<button style="position: absolute; top: 0; left: 0;" onclick="playMusic()">Play</button>
 		<main id="container" class="bg-color">
 			<section id="background">
 			</section>
@@ -42,6 +43,9 @@
 		</main>
 		<footer>
 		</footer>
+		<audio id="backgroundMusic">
+			<source src="assets/sounds/mansionwalk.wav" type="audio/wav">
+		</audio>
 		<script src="scripts/core/config.js"></script>
 		<script src="scripts/systems/maker.js"></script>
 		<script src="scripts/systems/controls/controls_config.js"></script>
@@ -55,6 +59,30 @@
 		<script src="scripts/render/render.js"></script>
 		<script src="scripts/core/game.js"></script>
 		<script>
+			function playMusic() {
+				//	play background music
+				var backgroundMusic = document.getElementById("backgroundMusic");
+				backgroundMusic.addEventListener('timeupdate', function() {
+					var buffer = 2.0;
+					log("time", this.currentTime);
+					if (this.currentTime <= buffer) {
+						if (this.volume <= 0.9) {
+							this.volume += 0.1;
+						}
+					}
+					if (this.currentTimer > buffer) {
+						this.volume = 1.0;
+					}
+					if (this.currentTime > this.duration - buffer) {
+						if (this.volume >= 0.1) {
+							this.volume -= 0.1;
+						}
+					}
+				});
+				backgroundMusic.loop = true;
+				backgroundMusic.play();
+			}
+				
 			function initrender() {
 				renderInit();
 			}
