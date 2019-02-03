@@ -1,9 +1,17 @@
 function moveLeft(object) {
 	object.vx = object.speed * -1;
+	var walkSE = document.getElementById("walk");
+	walkSE.volume = 0.5;
+	walkSE.loop = true;
+	walkSE.play();
 }
 
 function moveRight(object) {
 	object.vx = object.speed;
+	var walkSE = document.getElementById("walk");
+	walkSE.volume = 0.5;
+	walkSE.loop = true;
+	walkSE.play();
 }
 
 function jump(object) {

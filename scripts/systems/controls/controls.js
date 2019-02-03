@@ -142,6 +142,8 @@ function runControls(player) {
 	} else {
 		player.vx = 0;
 		player.animation = "standing";
+		var walkSE = document.getElementById("walk");
+		walkSE.pause();
 	}
 		
 	log("y", player.y);
