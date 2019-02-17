@@ -170,15 +170,6 @@
 				PLAYER = newPlayer;
 				OBJECTS.push(newPlayer);
 				// need to create a background layer of objects, they don't collide, may have z parallax property
-				/*
-				OBJECTS.push(make("basic", {
-					name: "foyer",
-					x: GAME_WIDTH / 2,
-					y: GAME_HEIGHT / 2,
-					width: 800,
-					height: 450
-				}));
-				*/
 				
 				for (var i = 0; i < 9; i++) {
 					for (var j = 0; j < 17; j++) {
@@ -241,165 +232,7 @@
 					height: BLOCK_SIZE
 				}));
 				
-
-				
-				
-				
-				
-				
-				// for performance testing
-				/*
-				for (var i = 0; i < 100; i++) {
-					OBJECTS.push(make("basic", {
-						randomizePosition: true,
-						randomizeVelocity: true,
-						randomizeColor: true
-					}));
-				}
-				*/
-				
-				/*
-				OBJECTS.push(make("point", {
-					width: 25,
-					height: 25,
-					x: 100,
-					y: 300
-				}));
-				*/
-				
-				OBJECTS.push(make("item", {
-					name: "crossbow",
-					x: GAME_WIDTH / 2 - 2*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("item", {
-					name: "stake",
-					x: GAME_WIDTH / 2 + 2*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("item", {
-					name: "stake",
-					x: GAME_WIDTH / 2 + 2*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("item", {
-					name: "stake",
-					x: GAME_WIDTH / 2 + 2*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("item", {
-					name: "stake",
-					x: GAME_WIDTH / 2 + 2*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("item", {
-					name: "stake",
-					x: GAME_WIDTH / 2 + 2*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("item", {
-					name: "mop",
-					x: GAME_WIDTH / 2 + 3*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("item", {
-					name: "jar",
-					x: GAME_WIDTH / 2 + 4*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				/*
-				OBJECTS.push(make("enemy", {
-					name: "zombie",
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 - 8*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("enemy", {
-					name: "zombie",
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 - 6*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("enemy", {
-					name: "zombie",
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 - 7*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("enemy", {
-					name: "zombie",
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 - 5*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("enemy", {
-					name: "zombie",
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 - 5*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				*/
-				
-				OBJECTS.push(make("body", {
-					name: "zombie",
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 - 3*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("body", {
-					name: "body",
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 - 5*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				OBJECTS.push(make("body", {
-					name: "body",
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 + 0*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				
-				
-				/*
-				OBJECTS.push(make("platform", {
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 + 2*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				*/
-				
-				/*
-				OBJECTS.push(make("wall", {
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 - 4*BLOCK_SIZE,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				}));
-				*/
-				
+				//	walls
 				for (var i = 0; i < 41; i++) {
 					OBJECTS.push(make("wall", {
 						name: "hardwoodfloor",
@@ -432,14 +265,6 @@
 					}));
 				}
 				
-				/*
-				OBJECTS.push(make("platform", {
-					x: GAME_WIDTH / 2,
-					y: GAME_HEIGHT - (BLOCK_SIZE * 2),
-					width: BLOCK_SIZE * 4
-				}));
-				*/
-				
 				OBJECTS.push(make("platform", {
 					x: GAME_WIDTH / 2,
 					y: GAME_HEIGHT - (BLOCK_SIZE * 3),
@@ -469,19 +294,7 @@
 					y: GAME_HEIGHT - (BLOCK_SIZE * 7),
 					width: GAME_WIDTH - BLOCK_SIZE,
 				}));
-				
-				/*
-				OBJECTS.push(make("item", {
-					x: 200,
-					y: 300
-				}));
-				*/
-				
-				
-				
-				
-				
-				
+
 				//	foreground
 				OBJECTS_FOREGROUND.push(make("basic", {
 					name: "chandalier",
@@ -563,11 +376,7 @@
 					width: BLOCK_SIZE,
 					height: BLOCK_SIZE
 				}));
-				
-				
-				
-				
-				
+
 				var newCamera = make("camera", {
 					mode: "static",
 					x: 0,
@@ -599,6 +408,17 @@
 						height: BLOCK_SIZE
 					}));
 				}
+				
+				// for performance testing
+				/*
+				for (var i = 0; i < 100; i++) {
+					OBJECTS.push(make("basic", {
+						randomizePosition: true,
+						randomizeVelocity: true,
+						randomizeColor: true
+					}));
+				}
+				*/
 				
 				OBJECTS.push(make("enemy", {
 					name: "zombie",
