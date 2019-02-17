@@ -288,6 +288,12 @@ function make(type, options) {	//	creates any object in the game
 				}
 			}
 		}
+		
+		
+		if (object.name == "humongouszombie") {
+			object.width = BLOCK_SIZE * 2;
+			object.height = BLOCK_SIZE * 2;
+		}
 	}
 	if (type == "body") {
 		object.weight = 800;
@@ -347,8 +353,19 @@ function make(type, options) {	//	creates any object in the game
 	if (type == "mound") {
 		object.weight = 800;
 		object.pile = options.pile ? options.pile : 1;
+		object.pileMaxHumongousZombie = 10;
 		
 		object.runAct = function() {
+			if (object.pile >= object.pileMaxHumongousZombie) {
+				OBJECTS.push(make("enemy", {
+					name: "humongouszombie",
+					x: object.x,
+					y: object.y
+				}));
+				renderAttach([OBJECTS[OBJECTS.length-1]]);
+				
+				object.isAlive = false;
+			}
 			log("Mound Size", object.pile);
 		}
 		
@@ -565,6 +582,9 @@ function make(type, options) {	//	creates any object in the game
 		object.image = "zombie.png";
 	}
 	if (options.name == "body") {
+		object.image = "zombie.png";
+	}
+	if (options.name == "humongouszombie") {
 		object.image = "zombie.png";
 	}
 	if (options.name == "mound") {
