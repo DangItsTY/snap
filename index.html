@@ -384,6 +384,61 @@
 				});
 				OBJECTS.push(newCamera);
 				CAMERA = newCamera;
+				
+				//	item spawns go here i believe
+				OBJECTS.push(make("item", {
+					name: "crossbow",
+					x: BLOCK_SIZE * 11,
+					y: BLOCK_SIZE * 7.5
+				}));
+				
+				for (var i = 0; i < 10; i++) {
+					OBJECTS.push(make("item", {
+						name: "stake",
+						x: BLOCK_SIZE * 12,
+						y: BLOCK_SIZE * 7.5
+					}));
+				}
+				
+				for (var i = 0; i < 4; i++) {
+					OBJECTS.push(make("item", {
+						name: "plank",
+						x: BLOCK_SIZE * 13,
+						y: BLOCK_SIZE * 7.5
+					}));
+				}
+				
+				for (var i = 0; i < 10; i++) {
+					OBJECTS.push(make("item", {
+						name: "match",
+						x: BLOCK_SIZE * 11,
+						y: BLOCK_SIZE * 6.5
+					}));
+				}
+				
+				OBJECTS.push(make("item", {
+					name: "mop",
+					x: BLOCK_SIZE * 12,
+					y: BLOCK_SIZE * 6.5
+				}));
+				
+				OBJECTS.push(make("item", {
+					name: "jar",
+					x: BLOCK_SIZE * 13,
+					y: BLOCK_SIZE * 6.5
+				}));
+				
+				var spawner = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout = setTimeout(function() {
+					clearInterval(spawner);
+				}, 30000);
 			}
 			
 			function initbasic() {

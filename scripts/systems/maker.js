@@ -178,6 +178,9 @@ function make(type, options) {	//	creates any object in the game
 		}
 	}
 	if (type == "enemy") {
+		object.width = BLOCK_SIZE;
+		object.height = BLOCK_SIZE;
+		object.health = 1;
 		object.speed = 64;
 		object.weight = 800;
 		object.red = 255;
@@ -243,6 +246,17 @@ function make(type, options) {	//	creates any object in the game
 			} else {
 				object.snarlTimer += 1000 * mod;
 			}
+			
+			//	death
+			if (object.health <= 0) {
+				object.isAlive = false;
+				OBJECTS.push(make("body", {
+					name: "body",
+					x: object.x,
+					y: object.y
+				}));
+				renderAttach([OBJECTS[OBJECTS.length-1]]);
+			}
 		}
 		
 		object.runCollide = function() {
@@ -288,14 +302,16 @@ function make(type, options) {	//	creates any object in the game
 				}
 			}
 		}
-		
-		
+				
 		if (object.name == "humongouszombie") {
 			object.width = BLOCK_SIZE * 2;
 			object.height = BLOCK_SIZE * 2;
+			object.health = 10;
 		}
 	}
 	if (type == "body") {
+		object.width = BLOCK_SIZE;
+		object.height = BLOCK_SIZE;
 		object.weight = 800;
 		object.timerBlood = 0;
 		object.timerBloodMax = 5000;
@@ -382,6 +398,7 @@ function make(type, options) {	//	creates any object in the game
 	}
 	if (type == "projectile") {
 		object.speed = options.speed != undefined ? options.speed : 400;
+		object.power = options.power != undefined ? options.power : 1;
 		object.red = options.red != undefined ? options.red : 50;
 		object.green = options.green != undefined ? options.green : 255;
 		object.blue = options.blue != undefined ? options.blue : 50;
@@ -407,7 +424,7 @@ function make(type, options) {	//	creates any object in the game
 				var target = object.collisions[i];
 				if (target.type == "enemy") {
 					target.damage(function() {
-						target.isAlive = false;
+						target.health -= object.power;
 						object.isAlive = false;
 						if (object.item) {
 							object.item.stack--;
@@ -443,8 +460,11 @@ function make(type, options) {	//	creates any object in the game
 		
 		switch (options.name) {
 			case "crossbow":
-				object.stackMax = 3;
-				object.stack = 3;
+				object.red = 100;
+				object.green = 0;
+				object.blue = 0;
+				object.stackMax = 99;
+				object.stack = 0;
 				object.isPermanent = true;
 				object.use = function() {
 					if (object.timer <= 0) {
@@ -473,6 +493,9 @@ function make(type, options) {	//	creates any object in the game
 				}
 				break;
 			case "stake":
+				object.red = 255;
+				object.green = 255;
+				object.blue = 255;
 				object.use = function() {
 					if (object.timer <= 0) {
 						stab(object);
@@ -481,6 +504,9 @@ function make(type, options) {	//	creates any object in the game
 				}
 				break;
 			case "plank":
+				object.red = 200;
+				object.green = 100;
+				object.blue = 50;
 				object.use = function() {
 					if (object.timer <= 0) {
 						build(object);
@@ -490,15 +516,23 @@ function make(type, options) {	//	creates any object in the game
 				}
 				break;
 			case "match":
+				object.red = 255;
+				object.green = 0;
+				object.blue = 0;
 				object.use = function() {
 					if (object.timer <= 0) {
-						match(object.owner);
+						var result = match(object.owner);
+						if (result) {
+							object.stack--;
+						}
 						object.timer = object.timerMax;
-						object.stack--
 					}
 				}
 				break;
 			case "mop":
+				object.red = 0;
+				object.green = 0;
+				object.blue = 255;
 				object.isSoaked = false;
 				object.isPermanent = true;
 				object.stack = 1;
@@ -514,6 +548,9 @@ function make(type, options) {	//	creates any object in the game
 				}
 				break;
 			case "jar":
+				object.red = 0;
+				object.green = 255;
+				object.blue = 0;
 				object.isFilled = false;
 				object.isPermanent = true;
 				object.stack = 1;

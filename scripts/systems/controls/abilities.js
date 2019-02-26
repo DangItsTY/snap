@@ -128,6 +128,7 @@ function match(object) {
 		if (target.type == "body") {
 			target.isAlive = false;
 			i = object.collisions.length;
+			return true;
 		}
 	}
 }
