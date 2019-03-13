@@ -143,6 +143,18 @@
 				mod = deltaTime / 1000;
 				log("mod", mod);
 				lastTimestamp = currentTimestamp;
+				
+				if (GAME_WAVE_STATE == "done") {
+					GAME_WAVE++;
+					if (GAME_WAVE > GAME_WAVES.length) {
+						log("wave", "done");
+					} else {
+						var index = GAME_WAVE - 1;
+						var nextWave = GAME_WAVES[index];
+						runWave(nextWave);
+					}
+				}
+				
 				game();
 				render(OBJECTS_BACKGROUND);
 				render(OBJECTS);
@@ -244,7 +256,7 @@
 				}
 				
 				//	 left wall
-				for (var i = 0; i < 6; i++) {
+				for (var i = 2; i < 6; i++) {
 					OBJECTS.push(make("wall", {
 						name: "woodwall",
 						x: 0,
@@ -255,7 +267,7 @@
 				}
 				
 				//	 right wall
-				for (var i = 0; i < 6; i++) {
+				for (var i = 2; i < 6; i++) {
 					OBJECTS.push(make("wall", {
 						name: "woodwall",
 						x: GAME_WIDTH,
@@ -314,7 +326,7 @@
 				}
 				
 				//	upper floor left
-				for ( var i = 0; i < 5; i++) {
+				for ( var i = 0; i < 6; i++) {
 					OBJECTS_FOREGROUND.push(make("basic", {
 						name: "foyerupperfloor",
 						x: GAME_WIDTH / 2 - (BLOCK_SIZE * 2.5) - (BLOCK_SIZE * i),
@@ -346,7 +358,7 @@
 				}));
 				
 				//	upper floor right
-				for ( var i = 0; i < 5; i++) {
+				for ( var i = 0; i < 6; i++) {
 					OBJECTS_FOREGROUND.push(make("basic", {
 						name: "foyerupperfloor",
 						x: GAME_WIDTH / 2 + (BLOCK_SIZE * 2.5) + (BLOCK_SIZE * i),
@@ -427,8 +439,29 @@
 					x: BLOCK_SIZE * 13,
 					y: BLOCK_SIZE * 6.5
 				}));
-				
+			}
+			
+			function runWave(num) {
+				GAME_WAVE_STATE = "play";
+				switch (num) {
+					case 1:
+						wave1();
+						break;
+					case 2:
+						wave2();
+						break;
+					case 3:
+						wave3();
+						break;
+					case 4:
+						wave4();
+						break;
+				}
+			}
+			
+			function wave1() {
 				var spawner = setInterval(function() {
+					log("wave", "1");
 					OBJECTS.push(make("enemy", {
 						name: "zombie",
 						x: BLOCK_SIZE * 0.5,
@@ -437,8 +470,57 @@
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
 				var spawnerTimeout = setTimeout(function() {
+					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
-				}, 30000);
+				}, 3000);
+			}
+			
+			function wave2() {
+				var spawner = setInterval(function() {
+					log("wave", "2");
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 15.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout = setTimeout(function() {
+					GAME_WAVE_STATE = "done";
+					clearInterval(spawner);
+				}, 3000);
+			}
+			
+			function wave3() {
+				var spawner = setInterval(function() {
+					log("wave", "3");
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 1.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout = setTimeout(function() {
+					GAME_WAVE_STATE = "done";
+					clearInterval(spawner);
+				}, 3000);
+			}
+			
+			function wave4() {
+				var spawner = setInterval(function() {
+					log("wave", "4");
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 15.5,
+						y: BLOCK_SIZE * 1.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout = setTimeout(function() {
+					GAME_WAVE_STATE = "done";
+					clearInterval(spawner);
+				}, 3000);
 			}
 			
 			function initbasic() {
