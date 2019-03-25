@@ -301,10 +301,21 @@
 					width: BLOCK_SIZE * 4
 				}));
 				
+				//	upper floor platform
 				OBJECTS.push(make("platform", {
 					x: GAME_WIDTH / 2,
 					y: GAME_HEIGHT - (BLOCK_SIZE * 7),
-					width: GAME_WIDTH - BLOCK_SIZE,
+					width: GAME_WIDTH - (BLOCK_SIZE * 6),
+				}));
+				OBJECTS.push(make("platform", {
+					x: GAME_WIDTH / 2 + (BLOCK_SIZE * 8),
+					y: GAME_HEIGHT - (BLOCK_SIZE * 7),
+					width: BLOCK_SIZE * 3,
+				}));
+				OBJECTS.push(make("platform", {
+					x: GAME_WIDTH / 2 - (BLOCK_SIZE * 8),
+					y: GAME_HEIGHT - (BLOCK_SIZE * 7),
+					width: BLOCK_SIZE * 3,
 				}));
 
 				//	foreground
@@ -326,7 +337,7 @@
 				}
 				
 				//	upper floor left
-				for ( var i = 0; i < 6; i++) {
+				for ( var i = 0; i < 3; i++) {
 					OBJECTS_FOREGROUND.push(make("basic", {
 						name: "foyerupperfloor",
 						x: GAME_WIDTH / 2 - (BLOCK_SIZE * 2.5) - (BLOCK_SIZE * i),
@@ -335,6 +346,13 @@
 						height: BLOCK_SIZE
 					}));
 				}
+				OBJECTS_FOREGROUND.push(make("basic", {
+					name: "foyerupperfloor",
+					x: GAME_WIDTH / 2 - (BLOCK_SIZE * 2.5) - (BLOCK_SIZE * 5),
+					y: GAME_HEIGHT - (BLOCK_SIZE * 7.32),
+					width: BLOCK_SIZE,
+					height: BLOCK_SIZE
+				}));
 				OBJECTS_FOREGROUND.push(make("basic", {
 					name: "stairrailpost",
 					x: GAME_WIDTH / 2 - (BLOCK_SIZE * 7),
@@ -358,7 +376,7 @@
 				}));
 				
 				//	upper floor right
-				for ( var i = 0; i < 6; i++) {
+				for ( var i = 0; i < 3; i++) {
 					OBJECTS_FOREGROUND.push(make("basic", {
 						name: "foyerupperfloor",
 						x: GAME_WIDTH / 2 + (BLOCK_SIZE * 2.5) + (BLOCK_SIZE * i),
@@ -367,6 +385,13 @@
 						height: BLOCK_SIZE
 					}));
 				}
+				OBJECTS_FOREGROUND.push(make("basic", {
+					name: "foyerupperfloor",
+					x: GAME_WIDTH / 2 + (BLOCK_SIZE * 2.5) + (BLOCK_SIZE * 5),
+					y: GAME_HEIGHT - (BLOCK_SIZE * 7.32),
+					width: BLOCK_SIZE,
+					height: BLOCK_SIZE
+				}));
 				OBJECTS_FOREGROUND.push(make("basic", {
 					name: "stairrailpost",
 					x: GAME_WIDTH / 2 + (BLOCK_SIZE * 7),
