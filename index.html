@@ -445,23 +445,42 @@
 				GAME_WAVE_STATE = "play";
 				switch (num) {
 					case 1:
+						log("wave", "1");
 						wave1();
 						break;
 					case 2:
+						log("wave", "2");
 						wave2();
 						break;
 					case 3:
+						log("wave", "3");
 						wave3();
 						break;
 					case 4:
+						log("wave", "4");
 						wave4();
+						break;
+					case 5:
+						log("wave", "5");
+						wave5();
+						break;
+					case 6:
+						log("wave", "6");
+						wave6();
+						break;
+					case 7:
+						log("wave", "7");
+						wave7();
+						break;
+					case 8:
+						log("wave", "8");
+						wave8();
 						break;
 				}
 			}
 			
 			function wave1() {
 				var spawner = setInterval(function() {
-					log("wave", "1");
 					OBJECTS.push(make("enemy", {
 						name: "zombie",
 						x: BLOCK_SIZE * 0.5,
@@ -472,15 +491,14 @@
 				var spawnerTimeout = setTimeout(function() {
 					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
-				}, 3000);
+				}, 15000);
 			}
 			
 			function wave2() {
 				var spawner = setInterval(function() {
-					log("wave", "2");
 					OBJECTS.push(make("enemy", {
 						name: "zombie",
-						x: BLOCK_SIZE * 15.5,
+						x: BLOCK_SIZE * 0.5,
 						y: BLOCK_SIZE * 7.5
 					}));
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
@@ -488,12 +506,90 @@
 				var spawnerTimeout = setTimeout(function() {
 					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
-				}, 3000);
+				}, 30000);
 			}
 			
 			function wave3() {
 				var spawner = setInterval(function() {
-					log("wave", "3");
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout = setTimeout(function() {
+					GAME_WAVE_STATE = "done";
+					clearInterval(spawner);
+				}, 30000);
+				
+				var spawner2 = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 15.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout2 = setTimeout(function() {
+					clearInterval(spawner);
+				}, 15000);
+			}
+			
+			function wave4() {
+				var spawner = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout = setTimeout(function() {
+					GAME_WAVE_STATE = "done";
+					clearInterval(spawner);
+				}, 30000);
+				
+				var spawner2 = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 15.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout2 = setTimeout(function() {
+					clearInterval(spawner2);
+				}, 30000);
+			}
+			
+			function wave5() {
+				var spawner = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout = setTimeout(function() {
+					GAME_WAVE_STATE = "done";
+					clearInterval(spawner);
+				}, 30000);
+				
+				var spawner2 = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 15.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout2 = setTimeout(function() {
+					clearInterval(spawner2);
+				}, 30000);
+				
+				var spawner3 = setInterval(function() {
 					OBJECTS.push(make("enemy", {
 						name: "zombie",
 						x: BLOCK_SIZE * 0.5,
@@ -501,15 +597,89 @@
 					}));
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
+				var spawnerTimeout3 = setTimeout(function() {
+					clearInterval(spawner3);
+				}, 15000);
+			}
+			
+			function wave6() {
+				var spawner = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
 				var spawnerTimeout = setTimeout(function() {
 					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
+				}, 30000);
+				
+				var spawner2 = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 15.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
+				var spawnerTimeout2 = setTimeout(function() {
+					clearInterval(spawner2);
+				}, 30000);
+				
+				var spawner3 = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 1.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout3 = setTimeout(function() {
+					clearInterval(spawner3);
+				}, 30000);
 			}
 			
-			function wave4() {
+			function wave7() {
 				var spawner = setInterval(function() {
-					log("wave", "4");
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout = setTimeout(function() {
+					GAME_WAVE_STATE = "done";
+					clearInterval(spawner);
+				}, 30000);
+				
+				var spawner2 = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 15.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout2 = setTimeout(function() {
+					clearInterval(spawner2);
+				}, 30000);
+				
+				var spawner3 = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 1.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout3 = setTimeout(function() {
+					clearInterval(spawner3);
+				}, 30000);
+				
+				var spawner4 = setInterval(function() {
 					OBJECTS.push(make("enemy", {
 						name: "zombie",
 						x: BLOCK_SIZE * 15.5,
@@ -517,10 +687,60 @@
 					}));
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
+				var spawnerTimeout4 = setTimeout(function() {
+					clearInterval(spawner4);
+				}, 15000);
+			}
+			
+			function wave8() {
+				var spawner = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
 				var spawnerTimeout = setTimeout(function() {
 					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
+				}, 30000);
+				
+				var spawner2 = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 15.5,
+						y: BLOCK_SIZE * 7.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
+				var spawnerTimeout2 = setTimeout(function() {
+					clearInterval(spawner2);
+				}, 30000);
+				
+				var spawner3 = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 0.5,
+						y: BLOCK_SIZE * 1.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout3 = setTimeout(function() {
+					clearInterval(spawner3);
+				}, 30000);
+				
+				var spawner4 = setInterval(function() {
+					OBJECTS.push(make("enemy", {
+						name: "zombie",
+						x: BLOCK_SIZE * 15.5,
+						y: BLOCK_SIZE * 1.5
+					}));
+					renderAttach([OBJECTS[OBJECTS.length-1]]);
+				}, 3000);
+				var spawnerTimeout4 = setTimeout(function() {
+					clearInterval(spawner4);
+				}, 30000);
 			}
 			
 			function initbasic() {

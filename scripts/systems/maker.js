@@ -256,7 +256,7 @@ function make(type, options) {	//	creates any object in the game
 					y: object.y
 				}));
 				renderAttach([OBJECTS[OBJECTS.length-1]]);
-			}
+9			}
 		}
 		
 		object.runCollide = function() {
@@ -463,8 +463,8 @@ function make(type, options) {	//	creates any object in the game
 				object.red = 100;
 				object.green = 0;
 				object.blue = 0;
-				object.stackMax = 99;
 				object.stack = 0;
+				object.stackMax = 99;
 				object.isPermanent = true;
 				object.use = function() {
 					if (object.timer <= 0) {
