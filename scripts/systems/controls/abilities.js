@@ -130,6 +130,11 @@ function match(object) {
 			i = object.collisions.length;
 			return true;
 		}
+		if (target.type == "mound") {
+			target.pile = target.pile - 1;
+			i = object.collisions.length;
+			return true;
+		}
 	}
 }
 

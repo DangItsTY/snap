@@ -342,7 +342,7 @@ function make(type, options) {	//	creates any object in the game
 		object.runCollide = function() {
 			for (var i = 0; i < object.collisions.length; i++) {
 				var target = object.collisions[i];
-				if (target.type == "body") {
+				if (target.type == "body" && target.isAlive) {
 					OBJECTS.push(make("mound", {
 						name: "mound",
 						x: object.x,
@@ -383,6 +383,10 @@ function make(type, options) {	//	creates any object in the game
 				object.isAlive = false;
 			}
 			log("Mound Size", object.pile);
+			
+			if (object.pile <= 0) {
+				object.isAlive = false;
+			}
 		}
 		
 		object.runCollide = function() {
@@ -463,7 +467,7 @@ function make(type, options) {	//	creates any object in the game
 				object.red = 100;
 				object.green = 0;
 				object.blue = 0;
-				object.stack = 0;
+				object.stack = 99;
 				object.stackMax = 99;
 				object.isPermanent = true;
 				object.use = function() {
@@ -519,6 +523,7 @@ function make(type, options) {	//	creates any object in the game
 				object.red = 255;
 				object.green = 0;
 				object.blue = 0;
+				object.stack = 99;
 				object.use = function() {
 					if (object.timer <= 0) {
 						var result = match(object.owner);
