@@ -123,19 +123,36 @@ function toss(object) {
 }
 
 function match(object) {
+	var result = false;
 	for (var i = 0; i < object.collisions.length; i++) {
 		var target = object.collisions[i];
 		if (target.type == "body") {
 			target.isAlive = false;
 			i = object.collisions.length;
-			return true;
+			result = true;
 		}
 		if (target.type == "mound") {
+			console.log("burning");
 			target.pile = target.pile - 1;
 			i = object.collisions.length;
-			return true;
+			result = true;
+			
+		}
+		if (result) {
+			OBJECTS.push(make("particle", {
+				name: "fire",
+				x: target.x,
+				y: target.y,
+				width: BLOCK_SIZE / 2,
+				height: BLOCK_SIZE / 2,
+				red: 200,
+				green: 0,
+				blue: 0
+			}));
+			renderAttach([OBJECTS[OBJECTS.length-1]]);
 		}
 	}
+	return result;
 }
 
 function mop(object) {

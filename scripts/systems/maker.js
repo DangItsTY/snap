@@ -524,6 +524,7 @@ function make(type, options) {	//	creates any object in the game
 				object.green = 0;
 				object.blue = 0;
 				object.stack = 99;
+				object.timer = object.timerMax = 500;
 				object.use = function() {
 					if (object.timer <= 0) {
 						var result = match(object.owner);
@@ -570,6 +571,23 @@ function make(type, options) {	//	creates any object in the game
 						object.timer = object.timerMax;
 					}
 				}
+		}
+	}
+	if (type == "particle") {
+		object.x = options.x != undefined ? options.x : 0;
+		object.y = options.x != undefined ? options.y : 0;
+		object.width = options.width != undefined ? options.width : 5;
+		object.height = options.height != undefined ? options.height : 5;
+		object.red = options.red != undefined ? options.red : 255;
+		object.green = options.green != undefined ? options.green : 255;
+		object.blue = options.blue != undefined ? options.blue : 255;
+		object.timer = options.timer != undefined ? options.timer : 500;
+		object.runAct = function() {
+			if (object.timer < 0) {
+				object.isAlive = false;
+			} else {
+				object.timer = object.timer - (1000 * mod);
+			}
 		}
 	}
 	if (type == "camera") {
