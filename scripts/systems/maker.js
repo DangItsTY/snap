@@ -256,7 +256,7 @@ function make(type, options) {	//	creates any object in the game
 					y: object.y
 				}));
 				renderAttach([OBJECTS[OBJECTS.length-1]]);
-9			}
+			}
 		}
 		
 		object.runCollide = function() {
