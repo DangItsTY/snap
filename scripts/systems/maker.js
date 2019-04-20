@@ -674,6 +674,27 @@ function make(type, options) {	//	creates any object in the game
 	if (options.name == "chandalierchain") {
 		object.image = "chandalierchain.png";
 	}
+	if (options.name == "plank") {
+		object.image = "plank.png";
+	}
+	if (options.name == "match") {
+		object.image = "match.png";
+	}
+	if (options.name == "fire") {
+		object.image = "fire.png";
+	}
+	if (options.name == "mop") {
+		object.image = "mop.png";
+	}
+	if (options.name == "jar") {
+		object.image = "jar.png";
+	}
+	if (options.name == "crossbow") {
+		object.image = "crossbow.png";
+	}
+	if (options.name == "stake") {
+		object.image = "stake.png";
+	}
 	
 	//	OPTIONS
 	if (options.randomizeColor) {
