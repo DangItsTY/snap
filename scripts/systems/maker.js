@@ -630,6 +630,10 @@ function make(type, options) {	//	creates any object in the game
 			}
 		}
 	}
+	if (type == "boxes") {
+		object.width = BLOCK_SIZE;
+		object.height = BLOCK_SIZE;
+	}
 	if (type == "camera") {
 		object.width = 0;
 		object.height = 0;
@@ -734,6 +738,9 @@ function make(type, options) {	//	creates any object in the game
 	}
 	if (options.name == "stake") {
 		object.image = "stake.png";
+	}
+	if (options.name == "boxes") {
+		object.image = "boxes.png";
 	}
 	
 	//	OPTIONS
