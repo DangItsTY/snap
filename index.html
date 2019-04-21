@@ -425,8 +425,8 @@
 				//	item spawns go here i believe
 				OBJECTS.push(make("item", {
 					name: "crossbow",
-					x: BLOCK_SIZE * 11,
-					y: BLOCK_SIZE * 7.5
+					x: BLOCK_SIZE * 9,
+					y: BLOCK_SIZE * 1.5
 				}));
 				
 				for (var i = 0; i < 10; i++) {
@@ -516,7 +516,7 @@
 				var spawnerTimeout = setTimeout(function() {
 					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
-				}, 15000);
+				}, 3000);
 			}
 			
 			function wave2() {
