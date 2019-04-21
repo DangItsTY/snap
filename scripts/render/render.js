@@ -8,6 +8,11 @@ function render(list) {
 		//element.style.top = object.y - (object.height / 2) - CAMERA.offsetY + "px";
 		element.style.top = (object.y * CAMERA_SIZE) - ((object.height * CAMERA_SIZE) / 2) + "px";
 		element.style.backgroundPosition = object.imageX * BLOCK_SIZE * CAMERA_SIZE + "px -" + object.imageY * BLOCK_SIZE * CAMERA_SIZE + "px";
+		if (object.direction == -1) {
+			element.style.transform = "scaleX(-1)";
+		} else if (object.direction == 1) {
+			element.style.transform = "scaleX(1)";
+		}
 		if (CAMERA.mode == "follow" && object == PLAYER) {
 			element.style.left = "375px";
 		} else {

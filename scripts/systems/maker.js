@@ -83,6 +83,7 @@ function make(type, options) {	//	creates any object in the game
 		object.inventory = [];
 		object.selection = 0;
 		
+		//	this might be reusable use player as basis
 		object.animation = "standing";
 		object.animationLock = null;
 		object.animationFrame = 0;
@@ -91,6 +92,7 @@ function make(type, options) {	//	creates any object in the game
 			"walking": [{"x": 0, "y": 0}, {"x": 0, "y": 1}],
 			"using": [{"x": 0, "y": 2}, {"x": 0, "y": 0}]
 		};
+		object.animationTimer = object.animationTimerMax = 200;
 		
 		//	timers
 		object.inventoryModeTimer = 0;
@@ -101,7 +103,6 @@ function make(type, options) {	//	creates any object in the game
 		object.pocketTimerMax = 200;
 		object.combineTimer = -1;
 		object.combineTimerMax = 200;
-		object.animationTimer = object.animationTimerMax = 200;
 		
 		object.runAct = function() {
 			if (object.health < 0) {
@@ -146,6 +147,7 @@ function make(type, options) {	//	creates any object in the game
 				object.combineTimer += 1000 * mod;
 			}
 			
+			//	this might be reusable, use player animation as basis
 			if (object.animationLock != null) {
 				object.animation = object.animationLock;
 			}
@@ -202,6 +204,17 @@ function make(type, options) {	//	creates any object in the game
 		object.snarlTimer = 0;
 		object.snarlTimerMax = 5000;
 		
+		//	this might be reusable use player as basis
+		object.animation = "standing";
+		object.animationLock = null;
+		object.animationFrame = 0;
+		object.animationMap = {
+			"standing": [{"x": 0, "y": 0}],
+			"walking": [{"x": 0, "y": 0}, {"x": 0, "y": 1}],
+			"using": [{"x": 0, "y": 2}, {"x": 0, "y": 0}]
+		};
+		object.animationTimer = object.animationTimerMax = 600;
+		
 		if (object.x < PLAYER.x) {
 			object.direction = 1;
 		} else {
@@ -220,6 +233,7 @@ function make(type, options) {	//	creates any object in the game
 			}
 			
 			if (object.timer <= 0) {
+				object.animation = "walking";
 				object.vx = object.direction * object.speed * 0.2;
 			} else {
 				object.timer = object.timer - (1000 * mod);
@@ -263,12 +277,32 @@ function make(type, options) {	//	creates any object in the game
 				}));
 				renderAttach([OBJECTS[OBJECTS.length-1]]);
 			}
+			
+			//	this might be reusable, use player animation as basis
+			if (object.animationLock != null) {
+				object.animation = object.animationLock;
+			}
+			if (object.animationTimer >= object.animationTimerMax) {
+				object.animationFrame++;
+				var nextAnimationFrame = object.animationMap[object.animation];
+				if (object.animationFrame >= nextAnimationFrame.length) {
+					object.animationFrame = 0;
+					object.animationLock = null;
+				}
+				object.imageX = object.animationMap[object.animation][object.animationFrame].x;
+				object.imageY = object.animationMap[object.animation][object.animationFrame].y;
+				
+				object.animationTimer = 0;
+			} else {
+				object.animationTimer += 1000 * mod;
+			}
 		}
 		
 		object.runCollide = function() {
 			for (var i = 0; i < object.collisions.length; i++) {
 				var target = object.collisions[i];
 				if (target.type == "player") {
+					object.animation = object.animationLock = "using";
 					object.vx = 0;
 					if (object.timer <= 0) {
 						object.timer = object.timerMax;
