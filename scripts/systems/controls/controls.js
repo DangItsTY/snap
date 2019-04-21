@@ -12,6 +12,7 @@ function runControls(player) {
 	if (keysDown[keyMap.use] && player.useReady && !player.inventoryMode) {
 		if (player.item != null) {
 			player.item.use();
+			player.animation = player.animationLock = "using";
 		}
 		log("use", "active");
 		player.useReady = false;

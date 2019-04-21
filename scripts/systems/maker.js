@@ -84,10 +84,12 @@ function make(type, options) {	//	creates any object in the game
 		object.selection = 0;
 		
 		object.animation = "standing";
+		object.animationLock = null;
 		object.animationFrame = 0;
 		object.animationMap = {
 			"standing": [{"x": 0, "y": 0}],
-			"walking": [{"x": 0, "y": 0}, {"x": 0, "y": 1}]
+			"walking": [{"x": 0, "y": 0}, {"x": 0, "y": 1}],
+			"using": [{"x": 0, "y": 2}, {"x": 0, "y": 0}]
 		};
 		
 		//	timers
@@ -99,8 +101,7 @@ function make(type, options) {	//	creates any object in the game
 		object.pocketTimerMax = 200;
 		object.combineTimer = -1;
 		object.combineTimerMax = 200;
-		object.animationTimer = 0;
-		object.animationTimerMax = 200;
+		object.animationTimer = object.animationTimerMax = 200;
 		
 		object.runAct = function() {
 			if (object.health < 0) {
@@ -144,11 +145,16 @@ function make(type, options) {	//	creates any object in the game
 			} else if (object.combineTimer >= 0) {
 				object.combineTimer += 1000 * mod;
 			}
+			
+			if (object.animationLock != null) {
+				object.animation = object.animationLock;
+			}
 			if (object.animationTimer >= object.animationTimerMax) {
 				object.animationFrame++;
 				var nextAnimationFrame = object.animationMap[object.animation];
 				if (object.animationFrame >= nextAnimationFrame.length) {
 					object.animationFrame = 0;
+					object.animationLock = null;
 				}
 				object.imageX = object.animationMap[object.animation][object.animationFrame].x;
 				object.imageY = object.animationMap[object.animation][object.animationFrame].y;
