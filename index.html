@@ -173,16 +173,7 @@
 			
 			//	initialization scripts
 			function initmansion() {
-				var newPlayer = make("player", {
-					width: BLOCK_SIZE,
-					height: BLOCK_SIZE,
-					x: GAME_WIDTH / 2 + 1,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
-				});
-				PLAYER = newPlayer;
-				OBJECTS.push(newPlayer);
-				// need to create a background layer of objects, they don't collide, may have z parallax property
-				
+				// need to create a background layer of objects, they don't collide, may have z parallax property			
 				for (var i = 0; i < 9; i++) {
 					for (var j = 0; j < 17; j++) {
 						OBJECTS_BACKGROUND.push(make("basic", {
@@ -423,6 +414,12 @@
 				CAMERA = newCamera;
 				
 				//	item spawns go here i believe
+				OBJECTS.push(make("boxes", {
+					name: "boxes",
+					x: BLOCK_SIZE * 5,
+					y: BLOCK_SIZE * 7.5
+				}));
+				
 				OBJECTS.push(make("item", {
 					name: "crossbow",
 					x: BLOCK_SIZE * 9,
@@ -465,11 +462,15 @@
 					y: BLOCK_SIZE * 6.5
 				}));
 				
-				OBJECTS.push(make("boxes", {
-					name: "boxes",
-					x: BLOCK_SIZE * 7,
-					y: BLOCK_SIZE * 6.5
-				}));
+				//	Player layer, always on top
+				var newPlayer = make("player", {
+					width: BLOCK_SIZE,
+					height: BLOCK_SIZE,
+					x: GAME_WIDTH / 2 + 1,
+					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
+				});
+				PLAYER = newPlayer;
+				OBJECTS.push(newPlayer);
 			}
 			
 			function runWave(num) {

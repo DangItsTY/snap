@@ -167,6 +167,18 @@ function mop(object) {
 	return null;
 }
 
+function punch(object) {
+	for (var i = 0; i < object.collisions.length; i++) {
+		var target = object.collisions[i];
+		if (target.type == "boxes") {
+			target.use();
+			i = object.collisions.length;
+			return target;
+		}
+	}
+	return null;
+}
+
 function combine(equip, pocket) {
 	if (equip.name == "crossbow" && pocket.name == "stake") {
 		var slots = equip.stackMax - equip.stack;

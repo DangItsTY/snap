@@ -77,6 +77,7 @@ function make(type, options) {	//	creates any object in the game
 		object.cyclerightReady = true;
 		object.inventoryMode = false;
 		object.isHolding = false;
+		object.punchReady = true;
 		
 		object.item = null;
 		object.pocket = null;
@@ -103,6 +104,8 @@ function make(type, options) {	//	creates any object in the game
 		object.pocketTimerMax = 200;
 		object.combineTimer = -1;
 		object.combineTimerMax = 200;
+		object.punchTimer = 0;
+		object.punchTimerMax = 500;
 		
 		object.runAct = function() {
 			if (object.health < 0) {
@@ -146,6 +149,12 @@ function make(type, options) {	//	creates any object in the game
 			} else if (object.combineTimer >= 0) {
 				object.combineTimer += 1000 * mod;
 			}
+			if (object.punchTimer >= object.punchTimerMax) {
+				object.punchReady = true;
+				object.punchTimer = -1;
+			} else if (object.punchTimer >= 0) {
+				object.punchTimer += 1000 * mod;
+			}
 			
 			//	this might be reusable, use player animation as basis
 			if (object.animationLock != null) {
@@ -171,6 +180,15 @@ function make(type, options) {	//	creates any object in the game
 			if (object.invulnerableTimer <= 0) {
 				attack();
 				object.invulnerableTimer = object.invulnerableTimerMax;
+			}
+		}
+		
+		object.punch = function() {
+			if (object.punchReady) {
+				punch(object);
+				object.punchReady = false;
+			} else if (!object.punchReady && object.punchTimer == -1) {
+				object.punchTimer = 0;
 			}
 		}
 	}
@@ -633,6 +651,21 @@ function make(type, options) {	//	creates any object in the game
 	if (type == "boxes") {
 		object.width = BLOCK_SIZE;
 		object.height = BLOCK_SIZE;
+		object.stack = object.stackMax = 10;
+		
+		object.use = function() {
+			OBJECTS.push(make("item", {
+				name: "plank",
+				x: object.x,
+				y: object.y
+			}));
+			renderAttach([OBJECTS[OBJECTS.length-1]]);
+			
+			object.stack--;
+			if (object.stack <= 0) {
+				object.isAlive = false;
+			}
+		}
 	}
 	if (type == "camera") {
 		object.width = 0;

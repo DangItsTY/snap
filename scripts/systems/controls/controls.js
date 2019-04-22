@@ -13,6 +13,9 @@ function runControls(player) {
 		if (player.item != null) {
 			player.item.use();
 			player.animation = player.animationLock = "using";
+		} else {
+			player.punch();
+			player.animation = player.animationLock = "using";
 		}
 		log("use", "active");
 		player.useReady = false;
