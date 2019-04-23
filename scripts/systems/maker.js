@@ -563,13 +563,14 @@ function make(type, options) {	//	creates any object in the game
 				object.red = 255;
 				object.green = 0;
 				object.blue = 0;
-				object.stack = 99;
+				object.stack = 1;
+				object.isPermanent = true;
 				object.timer = object.timerMax = 500;
 				object.use = function() {
 					if (object.timer <= 0) {
 						var result = match(object.owner);
 						if (result) {
-							object.stack--;
+							//object.stack--; // this is now permanent
 						}
 						object.timer = object.timerMax;
 					}
