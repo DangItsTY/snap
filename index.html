@@ -416,7 +416,15 @@
 				//	item spawns go here i believe
 				OBJECTS.push(make("boxes", {
 					name: "boxes",
+					itemName: "plank",
 					x: BLOCK_SIZE * 5,
+					y: BLOCK_SIZE * 7.5
+				}));
+				
+				OBJECTS.push(make("boxes", {
+					name: "boxes",
+					itemName: "stake",
+					x: BLOCK_SIZE * 11,
 					y: BLOCK_SIZE * 7.5
 				}));
 				
@@ -425,22 +433,6 @@
 					x: BLOCK_SIZE * 9,
 					y: BLOCK_SIZE * 1.5
 				}));
-				
-				for (var i = 0; i < 10; i++) {
-					OBJECTS.push(make("item", {
-						name: "stake",
-						x: BLOCK_SIZE * 12,
-						y: BLOCK_SIZE * 7.5
-					}));
-				}
-				
-				for (var i = 0; i < 4; i++) {
-					OBJECTS.push(make("item", {
-						name: "plank",
-						x: BLOCK_SIZE * 13,
-						y: BLOCK_SIZE * 7.5
-					}));
-				}
 				
 				for (var i = 0; i < 10; i++) {
 					OBJECTS.push(make("item", {

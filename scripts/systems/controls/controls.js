@@ -14,7 +14,7 @@ function runControls(player) {
 			player.item.use();
 			player.animation = player.animationLock = "using";
 		} else {
-			player.punch();
+			punch(player);
 			player.animation = player.animationLock = "using";
 		}
 		log("use", "active");
