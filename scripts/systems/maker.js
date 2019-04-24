@@ -340,7 +340,6 @@ function make(type, options) {	//	creates any object in the game
 						object.attackTimer = -1;
 						target.damage(function() {
 							target.health -= object.power;
-							console.log(target.health);
 						});
 					}
 				}

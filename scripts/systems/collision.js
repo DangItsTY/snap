@@ -8,8 +8,12 @@ function runCollision(objects) {
 	for (var i = 0; i < objects.length; i++) {
 		for (var j = 0; j < objects.length; j++) {
 			if (isCollidingAnywhere(objects[i], objects[j])) {
-				objects[i].collisions.push(objects[j]);
-				objects[j].collisions.push(objects[i]);
+				if (objects[i].collisions.indexOf(objects[j]) == -1) {
+					objects[i].collisions.push(objects[j]);
+				}
+				if (objects[j].collisions.indexOf(objects[i]) == -1) {
+					objects[j].collisions.push(objects[i]);
+				}
 			}
 		}
 	}
