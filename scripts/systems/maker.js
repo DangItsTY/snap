@@ -55,6 +55,13 @@ function make(type, options) {	//	creates any object in the game
 		object.y = options.y != undefined ? options.y : GAME_HEIGHT - 50;
 		object.width = options.width != undefined ? options.width : GAME_WIDTH;
 		object.height = options.height != undefined ? options.height : 50;
+				
+		object.runAct = function() {
+			//	death
+			if (object.health <= 0) {
+				object.isAlive = false;
+			}
+		}
 	}
 	if (type == "player") {
 		object.speed = 128;
@@ -190,6 +197,7 @@ function make(type, options) {	//	creates any object in the game
 		object.height = BLOCK_SIZE;
 		object.health = 1;
 		object.speed = 64;
+		object.power = 1;
 		object.weight = 800;
 		object.red = 255;
 		object.green = 50;
@@ -203,6 +211,8 @@ function make(type, options) {	//	creates any object in the game
 		object.prevDirection = 1;
 		object.snarlTimer = 0;
 		object.snarlTimerMax = 5000;
+		object.attackTimer = -1;
+		object.attackTimerMax = 1000;
 		
 		//	this might be reusable use player as basis
 		object.animation = "standing";
@@ -213,7 +223,7 @@ function make(type, options) {	//	creates any object in the game
 			"walking": [{"x": 0, "y": 0}, {"x": 0, "y": 1}],
 			"using": [{"x": 0, "y": 2}, {"x": 0, "y": 0}]
 		};
-		object.animationTimer = object.animationTimerMax = 600;
+		object.animationTimer = object.animationTimerMax = 1000;
 		
 		if (object.x < PLAYER.x) {
 			object.direction = 1;
@@ -254,6 +264,11 @@ function make(type, options) {	//	creates any object in the game
 				object.stuckCounter++;
 			}
 			object.timerStuck = object.timerStuck - (1000 * mod);
+			
+			//	attack timer
+			if (object.attackTimer >= 0) {
+				object.attackTimer += 1000 * mod;
+			}
 			
 			//	snarl
 			if (object.snarlTimer >= object.snarlTimerMax) {
@@ -314,9 +329,24 @@ function make(type, options) {	//	creates any object in the game
 						});
 					}
 				}
+				if (target.name == "plank") {
+					object.animation = object.animationLock = "using";
+					object.vx = 0;
+					
+					if (object.attackTimer < 0) {
+						object.attackTimer = 0;
+					}
+					if (object.attackTimer >= object.attackTimerMax) {
+						object.attackTimer = -1;
+						target.damage(function() {
+							target.health -= object.power;
+							console.log(target.health);
+						});
+					}
+				}
 				
 				//	bounce off walls
-				if (target.type == "wall") {
+				if (target.type == "wall" && target.name != "plank") {
 					if (isCollidingWithWallRight(object, target)) {
 						object.direction *= -1;
 						object.x = target.x - (target.width / 2) - (object.width / 2) - 1;
