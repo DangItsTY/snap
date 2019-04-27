@@ -424,7 +424,7 @@
 				OBJECTS.push(make("boxes", {
 					name: "boxes",
 					itemName: "stake",
-					x: BLOCK_SIZE * 11,
+					x: BLOCK_SIZE * 12,
 					y: BLOCK_SIZE * 7.5
 				}));
 				
@@ -457,7 +457,8 @@
 					width: BLOCK_SIZE,
 					height: BLOCK_SIZE,
 					x: GAME_WIDTH / 2 + 1,
-					y: GAME_HEIGHT - 1.5*BLOCK_SIZE
+					y: GAME_HEIGHT - 1.5*BLOCK_SIZE,
+					direction: -1
 				});
 				PLAYER = newPlayer;
 				OBJECTS.push(newPlayer);
