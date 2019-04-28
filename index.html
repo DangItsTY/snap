@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="styles/styles.css">
 		<link rel="manifest" href="manifest.json">
 	</head>
-	<body class="mobil">
+	<body>
 		<button style="position: absolute; top: 0; left: 0;" onclick="playMusic()">Play</button>
 		<main id="container" class="bg-color">
 			<section id="background">
@@ -42,6 +42,27 @@
 			</section>
 		</main>
 		<footer>
+			<section id="howtoplay">
+			<h1>How To Play</h1>
+			<h2>Controls</h2>
+			<ul>
+				<li>Move left/right - [A]/[D]</li>
+				<li>Jump - [SPACEBAR]</li>
+				<li>Use - [J]</li>
+				<li>Pickup - [N]</li>
+				<li>Swap - [K]</li>
+				<li>Cycle Left - [U]</li>
+				<li>Cycle Right - [I]</li>
+			</ul>
+			<h2>Actions</h2>
+			<ul>
+				<li>Punch - When unequipped, press "Use" to punch things that drop items</li>
+				<li>Pickup item - Pickup an item to add to your inventory</li>
+				<li>Equip - Cycle to select an item in inventory, then hold "Use" to equip</li>
+				<li>Pocket - Cycle to select an item in inventory, then hold "Swap" to pocket the item to swap your equip with pocket</li>
+				<li>Inventory Mode - Any time cycling is pressed, inventory mode is activated. Wait a second to exit inventory mode.</li>
+			</ul>
+			</section>
 		</footer>
 		<audio id="backgroundMusic">
 			<source src="assets/sounds/mansionwalk.wav" type="audio/wav">

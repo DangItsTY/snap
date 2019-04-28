@@ -1,10 +1,12 @@
 body {
 	margin: 0px;
+	/*
 	width: 100vw;
 	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	*/
 }
 div { 
 	image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
@@ -36,6 +38,13 @@ div {
 .bg-color {
 	background-color: antiquewhite;
 	overflow: hidden;
+}
+#howtoplay {
+	/*
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	*/
 }
 
 
@@ -94,13 +103,13 @@ div {
 	flex: 1 1;
 }
 
+/*
 body.mobile #debug {
 	display: none;
 }
 body.mobile #tydo {
 	display: none;
 }
-/*
 body.mobile #overlays {
 	width: 100%;
 	height: 100%;
@@ -109,7 +118,7 @@ body.mobile #main {
 	flex: 1 1 auto;
 	height: 100vh;
 }
-*/
 body.mobile footer {
 	display: none;
 }
+*/
