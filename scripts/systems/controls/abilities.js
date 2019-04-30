@@ -68,7 +68,7 @@ function stab(object) {
 
 function build(object) {
 	var owner = object.owner;
-	OBJECTS.push(make("wall", {
+	OBJECTS.push(make("blockade", {
 		name: object.name,
 		health: 10,
 		x: owner.direction == 1 ? owner.x + (owner.width / 2) : owner.x - (owner.width / 2),

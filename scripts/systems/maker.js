@@ -213,6 +213,7 @@ function make(type, options) {	//	creates any object in the game
 		object.snarlTimerMax = 5000;
 		object.attackTimer = -1;
 		object.attackTimerMax = 1000;
+		object.collideAttackCount = 0;
 		
 		//	this might be reusable use player as basis
 		object.animation = "standing";
@@ -242,7 +243,7 @@ function make(type, options) {	//	creates any object in the game
 				object.x = GAME_WIDTH;
 			}
 			
-			if (object.timer <= 0) {
+			if (object.timer <= 0 && object.collideAttackCount == 0) {
 				object.animation = "walking";
 				object.vx = object.direction * object.speed * 0.2;
 			} else {
@@ -314,9 +315,11 @@ function make(type, options) {	//	creates any object in the game
 		}
 		
 		object.runCollide = function() {
+			object.collideAttackCount = 0;
 			for (var i = 0; i < object.collisions.length; i++) {
 				var target = object.collisions[i];
 				if (target.type == "player") {
+					object.collideAttackCount++;
 					object.animation = object.animationLock = "using";
 					object.vx = 0;
 					if (object.timer <= 0) {
@@ -329,7 +332,8 @@ function make(type, options) {	//	creates any object in the game
 						});
 					}
 				}
-				if (target.name == "plank") {
+				if (target.type == "blockade") {
+					object.collideAttackCount++;
 					object.animation = object.animationLock = "using";
 					object.vx = 0;
 					
@@ -700,6 +704,38 @@ function make(type, options) {	//	creates any object in the game
 				object.stack--;
 				if (object.stack <= 0) {
 					object.isAlive = false;
+				}
+			}
+		}
+	}
+	if (type == "blockade") {
+		object.weight = 1024;
+		
+		object.runAct = function() {
+			//	snap horizontally
+			object.x = Math.floor(object.x / BLOCK_SIZE) * BLOCK_SIZE;
+			
+			//	death
+			if (object.health <= 0) {
+				object.isAlive = false;
+			}
+		}
+		
+		object.runCollide = function() {
+			for (var i = 0; i < object.collisions.length; i++) {
+				var target = object.collisions[i];
+				if (target.type == "blockade") {
+					if (target.y < object.y || (target.y == object.y && target.x == object.x)) {
+						target.y = object.y - object.height;
+						target.vy = 0;
+					}
+					if (target.y == object.y) {
+						if (target.x > object.x) {
+							target.x = object.x + object.width;
+						} else if (target.x < object.x) {
+							target.x = object.x - object.width;
+						}
+					}
 				}
 			}
 		}
