@@ -524,17 +524,19 @@
 			}
 			
 			function wave1() {
-				var spawner = setInterval(function() {
-					OBJECTS.push(make("enemy", {
-						name: "zombie",
-						x: BLOCK_SIZE * 0.5,
-						y: BLOCK_SIZE * 7.5
-					}));
-					renderAttach([OBJECTS[OBJECTS.length-1]]);
-				}, 3000);
-				var spawnerTimeout = setTimeout(function() {
-					GAME_WAVE_STATE = "done";
-					clearInterval(spawner);
+				var delay = setTimeout(function() {
+					var spawner = setInterval(function() {
+						OBJECTS.push(make("enemy", {
+							name: "zombie",
+							x: BLOCK_SIZE * 0.5,
+							y: BLOCK_SIZE * 7.5
+						}));
+						renderAttach([OBJECTS[OBJECTS.length-1]]);
+					}, 3000);
+					var spawnerTimeout = setTimeout(function() {
+						GAME_WAVE_STATE = "done";
+						clearInterval(spawner);
+					}, 3000);
 				}, 3000);
 			}
 			
