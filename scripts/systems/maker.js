@@ -711,13 +711,26 @@ function make(type, options) {	//	creates any object in the game
 	if (type == "blockade") {
 		object.weight = 1024;
 		
+		OBJECTS.push(make("platform", {
+			x: object.x,
+			y: object.y,
+			width: BLOCK_SIZE
+		}));
+		renderAttach([OBJECTS[OBJECTS.length-1]]);
+		object.platform = OBJECTS[OBJECTS.length-1];
+		
 		object.runAct = function() {
 			//	snap horizontally
 			object.x = Math.floor(object.x / BLOCK_SIZE) * BLOCK_SIZE;
 			
+			//	follow platform
+			object.platform.x = object.x;
+			object.platform.y = object.y;
+			
 			//	death
 			if (object.health <= 0) {
 				object.isAlive = false;
+				object.platform.isAlive = false;
 			}
 		}
 		
