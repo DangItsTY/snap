@@ -34,6 +34,7 @@ function make(type, options) {	//	creates any object in the game
 	object.invulnerableTimerMax = 2000;
 	object.collisions = [];
 	object.collisionFloor = null;
+	object.collisionFloorIgnored = null;
 	object.runCollide = function() {}
 	object.runAct = function() {}
 	object.damage = function(attack) { attack(); }
@@ -71,6 +72,7 @@ function make(type, options) {	//	creates any object in the game
 		//	controls
 		object.jump = 256;
 		object.jumpReady = true;
+		object.jumpDownReady = true;
 		object.useReady = false;
 		object.equipReady = true;
 		object.switchReady = false;

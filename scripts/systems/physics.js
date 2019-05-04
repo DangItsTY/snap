@@ -62,12 +62,18 @@ function runPhysicsCollision(list) {
 			}
 			target = object.collisionFloor;
 			
+			//	then check if floor should be ignored
+			if (target == object.collisionFloorIgnored) {
+				target = null;
+			}
+			
 			if (target == null) {
 					if (object.vy > 0) {
 					//	do not apply gravity if object is colliding with a platform
 					for (var j = 0; j < object.collisions.length; j++) {
 						target = object.collisions[j];
-						if ((target.type == "platform" || target.type == "wall") && isCollidingWithFloor(object, target)) {
+
+						if ((target.type == "platform" || target.type == "wall") && isCollidingWithFloor(object, target) && target != object.collisionFloorIgnored) {
 							object.collisionFloor = target;
 							object.vy = 0;
 							object.y = target.y - (target.height / 2) - (object.height / 2);
