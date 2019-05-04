@@ -70,7 +70,7 @@ function build(object) {
 	var owner = object.owner;
 	OBJECTS.push(make("blockade", {
 		name: object.name,
-		health: 10,
+		health: 20,
 		x: owner.direction == 1 ? owner.x + (owner.width / 2) : owner.x - (owner.width / 2),
 		y: owner.y,
 		width: BLOCK_SIZE,
