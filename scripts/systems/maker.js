@@ -515,6 +515,7 @@ function make(type, options) {	//	creates any object in the game
 	if (type == "item") {
 		object.width = BLOCK_SIZE / 2;
 		object.height = BLOCK_SIZE / 2;
+		object.weight = 1024;
 		object.timer = object.timerMax = 500;
 		object.stack = 1;
 		object.stackMax = 99;
@@ -695,7 +696,8 @@ function make(type, options) {	//	creates any object in the game
 				OBJECTS.push(make("item", {
 					name: object.itemName,
 					x: object.x,
-					y: object.y
+					y: object.y,
+					vy: -128
 				}));
 				renderAttach([OBJECTS[OBJECTS.length-1]]);
 
