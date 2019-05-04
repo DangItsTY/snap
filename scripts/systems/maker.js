@@ -679,6 +679,13 @@ function make(type, options) {	//	creates any object in the game
 				break;
 			case "stake":
 				object.stack = object.stackMax = 100;
+				OBJECTS.push(make("platform", {
+					x: object.x,
+					y: object.y - (object.height / 2),
+					width: BLOCK_SIZE
+				}));
+				renderAttach([OBJECTS[OBJECTS.length-1]]);
+				object.platform = OBJECTS[OBJECTS.length-1];
 				break;
 		}
 		
@@ -706,6 +713,7 @@ function make(type, options) {	//	creates any object in the game
 				object.stack--;
 				if (object.stack <= 0) {
 					object.isAlive = false;
+					object.platform != null ? object.platform.isAlive = false : null;
 				}
 			}
 		}
@@ -862,6 +870,9 @@ function make(type, options) {	//	creates any object in the game
 	}
 	if (options.name == "boxes") {
 		object.image = "boxes.png";
+	}
+	if (options.name == "boxes" && options.itemName == "stake") {
+		object.image = "shelf.png";
 	}
 	
 	//	OPTIONS

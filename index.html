@@ -442,12 +442,16 @@
 					y: BLOCK_SIZE * 7.5
 				}));
 				
-				OBJECTS.push(make("boxes", {
-					name: "boxes",
-					itemName: "stake",
-					x: BLOCK_SIZE * 12,
-					y: BLOCK_SIZE * 7.5
-				}));
+				for (var i = 0; i < 2; i++) {
+					for (var j = 0; j < 3; j++) {
+						OBJECTS.push(make("boxes", {
+							name: "boxes",
+							itemName: "stake",
+							x: BLOCK_SIZE * (11 + j),
+							y: BLOCK_SIZE * (6.5 + i)
+						}));
+					}
+				}
 				
 				OBJECTS.push(make("item", {
 					name: "crossbow",
