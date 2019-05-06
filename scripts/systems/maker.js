@@ -127,6 +127,7 @@ function make(type, options) {	//	creates any object in the game
 			}
 			if (object.equipTimer >= object.equipTimerMax) {
 				object.item = object.inventory[object.selection];
+				object.pocket == object.item ? object.pocket = null : null;
 				object.equipTimer = -1;
 				object.inventoryMode = false;
 				object.inventoryModeTimer = 0;
@@ -136,6 +137,7 @@ function make(type, options) {	//	creates any object in the game
 			}
 			if (object.pocketTimer >= object.pocketTimerMax) {
 				object.pocket = object.inventory[object.selection];
+				object.item == object.pocket ? object.item = null : null;
 				object.pocketTimer = -1;
 				object.inventoryMode = false;
 				object.inventoryModeTimer = 0;
