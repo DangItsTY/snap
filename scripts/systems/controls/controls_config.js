@@ -16,6 +16,7 @@ var keysDown = {
 	'74': false,
 	'75': false,
 	'78': false,
+	'83': false,
 	'leftclick': false
 };
 var keysUp = {
@@ -25,6 +26,7 @@ var keysUp = {
 	'74': true,
 	'75': true,
 	'78': true,
+	'83': true,
 	'leftclick': true
 };
 var touchLeft = null;
@@ -37,6 +39,7 @@ var keyMap = {
 	'jump': 32,
 	'left': 65,
 	'right': 68,
+	'down': 83,
 	'use': 74,
 	'equip': 74,
 	'pickup': 78,

@@ -34,6 +34,7 @@ function make(type, options) {	//	creates any object in the game
 	object.invulnerableTimerMax = 2000;
 	object.collisions = [];
 	object.collisionFloor = null;
+	object.collisionFloorIgnored = null;
 	object.runCollide = function() {}
 	object.runAct = function() {}
 	object.damage = function(attack) { attack(); }
@@ -71,6 +72,7 @@ function make(type, options) {	//	creates any object in the game
 		//	controls
 		object.jump = 256;
 		object.jumpReady = true;
+		object.jumpDownReady = true;
 		object.useReady = false;
 		object.equipReady = true;
 		object.switchReady = false;
@@ -513,6 +515,7 @@ function make(type, options) {	//	creates any object in the game
 	if (type == "item") {
 		object.width = BLOCK_SIZE / 2;
 		object.height = BLOCK_SIZE / 2;
+		object.weight = 1024;
 		object.timer = object.timerMax = 500;
 		object.stack = 1;
 		object.stackMax = 99;
@@ -686,6 +689,13 @@ function make(type, options) {	//	creates any object in the game
 				break;
 			case "stake":
 				object.stack = object.stackMax = 100;
+				OBJECTS.push(make("platform", {
+					x: object.x,
+					y: object.y - (object.height / 2),
+					width: BLOCK_SIZE
+				}));
+				renderAttach([OBJECTS[OBJECTS.length-1]]);
+				object.platform = OBJECTS[OBJECTS.length-1];
 				break;
 		}
 		
@@ -703,7 +713,8 @@ function make(type, options) {	//	creates any object in the game
 				OBJECTS.push(make("item", {
 					name: object.itemName,
 					x: object.x,
-					y: object.y
+					y: object.y,
+					vy: -128
 				}));
 				renderAttach([OBJECTS[OBJECTS.length-1]]);
 
@@ -712,6 +723,52 @@ function make(type, options) {	//	creates any object in the game
 				object.stack--;
 				if (object.stack <= 0) {
 					object.isAlive = false;
+					object.platform != null ? object.platform.isAlive = false : null;
+				}
+			}
+		}
+	}
+	if (type == "blockade") {
+		object.weight = 1024;
+		
+		OBJECTS.push(make("platform", {
+			x: object.x,
+			y: object.y,
+			width: BLOCK_SIZE
+		}));
+		renderAttach([OBJECTS[OBJECTS.length-1]]);
+		object.platform = OBJECTS[OBJECTS.length-1];
+		
+		object.runAct = function() {
+			//	snap horizontally
+			object.x = Math.floor(object.x / BLOCK_SIZE) * BLOCK_SIZE;
+			
+			//	follow platform
+			object.platform.x = object.x;
+			object.platform.y = object.y;
+			
+			//	death
+			if (object.health <= 0) {
+				object.isAlive = false;
+				object.platform.isAlive = false;
+			}
+		}
+		
+		object.runCollide = function() {
+			for (var i = 0; i < object.collisions.length; i++) {
+				var target = object.collisions[i];
+				if (target.type == "blockade") {
+					if (target.y < object.y || (target.y == object.y && target.x == object.x)) {
+						target.y = object.y - object.height;
+						target.vy = 0;
+					}
+					if (target.y == object.y) {
+						if (target.x > object.x) {
+							target.x = object.x + object.width;
+						} else if (target.x < object.x) {
+							target.x = object.x - object.width;
+						}
+					}
 				}
 			}
 		}
@@ -823,6 +880,9 @@ function make(type, options) {	//	creates any object in the game
 	}
 	if (options.name == "boxes") {
 		object.image = "boxes.png";
+	}
+	if (options.name == "boxes" && options.itemName == "stake") {
+		object.image = "shelf.png";
 	}
 	
 	//	OPTIONS

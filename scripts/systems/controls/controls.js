@@ -1,9 +1,20 @@
 function runControls(player) {
 	if (player.collisionFloor != null && (keysUp[keyMap.jump])) {
 		player.jumpReady = true;
+		
+		player.collisionFloorIgnored = null;
+		player.jumpDownReady = true;
 	}
 	
-	if ((keysDown[keyMap.jump] || touchRight) && player.jumpReady) {
+	if (keysDown[keyMap.down] && keysDown[keyMap.jump] && player.jumpDownReady) {
+		if (player.collisionFloor && player.collisionFloor.type == "platform") {
+			player.collisionFloorIgnored = player.collisionFloor;
+			player.collisionFloor = null;
+		}
+		player.jumpDownReady = false;
+	}
+	
+	if ((keysDown[keyMap.jump] || touchRight) && player.jumpReady && player.jumpDownReady) {
 		jump(player);
 		player.jumpReady = false;	
 		player.collisionFloor = null;
@@ -149,7 +160,7 @@ function runControls(player) {
 		var walkSE = document.getElementById("walk");
 		walkSE.pause();
 	}
-		
+			
 	log("y", player.y);
 	log("x", player.x);
 	log("keyleft", keysDown[keyMap.left]);

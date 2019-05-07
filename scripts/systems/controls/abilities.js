@@ -70,7 +70,7 @@ function build(object) {
 	var owner = object.owner;
 	OBJECTS.push(make("blockade", {
 		name: object.name,
-		health: 10,
+		health: 20,
 		x: owner.direction == 1 ? owner.x + (owner.width / 2) : owner.x - (owner.width / 2),
 		y: owner.y,
 		width: BLOCK_SIZE,
@@ -97,6 +97,7 @@ function pickup(object) {
 				target.x = 0;
 				target.y = 0;
 				//object.item = target; // this would automatically equip item
+				target.weight = 0;
 				object.inventory.push(target);
 				target.owner = object;
 			}
@@ -202,6 +203,8 @@ function drop(object) {
 	var target = object.inventory[object.selection];
 	target.x = target.owner.x;
 	target.y = target.owner.y;
+	target.weight = 1024;
+	target.vy = -128;
 	target.owner = null;
 	object.inventory.splice(object.selection, 1);
 }
