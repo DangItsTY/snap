@@ -119,6 +119,8 @@ function lift(object) {
 }
 
 function toss(object) {
+	object.held.vx = 512 * object.direction;
+	object.held.direction = object.direction;
 	object.held.owner = null;
 	object.held = null;
 	object.isHolding = false;

@@ -27,6 +27,7 @@ function make(type, options) {	//	creates any object in the game
 	object.width = options.width != undefined ? options.width : 5;
 	object.height = options.height != undefined ? options.height : 5;
 	object.weight = 0;
+	object.friction = 0;
 	object.health = options.health != undefined ? options.health : 100;
 	object.poisonTimer = 0;
 	object.poisonStack = 0;
@@ -386,6 +387,7 @@ function make(type, options) {	//	creates any object in the game
 		object.width = BLOCK_SIZE;
 		object.height = BLOCK_SIZE;
 		object.weight = 800;
+		object.friction = 1024;
 		object.timerBlood = 0;
 		object.timerBloodMax = 5000;
 		

@@ -1,5 +1,6 @@
 function runPhysics(list) {
 	gravity(list);
+	friction(list);
 	move(list);
 	direction(list);
 	//wrap(list);
@@ -8,6 +9,18 @@ function runPhysics(list) {
 		for (var i = 0; i < list.length; i++) {
 			var object = list[i];
 			object.vy = object.vy + (object.weight * mod);
+		}
+	}
+	
+	function friction(list) {
+		for (var i = 0; i < list.length; i++) {
+			var object = list[i];
+			var prev = object.vx;
+			object.vx = object.vx + (object.friction * mod * -object.direction);
+			var next = object.vx;
+			if (prev >= 0 && next <= 0 || prev <=0 && next >=0) {
+				object.vx = 0;
+			}
 		}
 	}
 
