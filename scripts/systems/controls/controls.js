@@ -30,6 +30,15 @@ function runControls(player) {
 		player.jumpTimer = -1;
 	}
 	
+	//	dodge
+	if (keysDown[keyMap.down] && player.dodgeReady) {
+		dodge(player);
+		player.dodgeReady = false;
+	}
+	if (keysUp[keyMap.down]) {
+		player.dodgeReady = true;
+	}
+	
 	if (keysDown[keyMap.use] && player.useReady && !player.inventoryMode) {
 		if (player.item != null) {
 			player.item.use();
@@ -170,6 +179,7 @@ function runControls(player) {
 	log("vy", player.vy);
 	log("inventoryModeTimer", player.inventoryModeTimer);
 	log("equipTimer", player.equipTimer);
+	log("invulnerabilityTimer", player.invulnerableTimer);
 	
 	// for the selector in editor
 	if (PLAYER.type == "selector") {

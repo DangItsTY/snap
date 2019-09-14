@@ -30,6 +30,10 @@ function jumpShort(object) {
 	jumpSE.play();
 }
 
+function dodge(object) {
+	object.invulnerableTimer = object.invulnerableTimerMax * 1.5;
+}
+
 function shoot(object) {
 	var owner = object.owner;
 	OBJECTS.push(make("projectile", {

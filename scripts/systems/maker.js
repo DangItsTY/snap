@@ -87,6 +87,7 @@ function make(type, options) {	//	creates any object in the game
 		object.cyclerightReady = true;
 		object.inventoryMode = false;
 		object.isHolding = false;
+		object.dodgeReady = true;
 		
 		object.item = null;
 		object.pocket = null;
