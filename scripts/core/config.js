@@ -10,7 +10,7 @@ var GAME_WIDTH = BLOCKW * BLOCK_SIZE; // 800
 var GAME_HEIGHT = BLOCKH * BLOCK_SIZE; // 450
 var GAME_WAVE = 0; // is an index to GAME_WAVES, subtract 1, should always be 0
 //var GAME_WAVES = [1, 2, 3, 4, 5, 6, 7, 8]; // list of waves to play out
-var GAME_WAVES = [1]; // list of waves to play out
+var GAME_WAVES = []; // list of waves to play out
 var GAME_WAVE_STATE = "done" // play, done
 
 var PLAYER;	//	reference to player object, is just one player for now

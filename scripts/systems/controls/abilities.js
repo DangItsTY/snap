@@ -22,6 +22,14 @@ function jump(object) {
 	jumpSE.play();
 }
 
+function jumpShort(object) {
+	object.vy = -1 * object.jump * 0.75;
+	var jumpSE = document.getElementById("jump");
+	jumpSE.currentTime = 0;
+	jumpSE.volume = 0.5;
+	jumpSE.play();
+}
+
 function shoot(object) {
 	var owner = object.owner;
 	OBJECTS.push(make("projectile", {

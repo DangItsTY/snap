@@ -1,11 +1,11 @@
 function runControls(player) {
+	//	jump
 	if (player.collisionFloor != null && (keysUp[keyMap.jump])) {
 		player.jumpReady = true;
 		
 		player.collisionFloorIgnored = null;
 		player.jumpDownReady = true;
 	}
-	
 	if (keysDown[keyMap.down] && keysDown[keyMap.jump] && player.jumpDownReady) {
 		if (player.collisionFloor && player.collisionFloor.type == "platform") {
 			player.collisionFloorIgnored = player.collisionFloor;
@@ -13,11 +13,21 @@ function runControls(player) {
 		}
 		player.jumpDownReady = false;
 	}
-	
 	if ((keysDown[keyMap.jump] || touchRight) && player.jumpReady && player.jumpDownReady) {
-		jump(player);
+		if (player.jumpTimer == -1) player.jumpTimer = player.jumpTimerMax;
+		
+		if (player.jumpTimer < 0) {
+			jump(player);
+			player.jumpReady = false;	
+			player.collisionFloor = null;
+			player.jumpTimer = -1;
+		}
+	}
+	if (keysUp[keyMap.jump] && player.jumpTimer >= 0) {
+		jumpShort(player);
 		player.jumpReady = false;	
 		player.collisionFloor = null;
+		player.jumpTimer = -1;
 	}
 	
 	if (keysDown[keyMap.use] && player.useReady && !player.inventoryMode) {

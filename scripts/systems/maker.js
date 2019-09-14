@@ -113,6 +113,8 @@ function make(type, options) {	//	creates any object in the game
 		object.pocketTimerMax = 200;
 		object.combineTimer = -1;
 		object.combineTimerMax = 200;
+		object.jumpTimer = -1;
+		object.jumpTimerMax = 100;
 		
 		object.runAct = function() {
 			if (object.health < 0) {
@@ -176,6 +178,14 @@ function make(type, options) {	//	creates any object in the game
 				object.animationTimer = 0;
 			} else {
 				object.animationTimer += 1000 * mod;
+			}
+			
+			//	The jump countdown timer is used to decide a short or high jump.
+			//	Because the short jump should feel like a tap, this actually executes upon the jump key release.
+			//	If the timer is not negative at the time of release, then execute a short jump.
+			//	If the timer is negative and jump is still pressed, then high jump as normal.
+			if (object.jumpTimer >= 0) {
+				object.jumpTimer -= 1000 * mod;
 			}
 		}
 		
