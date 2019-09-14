@@ -13,7 +13,7 @@ function runControls(player) {
 		}
 		player.jumpDownReady = false;
 	}
-	if ((keysDown[keyMap.jump] || touchRight) && player.jumpReady && player.jumpDownReady) {
+	if (keysDown[keyMap.jump] && player.jumpReady && player.jumpDownReady) {
 		if (player.jumpTimer == -1) player.jumpTimer = player.jumpTimerMax;
 		
 		if (player.jumpTimer < 0) {
@@ -149,19 +149,10 @@ function runControls(player) {
 		player.cyclerightReady = true;
 	}
 	
-	/*
-	if ((keysDown[keyMap.jump] || touchRight)) {
-		player.jumpReady = false;
-	}
-	if ((keysUp[keyMap.jump] && !touchRight)) {
-		player.jumpReady = true;
-	}
-	*/
-	
-	if ((keysDown[keyMap.left] || touchMoveLeft)) {
+	if (keysDown[keyMap.left]) {
 		moveLeft(player);
 		player.animation = "walking";
-	} else if ((keysDown[keyMap.right] || touchMoveRight)) {
+	} else if (keysDown[keyMap.right]) {
 		moveRight(player);
 		player.animation = "walking";
 	} else {
