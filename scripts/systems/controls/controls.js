@@ -131,13 +131,25 @@ function runControls(player) {
 	}
 	
 	if (keysDown[keyMap.drop] && player.dropReady && player.inventoryMode && player.inventory.length > 0) {
-		drop(player);
-		player.dropReady = false;
-		player.pickupReady = false;
+	    if (player.dropAllTimer == -1) player.dropAllTimer = player.dropAllTimerMax;
+		
+		if (player.dropAllTimer < 0) {
+			dropAll(player);
+			player.dropReady = false;
+	        player.pickupReady = false;
+	        player.dropAllTimer = -1;
+		}
 	}
 	
-	if (keysUp[keyMap.drop] && player.inventoryMode) {
+	if (keysUp[keyMap.drop] && player.dropReady && player.inventoryMode && player.inventory.length > 0 && player.dropAllTimer >= 0) {
+		drop(player);
 		player.dropReady = true;
+		player.dropAllTimer = -1;
+	}
+	
+	if (keysUp[keyMap.drop]) {
+		player.dropReady = true;
+		player.dropAllTimer = -1;
 	}
 	
 	if (keysDown[keyMap.cycleleft] && player.cycleleftReady && player.inventory.length > 0) {

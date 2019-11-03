@@ -116,6 +116,8 @@ function make(type, options) {	//	creates any object in the game
 		object.combineTimerMax = 200;
 		object.jumpTimer = -1;
 		object.jumpTimerMax = 100;
+		object.dropAllTimer = -1;
+		object.dropAllTimerMax = 100;
 		
 		object.runAct = function() {
 			if (object.health < 0) {
@@ -187,6 +189,10 @@ function make(type, options) {	//	creates any object in the game
 			//	If the timer is negative and jump is still pressed, then high jump as normal.
 			if (object.jumpTimer >= 0) {
 				object.jumpTimer -= 1000 * mod;
+			}
+			
+			if (object.dropAllTimer >= 0) {
+				object.dropAllTimer -= 1000 * mod;
 			}
 		}
 		
@@ -369,7 +375,7 @@ function make(type, options) {	//	creates any object in the game
 						object.direction *= -1;
 						object.x = target.x + (target.width / 2) + (object.width / 2) + 1;
 					}
-				}				
+				}
 				
 				// stack on stuck zombies
 				if (target.type == "enemy" && target.stuck && !object.stuck) {
@@ -556,7 +562,7 @@ function make(type, options) {	//	creates any object in the game
 					object.owner.pocket = null;
 				}
 			}
-		}		
+		}
 		object.owner = null;
 		
 		switch (options.name) {
