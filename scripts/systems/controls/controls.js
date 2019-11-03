@@ -18,14 +18,14 @@ function runControls(player) {
 		
 		if (player.jumpTimer < 0) {
 			jump(player);
-			player.jumpReady = false;	
+			player.jumpReady = false;
 			player.collisionFloor = null;
 			player.jumpTimer = -1;
 		}
 	}
 	if (keysUp[keyMap.jump] && player.jumpTimer >= 0) {
 		jumpShort(player);
-		player.jumpReady = false;	
+		player.jumpReady = false;
 		player.collisionFloor = null;
 		player.jumpTimer = -1;
 	}
@@ -56,7 +56,7 @@ function runControls(player) {
 		player.useReady = true;
 	}
 	
-	if (keysDown[keyMap.equip] && player.equipReady && player.inventoryMode) {
+	if (keysDown[keyMap.equip] && player.equipReady && player.inventoryMode && player.inventory.length > 0) {
 		player.equipTimer = 0;
 		player.equipReady = false;
 		
@@ -69,7 +69,7 @@ function runControls(player) {
 		player.equipReady = true;
 	}
 	
-	if (keysDown[keyMap.pocket] && player.pocketReady && player.inventoryMode) {
+	if (keysDown[keyMap.pocket] && player.pocketReady && player.inventoryMode && player.inventory.length > 0) {
 		player.pocketTimer = 0;
 		player.pocketReady = false;
 		
@@ -130,7 +130,7 @@ function runControls(player) {
 		player.tossReady = true;
 	}
 	
-	if (keysDown[keyMap.drop] && player.dropReady && player.inventoryMode) {
+	if (keysDown[keyMap.drop] && player.dropReady && player.inventoryMode && player.inventory.length > 0) {
 		drop(player);
 		player.dropReady = false;
 		player.pickupReady = false;
@@ -140,7 +140,7 @@ function runControls(player) {
 		player.dropReady = true;
 	}
 	
-	if (keysDown[keyMap.cycleleft] && player.cycleleftReady) {
+	if (keysDown[keyMap.cycleleft] && player.cycleleftReady && player.inventory.length > 0) {
 		inventoryCycle(player, -1);
 		player.cycleleftReady = false;
 	}
@@ -149,7 +149,7 @@ function runControls(player) {
 		player.cycleleftReady = true;
 	}
 	
-	if (keysDown[keyMap.cycleright] && player.cyclerightReady) {
+	if (keysDown[keyMap.cycleright] && player.cyclerightReady && player.inventory.length > 0) {
 		inventoryCycle(player, 1);
 		player.cyclerightReady = false;
 	}

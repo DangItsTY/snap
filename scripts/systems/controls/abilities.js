@@ -215,6 +215,25 @@ function combine(equip, pocket) {
 
 function drop(object) {
 	var target = object.inventory[object.selection];
+	object.inventoryModeTimer = object.inventoryModeTimerMax;
+	
+	target.stack--;
+	if (target.stack <= 0) {
+	    target.isAlive = false;
+	    object.inventory.splice(object.selection, 1);
+	}
+	
+	var owner = target.owner;
+	OBJECTS.push(make("item", {
+		name: target.name,
+		x: target.owner.x,
+		y: target.owner.y
+	}));
+	renderAttach([OBJECTS[OBJECTS.length-1]]);
+}
+
+function dropAll(object) {
+	var target = object.inventory[object.selection];
 	target.x = target.owner.x;
 	target.y = target.owner.y;
 	target.weight = 1024;
