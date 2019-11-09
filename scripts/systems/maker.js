@@ -217,7 +217,7 @@ function make(type, options) {	//	creates any object in the game
 	if (type == "enemy") {
 		object.width = BLOCK_SIZE;
 		object.height = BLOCK_SIZE;
-		object.health = 1;
+		object.health = 3;
 		object.speed = 64;
 		object.power = 1;
 		object.weight = 800;
@@ -520,7 +520,12 @@ function make(type, options) {	//	creates any object in the game
 				var target = object.collisions[i];
 				if (target.type == "enemy") {
 					target.damage(function() {
+						if (object.y >= target.y - target.height && object.y <= target.y - (target.height / 4)) {
+							target.health = -9999;
+							target.isAlive = false;
+						}
 						target.health -= object.power;
+						
 						object.isAlive = false;
 						if (object.item) {
 							object.item.stack--;
