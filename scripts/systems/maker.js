@@ -608,6 +608,7 @@ function make(type, options) {	//	creates any object in the game
 				object.red = 255;
 				object.green = 255;
 				object.blue = 255;
+				object.timerMax = 0;
 				object.use = function() {
 					if (object.timer <= 0) {
 						stab(object);
