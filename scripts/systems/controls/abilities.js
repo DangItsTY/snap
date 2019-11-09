@@ -195,6 +195,23 @@ function punch(object) {
 	return null;
 }
 
+function knockback(object, options) {
+	var damage = options.damage != undefined ? options.damage : 0;
+	
+	for (var i = 0; i < object.collisions.length; i++) {
+		var target = object.collisions[i];
+		if (target.type == "enemy") {
+			target.damage(function() {
+				target.health -= damage;
+			});
+			
+			i = object.collisions.length;
+			return target;
+		}
+	}
+	return null;
+}
+
 function combine(equip, pocket) {
 	if (equip.name == "crossbow" && pocket.name == "stake") {
 		var slots = equip.stackMax - equip.stack;
