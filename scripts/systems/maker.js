@@ -533,7 +533,7 @@ function make(type, options) {	//	creates any object in the game
 						i = object.collisions.length;
 					});
 					knockback(object, {
-						damage: 0
+						changeDirection: true
 					});
 				}
 			}
