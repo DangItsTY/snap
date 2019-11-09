@@ -23,6 +23,7 @@ function make(type, options) {	//	creates any object in the game
 	object.y = options.y != undefined ? options.y : GAME_HEIGHT / 2;
 	object.vx = options.vx != undefined ? options.vy : 0;
 	object.vy = options.vy != undefined ? options.vy : 0;
+	object.ax = options.ax != undefined ? options.ax : 0;
 	object.direction = options.direction != undefined ? options.direction : 1;
 	object.width = options.width != undefined ? options.width : 5;
 	object.height = options.height != undefined ? options.height : 5;
@@ -535,7 +536,8 @@ function make(type, options) {	//	creates any object in the game
 					knockback(object, {
 						damage: 0,
 						changeDirection: false,
-						vy: 8 * BLOCK_SIZE * -1
+						vy: 4 * BLOCK_SIZE * -1,
+						ax: 8 * BLOCK_SIZE * -1
 					});
 				}
 			}

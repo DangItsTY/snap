@@ -3,6 +3,7 @@ function runPhysics(list) {
 	friction(list);
 	move(list);
 	direction(list);
+	acceleration(list);
 	//wrap(list);
 
 	function gravity(list) {
@@ -23,10 +24,22 @@ function runPhysics(list) {
 			}
 		}
 	}
+	
+	function acceleration(list) {
+		for (var i = 0; i < list.length; i++) {
+			var object = list[i];
+			var prev = object.ax;
+			object.ax = object.ax + (object.weight * mod * -Math.sign(object.ax));
+			var next = object.ax;
+			if (prev >= 0 && next <= 0 || prev <=0 && next >=0) {
+				object.ax = 0;
+			}			
+		}
+	}
 
 	function move(list) {
 		for (var i = 0; i < list.length; i++) {
-			list[i].x = list[i].x + (list[i].vx * mod);
+			list[i].x = list[i].x + (list[i].vx * mod) + (list[i].ax * mod);
 			list[i].y = list[i].y + (list[i].vy * mod);
 		}
 	}
