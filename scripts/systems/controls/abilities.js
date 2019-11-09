@@ -198,6 +198,8 @@ function punch(object) {
 function knockback(object, options) {
 	var damage = options.damage != undefined ? options.damage : 0;
 	var changeDirection = options.changeDirection != undefined ? options.changeDirection : false;
+	var vy = options.vy != undefined ? options.vy : null;
+
 	
 	for (var i = 0; i < object.collisions.length; i++) {
 		var target = object.collisions[i];
@@ -208,6 +210,10 @@ function knockback(object, options) {
 			
 			if (changeDirection) {
 				target.direction *= -1;
+			}
+			
+			if (vy != null) {
+				target.vy = vy;
 			}
 			
 			i = object.collisions.length;
