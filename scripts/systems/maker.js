@@ -760,6 +760,65 @@ function make(type, options) {	//	creates any object in the game
 			}
 		}
 	}
+	if (type == "pile") {
+		object.itemName = options.itemName != undefined ? options.itemName : "plank";
+		object.width = BLOCK_SIZE;
+		object.height = BLOCK_SIZE;
+		object.weight = 32 * BLOCK_SIZE;
+		object.friction = 64 * BLOCK_SIZE;
+		object.stack = object.stackMax = 10;
+		object.spawnReady = true;
+		object.spawnTimer = -1;
+		object.spawnTimerMax = 500;
+		
+		object.runAct = function() {
+			//	when lifted, follow the holder around
+			if (object.owner != null) {
+				object.x = object.owner.x,
+				object.y = object.owner.y - (object.owner.height / 2) - (object.height / 2);
+				object.vy = 0;
+			}
+			
+			if (object.spawnTimer >= object.spawnTimerMax) {
+				object.spawnReady = true;
+				object.spawnTimer = -1;
+			} else if (object.spawnTimer >= 0) {
+				object.spawnTimer += 1000 * mod;
+			}
+		}
+		
+		object.runCollide = function() {
+			for (var i = 0; i < object.collisions.length; i++) {
+				var target = object.collisions[i];
+				if (target.type == "enemy") {
+					knockback(object, {
+						vy: 4 * BLOCK_SIZE * -1,
+						ax: 8 * BLOCK_SIZE * -1
+					});
+				}
+			}
+		}
+		
+		object.use = function() {
+			if (object.spawnReady) {
+				OBJECTS.push(make("item", {
+					name: object.itemName,
+					x: object.x,
+					y: object.y,
+					vy: -128
+				}));
+				renderAttach([OBJECTS[OBJECTS.length-1]]);
+
+				object.spawnTimer = 0;
+				object.spawnReady = false;
+				object.stack--;
+				if (object.stack <= 0) {
+					object.isAlive = false;
+					object.platform != null ? object.platform.isAlive = false : null;
+				}
+			}
+		}
+	}
 	if (type == "blockade") {
 		object.weight = 1024;
 		

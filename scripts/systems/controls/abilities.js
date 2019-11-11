@@ -121,7 +121,8 @@ function pickup(object) {
 function lift(object) {
 	for (var i = 0; i < object.collisions.length; i++) {
 		var target = object.collisions[i];
-		if (target.type == "body") {
+		if (target.type == "body" ||
+			target.type == "pile") {
 			object.held = target;
 			target.owner = object;
 			object.isHolding = true;
