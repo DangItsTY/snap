@@ -770,6 +770,7 @@ function make(type, options) {	//	creates any object in the game
 		object.spawnReady = true;
 		object.spawnTimer = -1;
 		object.spawnTimerMax = 500;
+		object.isProjectile = false;
 		
 		object.runAct = function() {
 			//	when lifted, follow the holder around
@@ -778,6 +779,8 @@ function make(type, options) {	//	creates any object in the game
 				object.y = object.owner.y - (object.owner.height / 2) - (object.height / 2);
 				object.vy = 0;
 			}
+			
+			object.isProjectile = object.vy == 0 ? false : true;
 			
 			if (object.spawnTimer >= object.spawnTimerMax) {
 				object.spawnReady = true;
@@ -790,11 +793,12 @@ function make(type, options) {	//	creates any object in the game
 		object.runCollide = function() {
 			for (var i = 0; i < object.collisions.length; i++) {
 				var target = object.collisions[i];
-				if (target.type == "enemy") {
+				if (object.isProjectile && target.type == "enemy") {
 					knockback(object, {
 						vy: 4 * BLOCK_SIZE * -1,
 						ax: 8 * BLOCK_SIZE * -1
 					});
+					object.use();
 				}
 			}
 		}
