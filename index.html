@@ -151,6 +151,12 @@
 			var currentTimestamp = null;
 			var deltaTime = null;
 			var mod = 0;
+			var dayTimer = 0;
+			var dayTimerMax = DAY_TIME;
+			dayTimer = dayTimerMax;	// starts the game as day time
+			log("wave", "day");
+			var nightTimer = 0;
+			var nightTimerMax = NIGHT_TIME;
 			function gameloop(timestamp) {
 				currentTimestamp = timestamp;
 				deltaTime = currentTimestamp - lastTimestamp;
@@ -164,6 +170,28 @@
 				mod = deltaTime / 1000;
 				log("mod", mod);
 				lastTimestamp = currentTimestamp;
+				
+				//	day night cycle
+				if (GAME_WAVE_STATE == "day") {
+					if (dayTimer > 0) {
+						dayTimer -= mod * 1000;
+					} else {
+						dayTimer = 0;
+						GAME_WAVE_STATE = "night";
+						nightTimer = nightTimerMax;
+						log("wave", "night");
+					}
+				}
+				if (GAME_WAVE_STATE == "night") {
+					if (nightTimer > 0) {
+						nightTimer -= mod * 1000;
+					} else {
+						nightTimer = 0;
+						GAME_WAVE_STATE = "day";
+						dayTimer = dayTimerMax;
+						log("wave", "day");
+					}
+				}
 				
 				if (GAME_WAVE_STATE == "done") {
 					GAME_WAVE++;
