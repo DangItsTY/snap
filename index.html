@@ -151,12 +151,17 @@
 			var currentTimestamp = null;
 			var deltaTime = null;
 			var mod = 0;
+			var totalTime = 0;
 			var dayTimer = 0;
 			var dayTimerMax = DAY_TIME;
-			dayTimer = dayTimerMax;	// starts the game as day time
-			log("wave", "day");
 			var nightTimer = 0;
 			var nightTimerMax = NIGHT_TIME;
+			
+			//	should put this in a preconfig
+			dayTimer = dayTimerMax;	// starts the game as day time
+			log("wave", "day");
+			GAME_WAVE++;
+			runWave(GAME_WAVES[GAME_WAVE - 1]);
 			function gameloop(timestamp) {
 				currentTimestamp = timestamp;
 				deltaTime = currentTimestamp - lastTimestamp;
@@ -189,18 +194,14 @@
 						nightTimer = 0;
 						GAME_WAVE_STATE = "day";
 						dayTimer = dayTimerMax;
-						log("wave", "day");
-					}
-				}
-				
-				if (GAME_WAVE_STATE == "done") {
-					GAME_WAVE++;
-					if (GAME_WAVE > GAME_WAVES.length) {
-						log("wave", "done");
-					} else {
-						var index = GAME_WAVE - 1;
-						var nextWave = GAME_WAVES[index];
-						runWave(nextWave);
+						
+						if (GAME_WAVE >= GAME_WAVES.length) {
+							log("wave", "done");
+						} else {
+							log("wave", "day");
+							GAME_WAVE++;
+							runWave(GAME_WAVES[GAME_WAVE - 1]);
+						}
 					}
 				}
 				
@@ -211,6 +212,8 @@
 				renderHud();
 				
 				window.requestAnimationFrame(gameloop);
+				totalTime += mod;
+				log("totalTime", totalTime);
 			}
 			window.requestAnimationFrame(gameloop);
 			
@@ -518,7 +521,6 @@
 			}
 			
 			function runWave(num) {
-				GAME_WAVE_STATE = "play";
 				switch (num) {
 					case 1:
 						log("wave", "1");
@@ -566,7 +568,6 @@
 						renderAttach([OBJECTS[OBJECTS.length-1]]);
 					}, 3000);
 					var spawnerTimeout = setTimeout(function() {
-						GAME_WAVE_STATE = "done";
 						clearInterval(spawner);
 					}, 3000);
 				}, 3000);
@@ -582,7 +583,6 @@
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
 				var spawnerTimeout = setTimeout(function() {
-					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
 				}, 30000);
 			}
@@ -597,7 +597,6 @@
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
 				var spawnerTimeout = setTimeout(function() {
-					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
 				}, 30000);
 				
@@ -624,7 +623,6 @@
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
 				var spawnerTimeout = setTimeout(function() {
-					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
 				}, 30000);
 				
@@ -651,7 +649,6 @@
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
 				var spawnerTimeout = setTimeout(function() {
-					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
 				}, 30000);
 				
@@ -690,7 +687,6 @@
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
 				var spawnerTimeout = setTimeout(function() {
-					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
 				}, 30000);
 				
@@ -729,7 +725,6 @@
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
 				var spawnerTimeout = setTimeout(function() {
-					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
 				}, 30000);
 				
@@ -780,7 +775,6 @@
 					renderAttach([OBJECTS[OBJECTS.length-1]]);
 				}, 3000);
 				var spawnerTimeout = setTimeout(function() {
-					GAME_WAVE_STATE = "done";
 					clearInterval(spawner);
 				}, 30000);
 				

@@ -9,8 +9,8 @@ var BLOCK_SIZE = 32;
 var GAME_WIDTH = BLOCKW * BLOCK_SIZE; // 800
 var GAME_HEIGHT = BLOCKH * BLOCK_SIZE; // 450
 var GAME_WAVE = 0; // is an index to GAME_WAVES, subtract 1, should always be 0
-var GAME_WAVES = []; // list of waves to play out
-var GAME_WAVE_STATE = "day" // play, done, day, night
+var GAME_WAVES = [1, 2]; // list of waves to play out
+var GAME_WAVE_STATE = "day" // day, night
 var DAY_TIME = 30000;
 var NIGHT_TIME = 30000;
 
