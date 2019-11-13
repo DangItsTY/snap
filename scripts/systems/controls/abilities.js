@@ -187,7 +187,8 @@ function mop(object) {
 function punch(object) {
 	for (var i = 0; i < object.collisions.length; i++) {
 		var target = object.collisions[i];
-		if (target.type == "boxes") {
+		if (target.type == "boxes" ||
+			target.type == "pile") {
 			target.use();
 			i = object.collisions.length;
 			return target;
