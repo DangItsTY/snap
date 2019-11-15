@@ -714,7 +714,7 @@ function make(type, options) {	//	creates any object in the game
 		object.stack = object.stackMax = 10;
 		object.spawnReady = true;
 		object.spawnTimer = -1;
-		object.spawnTimerMax = 500;
+		object.spawnTimerMax = 200;
 		
 		switch(object.itemName) {
 			case "plank":
@@ -769,7 +769,7 @@ function make(type, options) {	//	creates any object in the game
 		object.stack = object.stackMax = 10;
 		object.spawnReady = true;
 		object.spawnTimer = -1;
-		object.spawnTimerMax = 500;
+		object.spawnTimerMax = 200;
 		object.isProjectile = false;
 		
 		object.runAct = function() {
