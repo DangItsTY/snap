@@ -252,6 +252,12 @@ function drop(object) {
 	target.stack--;
 	if (target.stack <= 0) {
 	    target.isAlive = false;
+		if (object.item == target) {
+			object.item = null;
+		}
+		if (object.pocket == target) {
+			object.pocket = null;
+		}
 	    object.inventory.splice(object.selection, 1);
 	}
 	
@@ -271,6 +277,12 @@ function dropAll(object) {
 	target.weight = 1024;
 	target.vy = -128;
 	target.owner = null;
+	if (object.item == target) {
+		object.item = null;
+	}
+	if (object.pocket == target) {
+		object.pocket = null;
+	}
 	object.inventory.splice(object.selection, 1);
 }
 
