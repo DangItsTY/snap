@@ -7,6 +7,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	*/
+	overflow-y: scroll;
 }
 div { 
 	image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
@@ -45,6 +46,15 @@ div {
 	top: 0px;
 	left: 0px;
 	*/
+}
+footer {
+	margin: 8px;
+}
+aside {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin: 8px;
 }
 
 

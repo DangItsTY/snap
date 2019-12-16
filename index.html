@@ -10,7 +10,15 @@
 		<link rel="manifest" href="manifest.json">
 	</head>
 	<body>
-		<button style="position: absolute; top: 0; left: 0;" onclick="playMusic()">Play</button>
+		<aside>
+		<details>
+		<summary>Options</summary>
+		<ul>
+		<li><button onclick="playMusic()">Play Music!</button></li>
+		<li><button onclick="infoToggle()">Display Debug Info</button></li>
+		</ul>
+		</details>
+		</aside>
 		<main id="container" class="bg-color">
 			<section id="background">
 			</section>
@@ -38,10 +46,12 @@
 					<span id="pocket"></span>
 				</div>
 			</section>
-			<section id="info">
+			<section id="info" hidden>
 			</section>
 		</main>
 		<footer>
+			<details>
+			<summary>How-To: Play</summary>
 			<section id="howtoplay">
 			<h1>How To Play</h1>
 			<h2>Controls</h2>
@@ -63,6 +73,7 @@
 				<li>Inventory Mode - Any time cycling is pressed, inventory mode is activated. Wait a second to exit inventory mode.</li>
 			</ul>
 			</section>
+			</details>
 		</footer>
 		<audio id="backgroundMusic">
 			<source src="assets/sounds/mansionwalk.wav" type="audio/wav">
@@ -89,6 +100,9 @@
 		<script src="scripts/render/render.js"></script>
 		<script src="scripts/core/game.js"></script>
 		<script>
+			var isInfoHidden = true;
+			var infoElement = document.getElementById("info");
+			
 			function playMusic() {
 				//	play background music
 				var backgroundMusic = document.getElementById("backgroundMusic");
@@ -111,6 +125,15 @@
 				});
 				backgroundMusic.loop = true;
 				backgroundMusic.play();
+			}
+			
+			function infoToggle() {
+				isInfoHidden = !isInfoHidden;
+				if (isInfoHidden) {
+					infoElement.hidden = true;
+				} else {
+					infoElement.hidden = false;
+				}
 			}
 				
 			function initrender() {
