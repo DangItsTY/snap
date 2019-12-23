@@ -10,15 +10,6 @@
 		<link rel="manifest" href="manifest.json">
 	</head>
 	<body>
-		<aside>
-		<details>
-		<summary>Options</summary>
-		<ul>
-		<li><button onclick="playMusic()">Play Music!</button></li>
-		<li><button onclick="infoToggle()">Display Debug Info</button></li>
-		</ul>
-		</details>
-		</aside>
 		<main id="container" class="bg-color">
 			<section id="background">
 			</section>
@@ -50,6 +41,13 @@
 			</section>
 		</main>
 		<footer>
+        	<details>
+        		<summary>Options</summary>
+        		<ul>
+        		<li><button onclick="playMusic()">Play Music!</button></li>
+        		<li><button onclick="infoToggle()">Display Debug Info</button></li>
+        		</ul>
+        		</details>
 			<details>
 			<summary>How-To: Play</summary>
 			<section id="howtoplay">
@@ -154,7 +152,7 @@
 			preload();
 			
 			function prerender() {
-				renderAttach(OBJECTS_BACKGROUND);			
+				renderAttach(OBJECTS_BACKGROUND);
 				renderAttach(OBJECTS);
 				renderAttach(OBJECTS_FOREGROUND);
 			}
@@ -192,7 +190,7 @@
 				// if user tabs out, don't change anything
 				// this will need to be removed once logic goes to the server
 				if (deltaTime > 100) {
-					deltaTime = 0; 
+					deltaTime = 0;
 				}
 				
 				mod = deltaTime / 1000;
@@ -248,7 +246,7 @@
 			
 			//	initialization scripts
 			function initmansion() {
-				// need to create a background layer of objects, they don't collide, may have z parallax property			
+				// need to create a background layer of objects, they don't collide, may have z parallax property
 				for (var i = 0; i < 9; i++) {
 					for (var j = 0; j < 17; j++) {
 						OBJECTS_BACKGROUND.push(make("basic", {
